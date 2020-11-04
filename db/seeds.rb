@@ -5,3 +5,19 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Article.delete_all
+alist = []
+
+alist << Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00))
+
+alist << Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00))
+
+alist << Article.create!(company: "Pzifer", industry_type: "Medical", state: "NJ", city: "Newark", compensation: 70000, interview_exp: "Really hard interview", work_exp: "Hands on work. Learned a great deal", upvotes: 0, approved: DateTime.new(2020, 11, 04, 05, 00, 00))
+
+alist << Article.create!(company: "Pepsico", industry_type: "Food", state: "TX", city: "Houston", compensation: 60000, interview_exp: "Lots of behavioral questions", work_exp: "First time working in the food industry, team was very welcoming", upvotes: 0, approved: DateTime.new(2020, 11, 04, 06, 00, 00))
+
+alist << Article.create!(company: "Goldman Sachs", industry_type: "Finance", state: "NY", city: "New York", compensation: 70000, interview_exp: "Modelling questions. Behavioral questions", work_exp: "Not so good experience, was overworked", upvotes: 0, approved: DateTime.new(2020, 11, 04, 07, 00, 00))
+
+alist << Article.create!(company: "Business Ink", industry_type: "Business", state: "NY", city: "New York", compensation: 40000, interview_exp: "Logic type of questions", work_exp: "Not really vibing with my team", upvotes: 0, approved: DateTime.new(2020, 11, 04, 10,  00, 00))
+

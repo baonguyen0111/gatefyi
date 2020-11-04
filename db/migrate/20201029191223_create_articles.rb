@@ -9,7 +9,7 @@ class CreateArticles < ActiveRecord::Migration[6.0]
       t.text :interview_exp
       t.text :work_exp
       t.integer :upvotes
-
+      t.datetime :approved
       t.timestamps
     end
   end

@@ -1,1 +1,19 @@
-#bao and linh
+<div class="row">
+    <div class="col-md">
+      <h4 class="articlecompany">
+        <%= "Internship experience details for #{@article.company}" %>
+      </h4>
+    </div>
+</div>
+<div> Location: <%= @article.city%>, <%= @article.state %> </div>
+<div> Industry: <%= @article.industry_type %> </div>
+<div> Compensation:  <%= number_to_currency(@article.compensation) %> </div>
+<div> Interview experience: </div>
+<div> <%= @article.interview_exp %> </div>
+<div> <%= @article.work_exp %> </div>
+<br>
+<div> Upvotes: <%= @article.upvotes %> </div>
+<br>
+
+<%= link_to("Upvote post", article_path(@article), :method => :put, :class => "btn btn-primary") %>
+ <%= link_to("Back to main page", articles_path, :class => "btn btn-primary") %>

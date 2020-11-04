@@ -1,41 +1,43 @@
- <div class="row">
-    <div class="col-md">
-    	<%= link_to "Create new post", new_article_path, :class => "btn btn-primary" %>
-    </div>
- </div>
-<table class="table">
-    <thead class="thead-light">
-      <tr class="articless_header">
-        <th>Company</th>
-        <th>Industry</th>
-        <th>Location</th>
-	<th>Salary</th>
-	<th>Upvotes</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @articles.each do |a| %>
-	<tr class="article">
-          <td class="articlecompany">
-            <%= link_to "#{a.company}", article_path(a) %>
-          </td>
-          <td class="articleindustry">
-            <%= a.industry_type %>
-          </td>
-          <td class="articlelocation">
-		  <%= a.city %>, <%= a.state %>
-          </td>
-          <td class="articlecompensation">
-            <%= number_to_currency(a.compensation) %>
-	  </td>
-	  <td class="articleupvotes">
-		  <%= a.upvotes %>
-	  </td>
-        </tr>
-      <% end %>
-    </tbody>
-</table>
+<div class="row">
+	<div class="col-md">
+		<%= link_to "Create new post", new_article_path, :class => "btn btn-primary" %>
+	</div>
+</div>
 
-<%= will_paginate @articles, renderer: BootstrapPagination::Rails %>
-
-
+<div class="flickr_pagination">
+	<div class="page_info">
+	<table class="table">
+		<thead class="thead-light">
+			<tr class="articless_header">
+				<th>Company</th>
+				<th>Industry</th>
+				<th>Location</th>
+				<th>Salary</th>
+				<th>Upvotes</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @articles.each do |a| %>
+				<tr class="article">
+					<td class="articlecompany">
+						<%= link_to "#{a.company}", article_path(a) %>
+					</td>
+					<td class="articleindustry">
+						<%= a.industry_type %>
+					</td>
+					<td class="articlelocation">
+						<%= a.city %>, <%= a.state %>
+					</td>
+					<td class="articlecompensation">
+						<%= number_to_currency(a.compensation) %>
+					</td>
+					<td class="articleupvotes">
+						<%= a.upvotes %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<%= will_paginate @articles  %>
+	</div>	
+</div>

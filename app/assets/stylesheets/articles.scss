@@ -39,3 +39,38 @@ text-decoration: none;
 .flickr_pagination .next_page {
 	margin-left: 1em; 
 }
+.create_button, .back_button {
+	border: 1px solid #dddddd;
+	color: #0063dc;
+	text-decoration: none; 
+}
+.create_button:hover, .create_button:focus{
+	border-color: #003366;
+	background: #0063dc;
+	color: white; 
+}
+.back_button:hover, .back_button:focus{
+	border-color: #003366;
+	background: #0063dc;
+	color: white; 
+}
+.container {
+	border-radius: 5px;
+  	background-color: #f2f2f2;
+  	padding: 20px;
+}
+.col-md-25 {
+	float: left;
+  	width: 25%;
+  	margin-top: 6px;
+}
+.col-md-75 {
+	float: left;
+  	width: 75%;
+  	margin-top: 6px;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}

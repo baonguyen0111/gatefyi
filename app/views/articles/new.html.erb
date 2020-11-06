@@ -1,77 +1,86 @@
-#fanyi and mingche
-  <div class="row">
+<div class="row">
     <div class="col-md">
-      <h3>Create new work experience</h3>
+      <%= link_to "Back to main page", articles_path, :class => "back_button" %>
+    </div>
+</div>
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-1">
+      <h2>Create new work experience</h2>
     </div>
   </div>
   <%= form_with model: @article, local: true, :class => "form-group" do |f| %>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-25">
         <%= f.label :company %>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-25">
         <%= f.text_field :company %>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-25">
         <%= f.label :industry_type %>
       </div>
-      <div class="col-md-4">
-        <%= f.text_area :industry_type %>
+      <div class="col-md-25">
+        <%= f.text_field :industry_type %>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-25">
         <%= f.label :city %>
       </div>
-      <div class="col-md-4">
-        <%= f.text_area :city %>
+      <div class="col-md-25">
+        <%= f.text_field :city %>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-25">
         <%= f.label :state %>
       </div>
-      <div class="col-md-4">
-        <%= f.text_area :state %>
+      <div class="col-md-25">
+        <%= f.text_field :state %>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-25">
         <%= f.label :compensation %>
       </div>
-      <div class="col-md-2">
-        <%= f.number_field :compensation %>
+      <div class="col-md-25">
+        <%= f.number_field :compensation, step: 0.01 %>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-25">
         <%= f.label :interview_exp %>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-75">
         <%= f.text_area :interview_exp %>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-25">
         <%= f.label :work_exp %>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-75">
         <%= f.text_area :work_exp %>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-25">
         <%= f.label :upvote %>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-25">
         <%= f.number_field :upvote %>
       </div>
     </div>
+  </div>
     <div class="row">
       <div class="col-md-2">
-        <%= f.submit "Create new work experience" %>
+        <%= f.submit "Save", :class => "create_button" %>
       </div>
     </div>
   <% end %>
+  
+

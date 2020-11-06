@@ -24,8 +24,16 @@ class ArticlesController < ApplicationController
 
 	#mingche and fanyi
 	def new
+		@article = Article.new
 	end
 
 	def create
+		redirect_to articles_path
+		
 	end
+	
+	private
+	  def create_params
+	  	params.require(:article) .permit(:company, :industry_type, :state, :city, :compensation, :interview_exp, :work_exp, :upvote)
+	  end 
 end

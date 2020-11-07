@@ -29,6 +29,7 @@ class ArticlesController < ApplicationController
 
 	def create
 		@article = Article.new(create_params)
+		@article.upvotes = 0
 		if @article.save
 			flash[:notice] = "New work experience created"
 			redirect_to articles_path and return

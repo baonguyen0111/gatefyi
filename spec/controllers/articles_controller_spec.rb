@@ -14,23 +14,23 @@ Rspec.describe ArticlesController, type: :controller do
 		end
 
 		it "renders the index template" do
-			p = Article.new(name: "Amazon")
+			x, y = Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00)), Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00))
             get :index
-            #If we want to also check that it's indexed correctly by some standard, we would have to add it here.
+        	expect(assigns(:properties)).to match_array([x,y])
             expect(response).to render_template("index")
 		end
 	end
 
 	context "show" do
 		it "routes correctly" do
-			p = Article.new(name: "Amazon")
+			p = Article.new(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00))
             expect(Article).to receive(:find).with(eq("1").or eq(1)) { p }
             get :show, :params => { :id => 1 }
             expect(response.status).to eq(200)
 		end
 
 		it "renders the show template" do
-			p = Article.new(name: "Amazon")
+			p = Article.new(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00))
             expect(Article).to receive(:find).with(eq("1").or eq(1)) { p }
             get :show, :params => { :id => 1 }
             expect(response).to render_template("show")
@@ -46,7 +46,7 @@ Rspec.describe ArticlesController, type: :controller do
 		end
 		
 		it "renders the new template"
-			p = Article.new(name: "Amazon")
+			p = Article.new(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00))
             expect(Article).to receive(:find).with(eq("1").or eq(1)) { p }
             get :new, :params => { :id => 1 }
             expect(response).to have_http_status(:success)
@@ -62,7 +62,7 @@ Rspec.describe ArticlesController, type: :controller do
 		
 		it "renders the create template" do
 			#we need to add more things about the creation of an article to properly check
-			p = Article.new(name: "Amazon")
+			p = Article.new(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00))
 			expect(Article).to receive(:find).with(eq("1").or eq(1)) { p }
 			get :create, :params => { :id => 1 }
 			expect(response).to have_http_status(:success)

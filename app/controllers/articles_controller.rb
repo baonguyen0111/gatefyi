@@ -34,6 +34,6 @@ class ArticlesController < ApplicationController
 	
 	private
 	  def create_params
-	  	params.require(:article) .permit(:company, :industry_type, :state, :city, :compensation, :interview_exp, :work_exp, :upvote)
+	  	params.require(:article) .permit(:company, :industry_type, :state, :city, :compensation, :interview_exp, :work_exp)
 	  end 
 end

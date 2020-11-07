@@ -28,8 +28,14 @@ class ArticlesController < ApplicationController
 	end
 
 	def create
-		redirect_to articles_path
-		
+		@article = Article.new(create_params)
+		if @article.save
+			flash[:notice] = "New work experience created"
+			redirect_to articles_path and return
+		else
+			flash[:alert] = "Failed to save new  work experience"
+			redirect_to new_article_path and return
+		end
 	end
 	
 	private

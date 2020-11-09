@@ -1,53 +1,42 @@
 // Place all the styles related to the Articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-.flickr_pagination {
+.company-list {
 	text-align: center;
-	padding: 0.3em;
-	cursor: default; 
+	padding: 20px; 
 }
-.flickr_pagination a, .flickr_pagination span, .flickr_pagination em {
-padding: 0.2em 0.5em; 
+.table-headers {
+	background-color: #8c0303; 
+	color: #fff;
+	font-weight: bold;
 }
-.flickr_pagination .disabled {
-color: #aaaaaa; 
+.pagination a, .pagination span, .pagination em {
+	padding: 0.2em 0.5em; 
 }
-.flickr_pagination .current {
+.pagination .disabled {
+	color: #aaaaaa; 
+}
+.pagination .current {
 	font-style: normal;
 	font-weight: bold;
-color: #ff0084; }
-
-.flickr_pagination a {
-	border: 1px solid #dddddd;
-	color: #0063dc;
-text-decoration: none; 
+	color: #8c0303; 
 }
-.flickr_pagination a:hover, .flickr_pagination a:focus {
-	border-color: #003366;
-	background: #0063dc;
-	color: white; 
-}
-.flickr_pagination .page_info {
-	color: #aaaaaa;
-	padding-top: 0.8em; }
-.flickr_pagination .previous_page, .flickr_pagination .next_page {
-	border-width: 2px; 
-}
-.flickr_pagination .previous_page {
-	margin-right: 1em; 
-}
-.flickr_pagination .next_page {
-	margin-left: 1em; 
-}
-.create_button, .back_button {
-	border: 1px solid #dddddd;
-	color: #0063dc;
+.pagination a {
+	color: #343a40;
 	text-decoration: none; 
 }
-.create_button:hover, .create_button:focus{
+.pagination a:hover, .pagination a:focus {
 	border-color: #003366;
-	background: #0063dc;
-	color: white; 
+	color: #8c0303; 
+}
+.pagination .previous_page, .pagination .next_page {
+	border-width: 2px; 
+}
+.pagination .previous_page {
+	margin-right: 1em; 
+}
+.pagination .next_page {
+	margin-left: 1em; 
 }
 .back_button:hover, .back_button:focus{
 	border-color: #003366;
@@ -59,18 +48,12 @@ text-decoration: none;
   	background-color: #f2f2f2;
   	padding: 20px;
 }
-.col-md-25 {
-	float: left;
-  	width: 25%;
-  	margin-top: 6px;
+.left-button {
+	margin: 20px;
+	text-align: right;
 }
-.col-md-75 {
-	float: left;
-  	width: 75%;
-  	margin-top: 6px;
-}
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+.articlecompany {
+	color: #8c0303;
+	font-weight: bold;
+	padding: 8px;
 }

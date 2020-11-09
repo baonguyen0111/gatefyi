@@ -2,4 +2,4 @@
 Site to help students with internship/work experiences
 
 #### Video Demo 
-[](//s.imgur.com/min/embed.js)
+[Demo](https://imgur.com/a/wm4CO6O)

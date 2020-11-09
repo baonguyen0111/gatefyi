@@ -11,10 +11,15 @@ class ArticlesController < ApplicationController
 
 	def update
 		id = params[:id]
+		vote_change = params[:vote_change].to_i
 		@article = Article.find(id)
-		@article.upvotes += 1
+		@article.upvotes += vote_change
 		if @article.save
-			flash[:notice] = "Upvoted successfully"
+			if vote_change == 1 
+				flash[:notice] = "Upvoted successfully"
+			else vote_change == -1 
+				flash[:notice] = "Downvoted successfully"
+			end
 			redirect_to article_path(@article)
 		else
 			flash[:alert] = "Failed to upvote"	

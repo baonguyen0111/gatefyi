@@ -1,78 +1,69 @@
 <div class="row">
-	<div class="col-md">
-		<%= link_to "Back to main page", articles_path, :class => "back_button" %>
-	</div>
-</div>
-<div class="container">
-
-	<div class="row">
-		<div class="col-md-1">
-			<h2>Create new work experience</h2>
-		</div>
-	</div>
-	<%= form_with model: @article, local: true, :class => "form-group" do |f| %>
-		<div class="row">
-			<div class="col-md-25">
-				<%= f.label :company %>
-			</div>
-			<div class="col-md-25">
-				<%= f.text_field :company %>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-25">
-				<%= f.label :industry_type %>
-			</div>
-			<div class="col-md-25">
-				<%= f.text_field :industry_type %>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-25">
-				<%= f.label :city %>
-			</div>
-			<div class="col-md-25">
-				<%= f.text_field :city %>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-25">
-				<%= f.label :state %>
-			</div>
-			<div class="col-md-25">
-				<%= f.select :state, options_for_select(@us_states), :prompt => "Select state" %>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-25">
-				<%= f.label :compensation %>
-			</div>
-			<div class="col-md-25">
-				<%= f.number_field :compensation, step: 1 %>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-25">
-				<%= f.label :interview_exp %>
-			</div>
-			<div class="col-md-75">
-				<%= f.text_area :interview_exp %>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-25">
-				<%= f.label :work_exp %>
-			</div>
-			<div class="col-md-75">
-				<%= f.text_area :work_exp %>
-			</div>
-		</div>
-    <div class="row">
-	    <div class="col-md-25">
-		    <%= f.submit "Save", :class => "create_button" %>
-	    </div>
+    <div class="col-md">
+      <h4 class="articlecompany">
+        Create new work experience
+      </h4>
     </div>
-  <% end %>
 </div>
-
-
+<!--Back to main page-->
+<div class="text-right mr-4">
+    <%= link_to articles_path, :class =>"text-decoration-none" do %>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+        </svg>
+        Back to main page
+    <% end %>      
+</div>
+<div class="mr-4"> 
+<%= form_with model: @article, local: true, :class => "form-horizontal center" do |f| %>
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<%= f.label :company, "Company:", class: "col-md-4 control-label" %>
+			<div class="col-md-8">
+				<%= f.text_field :company, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group col-md-6">
+			<%= f.label :industry_type, "Industry Type:", class: "col-md-4 control-label" %>
+			<div class="col-md-8">
+				<%= f.text_field :industry_type, class: "form-control" %>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<%= f.label :city, "City:", class: "col-md-4 control-label" %>
+			<div class="col-md-8">
+				<%= f.text_field :city, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group col-md-6">
+			<%= f.label :state, "State:", class: "col-md-4 control-label" %>
+			<div class="col-md-8">
+				<%= f.select :state, options_for_select(@us_states), {:prompt => "Select state"}, {class: "form-control"} %>
+			</div>
+		</div>	
+	</div>
+	<div class="form-group">
+		<%= f.label :compensation, "Compensation:", class: "col-md-4 control-label" %>
+		<div class="col-md-10">
+			<%= f.number_field :compensation, step: 1, class: "form-control" %>
+		</div>
+	</div>	
+	<div class="form-group">
+		<%= f.label :interview_exp, "Interview Experience:", class: "col-md-4 control-label" %>
+		<div class="col-md-10">
+			<%= f.text_area :interview_exp, class: "form-control" %>
+		</div>
+	</div>
+	<div class="form-group">
+		<%= f.label :work_exp, "Work Experience:", class: "col-md-4 control-label" %>
+		<div class="col-md-10">
+			<%= f.text_area :work_exp, class: "form-control" %>
+		</div>
+	</div>
+	<span style="margin-left: 30%">
+		<%= f.submit "Submit", class: "btn btn-default btn-primary" %>  
+	</span>
+<% end %>
+</div>

@@ -1,26 +1,20 @@
-<div class="row">
-	<div class="col-md">
-		<%= link_to "Create new post", new_article_path, :class => "create_button" %>
-	</div>
+<div class="left-button">
+	<%= link_to "+ Add Post", new_article_path, :class => "btn btn-primary" %>
 </div>
-
-<div class="flickr_pagination">
-	<div class="page_info">
-	<table class="table">
-		<thead class="thead-light">
-			<tr class="articless_header">
-				<th>Company</th>
-				<th>Industry</th>
-				<th>Location</th>
-				<th>Salary</th>
-				<th>Upvotes</th>
-			</tr>
+<div class="company-list">
+	<table class="table table-hover">
+		<thead class="table-headers">
+			<th>Company</th>
+			<th>Industry</th>
+			<th>Location</th>
+			<th>Salary</th>
+			<th>Upvotes</th>
 		</thead>
 		<tbody>
 			<% @articles.each do |a| %>
-				<tr class="article">
+				<tr>
 					<td class="articlecompany">
-						<%= link_to "#{a.company}", article_path(a) %>
+						<%= link_to "#{a.company}", article_path(a), :class => "articlecompany" %>
 					</td>
 					<td class="articleindustry">
 						<%= a.industry_type %>
@@ -38,6 +32,10 @@
 			<% end %>
 		</tbody>
 	</table>
-	<%= will_paginate @articles  %>
-	</div>	
+
 </div>
+<nav aria-label="Pagination">
+	<ul class="pagination justify-content-center"> 
+		<%= will_paginate @articles %>
+	</ul>
+</nav> 

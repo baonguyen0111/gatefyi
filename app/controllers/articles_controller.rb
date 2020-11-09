@@ -11,20 +11,13 @@ class ArticlesController < ApplicationController
 
 	def update
 		id = params[:id]
-		vote_change = params[:vote_change].to_i
 		@article = Article.find(id)
-		@article.upvotes += vote_change
-		if @article.save
-			if vote_change == 1 
-				flash[:notice] = "Upvoted successfully"
-			else vote_change == -1 
-				flash[:notice] = "Downvoted successfully"
-			end
-			redirect_to article_path(@article)
-		else
-			flash[:alert] = "Failed to upvote"	
-			redirect_to article_path(@article)
+		
+		if params[:vote_change] 
+			change_upvotes
 		end
+		
+		redirect_to article_path(@article) and return 
 	end	
 
 	#mingche and fanyi
@@ -50,4 +43,15 @@ class ArticlesController < ApplicationController
 	def create_params
 		params.require(:article) .permit(:company, :industry_type, :state, :city, :compensation, :interview_exp, :work_exp)
 	end 
+	
+	def change_upvotes
+		vote_change = params.require(:vote_change).to_i 
+		@article.upvotes += vote_change
+		
+		if @article.save
+			flash[:notice] = "#{vote_change == 1 ? 'Upvoted' : 'Downvoted'} successfully"
+		else
+			flash[:alert] = "Failed to upvote"	
+		end
+	end
 end

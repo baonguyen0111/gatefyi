@@ -25,6 +25,7 @@ class ArticlesController < ApplicationController
 	#mingche and fanyi
 	def new
 		@article = Article.new
+		@us_states = ArticlesHelper::US_STATES
 	end
 
 	def create
@@ -40,7 +41,8 @@ class ArticlesController < ApplicationController
 	end
 	
 	private
-	  def create_params
-	  	params.require(:article) .permit(:company, :industry_type, :state, :city, :compensation, :interview_exp, :work_exp)
-	  end 
+	
+	def create_params
+		params.require(:article) .permit(:company, :industry_type, :state, :city, :compensation, :interview_exp, :work_exp)
+	end 
 end

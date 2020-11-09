@@ -28,7 +28,9 @@ class ArticlesController < ApplicationController
 
 	def create
 		@article = Article.new(create_params)
+		#byebug
 		@article.upvotes = 0
+		#byebug
 		if @article.save
 			flash[:notice] = "New work experience created"
 			redirect_to articles_path and return
@@ -41,7 +43,7 @@ class ArticlesController < ApplicationController
 	private
 	
 	def create_params
-		params.require(:article) .permit(:company, :industry_type, :state, :city, :compensation, :interview_exp, :work_exp)
+		params.require(:article).permit(:company, :industry_type, :state, :city, :compensation, :interview_exp, :work_exp)
 	end 
 	
 	def change_upvotes

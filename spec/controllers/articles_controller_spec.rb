@@ -72,14 +72,5 @@ RSpec.describe ArticlesController, type: :controller do
 			get :create, :params => {:article => {company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00)}}
     		expect(response).to have_http_status(:redirect)
 		end
-		
-		it "renders the create template" do
-			#we need to add more things about the creation of an article to properly check
-			p = Article.new(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00))
-			expect(Article).to receive(:find).with(eq("1").or eq(1)) { p }
-			get :create, :params => { :id => 1 }
-			expect(response).to have_http_status(:success)
-        	expect(response).to render_template(:create)
-		end
 	end
 end

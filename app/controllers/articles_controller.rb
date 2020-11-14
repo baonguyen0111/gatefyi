@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
 	#linh and bao
 	def index
-		@articles = Article.order("approved DESC").paginate(:page => params[:page], :per_page => 4)
+		@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4)
 	end
 
 	def show
@@ -32,7 +32,7 @@ class ArticlesController < ApplicationController
 		@article.upvotes = 0
 		#byebug
 		if @article.save
-			flash[:notice] = "New work experience created"
+			flash[:notice] = "Waiting for approval from admin"
 			redirect_to articles_path and return
 		else
 			flash[:alert] = "Failed to save new  work experience"

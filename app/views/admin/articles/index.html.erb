@@ -1,14 +1,5 @@
-
 <div class="row">
-	<% if admin_signed_in? %>
-		<div class="col-md-2 offset-md-1">
-			<%= link_to "Approve posts", admin_articles_path, :class => "btn btn-primary" %> 
-		</div>	
-	<% end %>
-	
-	<div class="col-md-2 offset-md-10">
-		<%= link_to "+ Add Post", new_article_path, :class => "btn btn-primary" %>
-	</div>
+	<h2>Posts waiting for your approval</h2>
 </div>
 <div class="company-list">
 	<table class="table table-hover">
@@ -23,7 +14,7 @@
 			<% @articles.each do |a| %>
 				<tr>
 					<td class="articlecompany">
-						<%= link_to "#{a.company}", article_path(a), :class => "articlecompany" %>
+						<%= link_to "#{a.company}", admin_article_path(a), :class => "articlecompany" %>
 					</td>
 					<td class="articleindustry">
 						<%= a.industry_type %>
@@ -48,3 +39,4 @@
 		<%= will_paginate @articles %>
 	</ul>
 </nav> 
+

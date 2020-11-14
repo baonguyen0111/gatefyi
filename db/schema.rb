@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2020_10_29_191223) do
     t.text "interview_exp"
     t.text "work_exp"
     t.integer "upvotes"
+    t.boolean "admin_approved", default: false
     t.datetime "approved"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

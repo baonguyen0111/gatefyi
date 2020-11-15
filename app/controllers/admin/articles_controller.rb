@@ -19,5 +19,15 @@ class Admin::ArticlesController < ApplicationController
 
 		end
 
-	end	
+	end
+	
+	def admin_approve
+		approval = params.require(:approval)
+		if approval
+			@article.admin_approved = true 
+			flash[:notice] = "post approved!"
+		else
+			flash[:alert] = "post rejected."
+		end 
+	end 
 end

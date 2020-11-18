@@ -1,87 +1,22 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/ubuntu/environment/gatefyi/spec/controllers/articles_controller_spec.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/spec/controllers/admin/articles_controller_spec.rb": {
         "lines": [
           1,
           null,
           1,
-          1,
-          1,
+          null,
           1,
           null,
           null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          2,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          2,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
           1,
           null,
           null,
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/spec/rails_helper.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/spec/rails_helper.rb": {
         "lines": [
           null,
           1,
@@ -149,7 +84,7 @@
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/config/environment.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -158,7 +93,7 @@
           1
         ]
       },
-      "/home/ubuntu/environment/gatefyi/config/application.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/config/application.rb": {
         "lines": [
           1,
           null,
@@ -197,7 +132,7 @@
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/config/boot.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/config/boot.rb": {
         "lines": [
           1,
           null,
@@ -205,7 +140,17 @@
           1
         ]
       },
-      "/home/ubuntu/environment/gatefyi/config/environments/test.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/config/spring.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/ubuntu/environment/proj/gatefyi/config/environments/test.rb": {
         "lines": [
           null,
           null,
@@ -258,7 +203,7 @@
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/config/initializers/application_controller_renderer.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/config/initializers/application_controller_renderer.rb": {
         "lines": [
           null,
           null,
@@ -270,7 +215,7 @@
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/config/initializers/assets.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/config/initializers/assets.rb": {
         "lines": [
           null,
           null,
@@ -288,7 +233,7 @@
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/config/initializers/backtrace_silencers.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/config/initializers/backtrace_silencers.rb": {
         "lines": [
           null,
           null,
@@ -299,7 +244,7 @@
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/config/initializers/content_security_policy.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/config/initializers/content_security_policy.rb": {
         "lines": [
           null,
           null,
@@ -333,7 +278,7 @@
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/config/initializers/cookies_serializer.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/config/initializers/cookies_serializer.rb": {
         "lines": [
           null,
           null,
@@ -342,7 +287,7 @@
           1
         ]
       },
-      "/home/ubuntu/environment/gatefyi/config/initializers/devise.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/config/initializers/devise.rb": {
         "lines": [
           null,
           null,
@@ -450,7 +395,7 @@
           null,
           null,
           null,
-          null,
+          1,
           null,
           null,
           null,
@@ -657,7 +602,7 @@
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/config/initializers/filter_parameter_logging.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/config/initializers/filter_parameter_logging.rb": {
         "lines": [
           null,
           null,
@@ -665,7 +610,7 @@
           1
         ]
       },
-      "/home/ubuntu/environment/gatefyi/config/initializers/inflections.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/config/initializers/inflections.rb": {
         "lines": [
           null,
           null,
@@ -685,7 +630,7 @@
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/config/initializers/mime_types.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/config/initializers/mime_types.rb": {
         "lines": [
           null,
           null,
@@ -693,7 +638,7 @@
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/config/initializers/wrap_parameters.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/config/initializers/wrap_parameters.rb": {
         "lines": [
           null,
           null,
@@ -711,100 +656,120 @@
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/config/routes.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/config/routes.rb": {
         "lines": [
           1,
           1,
           1,
           1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/app/models/admin.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/app/models/admin.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/ubuntu/environment/proj/gatefyi/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/ubuntu/environment/proj/gatefyi/app/helpers/admin/articles_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/ubuntu/environment/proj/gatefyi/app/helpers/application_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/ubuntu/environment/proj/gatefyi/app/helpers/articles_helper.rb": {
         "lines": [
           1,
           null,
           null,
           1,
           null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/app/models/application_record.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/app/helpers/omniauth_callbacks_helper.rb": {
         "lines": [
           1,
-          1,
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/app/helpers/application_helper.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/home/ubuntu/environment/gatefyi/app/helpers/articles_helper.rb": {
-        "lines": [
-          1,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/home/ubuntu/environment/gatefyi/app/helpers/states_helper.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/app/helpers/states_helper.rb": {
         "lines": [
           1,
           null,
@@ -867,7 +832,133 @@
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/app/controllers/articles_controller.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/app/controllers/admin/articles_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/ubuntu/environment/proj/gatefyi/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/ubuntu/environment/proj/gatefyi/spec/controllers/articles_controller_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          0,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          2,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          2,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/ubuntu/environment/proj/gatefyi/app/controllers/articles_controller.rb": {
         "lines": [
           1,
           null,
@@ -876,8 +967,8 @@
           null,
           null,
           1,
-          5,
-          5,
+          3,
+          3,
           null,
           null,
           1,
@@ -930,13 +1021,7 @@
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/app/controllers/application_controller.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/home/ubuntu/environment/gatefyi/spec/features/index_request_spec.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/spec/features/index_request_spec.rb": {
         "lines": [
           1,
           null,
@@ -944,7 +1029,7 @@
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/spec/features/show_request_spec.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/spec/features/show_request_spec.rb": {
         "lines": [
           1,
           null,
@@ -957,36 +1042,36 @@
           null,
           1,
           1,
-          1,
+          0,
           null,
           null,
           1,
           1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           null,
           null,
           1,
           1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           null,
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/spec/helpers/articles_helper_spec.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/spec/helpers/admin/articles_helper_spec.rb": {
         "lines": [
           1,
           null,
@@ -1005,7 +1090,45 @@
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/spec/models/admin_spec.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/spec/helpers/articles_helper_spec.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/ubuntu/environment/proj/gatefyi/spec/helpers/omniauth_callbacks_helper_spec.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/ubuntu/environment/proj/gatefyi/spec/models/admin_spec.rb": {
         "lines": [
           1,
           null,
@@ -1014,7 +1137,7 @@
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/spec/models/article_spec.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/spec/models/article_spec.rb": {
         "lines": [
           1,
           null,
@@ -1027,15 +1150,23 @@
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/app/models/article.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/app/models/article.rb": {
         "lines": [
           1,
           1,
           1,
+          1,
+          5,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/spec/requests/articles_request_spec.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/spec/requests/admin/articles_request_spec.rb": {
         "lines": [
           1,
           null,
@@ -1044,7 +1175,16 @@
           null
         ]
       },
-      "/home/ubuntu/environment/gatefyi/spec/requests/indexshow_request_spec.rb": {
+      "/home/ubuntu/environment/proj/gatefyi/spec/requests/articles_request_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null
+        ]
+      },
+      "/home/ubuntu/environment/proj/gatefyi/spec/requests/indexshow_request_spec.rb": {
         "lines": [
           1,
           null,
@@ -1057,11 +1197,20 @@
           null,
           1,
           null,
+          null,
+          null
+        ]
+      },
+      "/home/ubuntu/environment/proj/gatefyi/spec/requests/omniauth_callbacks_request_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
           null,
           null
         ]
       }
     },
-    "timestamp": 1604956125
+    "timestamp": 1605696919
   }
 }

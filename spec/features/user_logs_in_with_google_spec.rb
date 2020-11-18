@@ -18,8 +18,8 @@ RSpec.feature "user logs in" do
     expect(page).to have_link("Log in as admin")
     visit root_path
     expect(page).not_to have_content("Approve posts")
-    vist admin_articles_path
-    expect(response).to have_http_status(:redirect)
+    visit admin_articles_path
+    expect(page).to have_content("Only admin users can access this page")
   end
 end
 

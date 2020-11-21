@@ -35,7 +35,7 @@ class ArticlesController < ApplicationController
 			flash[:notice] = "Waiting for approval from admin"
 			redirect_to articles_path and return
 		else
-			flash[:alert] = "Failed to save new  work experience"
+			flash[:alert] = "Failed to save new work experience"
 			redirect_to new_article_path and return
 		end
 	end

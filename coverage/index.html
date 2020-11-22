@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2020-11-22T23:21:08+00:00">2020-11-22T23:21:08+00:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2020-11-22T23:36:39+00:00">2020-11-22T23:36:39+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -1392,7 +1392,7 @@
 
             
 
-            <code class="ruby">	        @articles = Article.getApprovedArticles.paginate(:page =&gt; params[:page], :per_page =&gt; 4).order(queries[params[:query]].to_s + session[params[:query]])</code>
+            <code class="ruby">	        @articles = Article.getApprovedArticles.paginate(:page =&gt; params[:page], :per_page =&gt; 4).reorder(queries[params[:query]].to_s + session[params[:query]])</code>
           </li>
         </div>
       
@@ -1524,7 +1524,7 @@
 
             
 
-            <code class="ruby">				@articles = Article.getApprovedArticles.paginate(:page =&gt; params[:page], :per_page =&gt; 4).order(queries[session[:prev]].to_s + session[session[:prev]])</code>
+            <code class="ruby">				@articles = Article.getApprovedArticles.paginate(:page =&gt; params[:page], :per_page =&gt; 4).reorder(queries[session[:prev]].to_s + session[session[:prev]])</code>
           </li>
         </div>
       
@@ -11491,7 +11491,7 @@
 
             
 
-            <code class="ruby">    page.all(&quot;.articleindustry&quot;).each { |x| names &lt;&lt; x.text }</code>
+            <code class="ruby">    page.all(&quot;.articlecompany&quot;).each { |x| names &lt;&lt; x.text }</code>
           </li>
         </div>
       

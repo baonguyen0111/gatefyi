@@ -16,7 +16,7 @@ class ArticlesController < ApplicationController
 	    		session[params[:query]] = ' ASC'
 	    	end
 	        #Sort and update where needed
-	        @articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4).reorder(queries[params[:query]].to_s + session[params[:query]])
+	        @articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4).order(queries[params[:query]].to_s + session[params[:query]])
 	        session[:prev] = params[:query]
 	        params[:query] = nil
 		else
@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
 			
 			#if a param was previous selcted, we should kepp follwing it when going to a different page
 			else
-				@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4).reorder(queries[session[:prev]].to_s + session[session[:prev]])
+				@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4).order(queries[session[:prev]].to_s + session[session[:prev]])
 			end
 		end
 	end

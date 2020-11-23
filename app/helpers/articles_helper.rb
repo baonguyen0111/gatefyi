@@ -1,5 +1,5 @@
 module ArticlesHelper
-    US_STATES = 
+	US_STATES = 
 		[
 			['Alabama', 'AL'],
 			['Alaska', 'AK'],
@@ -53,5 +53,58 @@ module ArticlesHelper
 			['West Virginia', 'WV'],
 			['Wisconsin', 'WI'],
 			['Wyoming', 'WY']
-		]	
+	]
+
+	INDUSTRY_TYPES = 
+		[
+			['Accounting', 'Accounting'], 
+			['Airlines', 'Airlines'], 
+			['Animation', 'Animation'], 
+			['Architecture', 'Architecture'],
+			['Arts', 'Arts'],
+			['Banking', 'Banking'], 
+			['Biotechnology', 'Biotechnology'], 
+			['Chemicals', 'Chemicals'], 
+			['Civil Engineering', 'Civil Engineering'],
+			['Computer Games', 'Computer Games'],
+			['Computer Hardware', 'Computer Hardware'], 
+			['Computer Networking', 'Computer Networking'], 
+			['Computer Software', 'Computer Software'], 
+			['Construction', 'Construction'],
+			['Consumer Services', 'Consumer Services'],
+			['Cosmetics', 'Cosmetics'], 
+			['Defense', 'Defense'], 
+			['Education', 'Education'], 
+			['Entertainment', 'Entertainment'],
+			['Farming', 'Farming'],
+			['Fishery', 'Fishery'], 
+			['Food', 'Food'], 
+			['Furniture', 'Furniture'], 
+			['Gambling', 'Gambling'],
+			['Graphic Design', 'Graphic Design'],
+			['Health', 'Health'], 
+			['Hospitality', 'Hospitality'], 
+			['Human Resources', 'Human Resources'], 
+			['Insurance', 'Insurance'],
+			['International Affairs', 'International Affairs'],
+			['Judiciary', 'Judiciary'], 
+			['Libraries', 'Libraries'], 
+			['Machinery', 'Machinery'], 
+			['Military', 'Military'],
+			['Museums', 'Museums'],
+			['Music', 'Music'], 
+			['Oil', 'Oil'], 
+			['Pharmaceuticals', 'Pharmaceuticals'], 
+			['Philanthropy', 'Philanthropy'],
+			['Photography', 'Photography'],
+			['Publishing', 'Publishing'], 
+			['Ranching', 'Ranching'],
+			['Real Estate', 'Real Estate'],
+			['Sports', 'Sports'],
+			['Textiles', 'Textiles'],
+			['Tobacco', 'Tobacco'], 
+			['Utilities', 'Utilities'],
+			['Wine', 'Wine']
+
+	] 
 end

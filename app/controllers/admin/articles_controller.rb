@@ -26,6 +26,10 @@ class Admin::ArticlesController < ApplicationController
 		flash[:notice] = "post rejected"
 		redirect_to admin_articles_path and return
 	end
+	
+	## TODO 
+	def update 
+	end 
 
 	private
 	def admin_logged_in?

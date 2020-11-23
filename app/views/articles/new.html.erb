@@ -26,7 +26,7 @@
 		<div class="form-group col-md-6">
 			<%= f.label :industry_type, "Industry Type:", class: "col-md-4 control-label" %>
 			<div class="col-md-8">
-				<%= f.text_field :industry_type, class: "form-control" %>
+				<%= f.select :industry_type, options_for_select(@industry_types), {:prompt => "Select industry"}, {class: "form-control"} %>
 			</div>
 		</div>
 	</div>

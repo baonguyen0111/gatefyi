@@ -1,7 +1,36 @@
 class ArticlesController < ApplicationController
 	#linh and bao
 	def index
-		@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4)
+		#tyler
+		queries = {"company" => :company, "industy" => :industry_type, "location" => :state, "salary" => :compensation, "upvotes" => :upvotes}
+		#if a sorting param has been selected
+    	if queries.key? params[:query]
+	    	#decide if we should sort by ASC or DESC
+	    	if session[:prev] == params[:query]
+	    		if session[params[:query]] == ' DESC'
+	    			session[params[:query]] = ' ASC'
+	    		else
+	    			session[params[:query]] = ' DESC'
+	    		end
+	    	else
+	    		session[params[:query]] = ' ASC'
+	    	end
+	        #Sort and update where needed
+	        @articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4).reorder(queries[params[:query]].to_s + session[params[:query]])
+	        session[:prev] = params[:query]
+	        params[:query] = nil
+		else
+			#if no sorting param is selected (in the case of going to next or prev page)
+			
+			#if no param has ever been slected (the page was loaded for the first time)
+			if session[:prev] == nil
+				@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4)
+			
+			#if a param was previous selcted, we should kepp follwing it when going to a different page
+			else
+				@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4).reorder(queries[session[:prev]].to_s + session[session[:prev]])
+			end
+		end
 	end
 
 	def show

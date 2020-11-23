@@ -10,6 +10,23 @@ class Admin::ArticlesController < ApplicationController
 		@article = Article.find(id)
 	end
 	
+	def update
+		id = params[:id]
+		@article = Article.find(id)
+		if params[:approval]
+			admin_approve
+		end
+		redirect_to admin_articles_path and return
+	end
+	
+	def destroy
+		id = params[:id]
+		@article = Article.find(id)
+		@article.destroy
+		flash[:notice] = "post rejected"
+		redirect_to admin_articles_path and return
+	end
+	
 	## TODO 
 	def update 
 	end 
@@ -26,11 +43,11 @@ class Admin::ArticlesController < ApplicationController
 	
 	def admin_approve
 		approval = params.require(:approval)
-		if approval
-			@article.admin_approved = true 
-			flash[:notice] = "post approved!"
+		@article.admin_approved = approval
+		if @article.save
+			flash[:notice] = "post approved"
 		else
-			flash[:alert] = "post rejected."
-		end 
+			flash[:alert] = "Failed to approve post"
+		end
 	end 
 end

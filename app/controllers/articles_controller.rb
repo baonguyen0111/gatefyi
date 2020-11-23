@@ -24,6 +24,7 @@ class ArticlesController < ApplicationController
 	def new
 		@article = Article.new
 		@us_states = ArticlesHelper::US_STATES
+		@industry_types = ArticlesHelper::INDUSTRY_TYPES
 	end
 
 	def create

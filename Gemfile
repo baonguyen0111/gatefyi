@@ -24,12 +24,19 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', '>= 1.4.2', require: false 
+# will_paginate is a pagination library that integrates with Ruby on Rails, Sinatra, Hanami::View, Merb, DataMapper and Sequel.
 gem 'will_paginate', '~> 3.1.0'
+# This gem integrates the Twitter Bootstrap pagination component with the will_paginate pagination gem.
 gem 'will_paginate-bootstrap'
+# Devise is a flexible authentication solution for Rails based on Warden.
 gem 'devise'
+# Strategy to authenticate with Google via OAuth2 in OmniAuth.
 gem 'omniauth-google-oauth2'
+# Shim to load environment variables from .env into ENV in development.
 gem 'dotenv-rails', groups: [:development, :test]
+# This gem provides jQuery and the jQuery-ujs driver for your Rails 4+ application.
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

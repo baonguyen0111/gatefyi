@@ -27,10 +27,6 @@ class Admin::ArticlesController < ApplicationController
 		redirect_to admin_articles_path and return
 	end
 	
-	## TODO 
-	def update 
-	end 
-
 	private
 	def admin_logged_in?
 		unless admin_signed_in?

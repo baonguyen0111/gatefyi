@@ -40,6 +40,7 @@ class Admin::ArticlesController < ApplicationController
 	def admin_approve
 		approval = params.require(:approval)
 		@article.admin_approved = approval
+		@article.approved = DateTime.now
 		if @article.save
 			flash[:notice] = "post approved"
 		else

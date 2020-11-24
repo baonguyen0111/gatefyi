@@ -23,6 +23,10 @@ RSpec.describe ArticlesController, type: :controller do
             expect(response).to render_template("index")
 		end
 	end
+	
+	
+		
+
 
 	context "show" do
 		it "routes correctly" do
@@ -76,4 +80,6 @@ RSpec.describe ArticlesController, type: :controller do
     		expect(response).to have_http_status(:redirect)
 		end
 	end
+	
+	
 end

@@ -29,6 +29,9 @@ def stub_omniauth
   # then, provide a set of fake oauth data that
   # omniauth will use when a user tries to authenticate:
   OmniAuth.config.mock_auth[:google] = OmniAuth::AuthHash.new({
+  :provider => 'google',
+  :uid => '12345',
+    
     ## must intialize fake stub for testing 
   })
 end

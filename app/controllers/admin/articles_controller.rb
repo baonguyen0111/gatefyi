@@ -23,7 +23,7 @@ class Admin::ArticlesController < ApplicationController
 		id = params[:id]
 		@article = Article.find(id)
 		@article.destroy
-		flash[:notice] = "post rejected"
+		flash[:notice] = "Post rejected"
 		redirect_to admin_articles_path and return
 	end
 	
@@ -42,7 +42,7 @@ class Admin::ArticlesController < ApplicationController
 		@article.admin_approved = approval
 		@article.approved = DateTime.now
 		if @article.save
-			flash[:notice] = "post approved"
+			flash[:notice] = "Post approved"
 		else
 			flash[:alert] = "Failed to approve post"
 		end

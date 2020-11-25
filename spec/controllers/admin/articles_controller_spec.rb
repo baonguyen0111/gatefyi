@@ -43,36 +43,23 @@ RSpec.describe Admin::ArticlesController, type: :controller do
 			expect(response).to render_template("show")
 			expect(assigns(:article)).to eq(p)
 		end
-
-	end
-
-=begin
-	context "update" do
-		it "routes correctly" do
+		
+		it "approve" do
 			allow(controller).to receive(:admin_logged_in?).and_return(true)
-
-			p = Article.create!(company: "hello", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00))
-		# byebug
-		expect(Article).to receive(:find).with(eq("1").or eq(1)) { p }
-
-
-			get :destroy, :params => { :id => 1}
-			# byebug
-			# expect(response.status).to eq(200)
-
-
-
-
+			Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00))
+			get :update, :params => { :id => 1, :approval => true } 
+            expect(response).to have_http_status(:redirect)
+            expect(Article.find(1).admin_approved).to be_truthy
 		end
-		# it "approve correctly" do
-		# 	allow(controller).to receive(:admin_logged_in?).and_return(true)
-		# 	p = Article.create!(company: "hell", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00))
+		
+		it "reject" do
+			allow(controller).to receive(:admin_logged_in?).and_return(true)
+			Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00))
+			
+			get :destroy, :params => { :id => 1, :approval => false } 
+            expect{Article.find(1)}.to raise_error(ActiveRecord::RecordNotFound)
+            expect(response).to have_http_status(:redirect)
+		end
 
-  #          get :update, :params => { :id => 1,:approval => true }
-  #          expect(Article).to receive(:admin_approve).with(1, true)
-
-
-		# end
 	end
-=end
 end

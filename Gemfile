@@ -34,7 +34,7 @@ gem 'devise'
 # Strategy to authenticate with Google via OAuth2 in OmniAuth.
 gem 'omniauth-google-oauth2'
 # Shim to load environment variables from .env into ENV in development.
-gem 'dotenv-rails', groups: [:development, :test]
+gem 'dotenv-rails', groups: [:development, :test, :production]
 # This gem provides jQuery and the jQuery-ujs driver for your Rails 4+ application.
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 group :development, :test do

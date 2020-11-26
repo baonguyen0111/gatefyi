@@ -18,6 +18,12 @@
 !/log/.keep
 !/tmp/.keep
 
+# Ignore all swap files
+*swp
+
+#Ignore all files in coverage
+/coverage/*
+
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
 !/tmp/pids/

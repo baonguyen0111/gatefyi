@@ -2,6 +2,7 @@ class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 	# replace with your authenticate method
 	def google_oauth2
 		auth = request.env["omniauth.auth"]
+		byebug
 		admin = Admin.where(provider: auth["provider"], uid: auth["uid"])
 			.first_or_initialize(email: auth["info"]["email"])
 		admin.name ||= auth["info"]["name"]

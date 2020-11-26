@@ -2,7 +2,11 @@ class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 	# replace with your authenticate method
 	def google_oauth2
 		auth = request.env["omniauth.auth"]
-		byebug
+		admin_accpt = ["bnguyen@colgate.edu", "vtran@colgate.edu", "lnguyen@colgate.edu", "jsommers@colgate.edu", "tpotter@colgate.edu", "fmo@colgate.edu", "mliu1@colgate.edu"]
+		unless admin_accpt.include?(auth["info"]["email"])
+			flash["alert"] = "Please don't authenticate with the wrong email" 
+			redirect_to root_path and return
+		end	
 		admin = Admin.where(provider: auth["provider"], uid: auth["uid"])
 			.first_or_initialize(email: auth["info"]["email"])
 		admin.name ||= auth["info"]["name"]

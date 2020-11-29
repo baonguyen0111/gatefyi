@@ -31,7 +31,7 @@ class Admin::ArticlesController < ApplicationController
 	def admin_logged_in?
 		unless admin_signed_in?
 			flash[:alert] =  "Only admin users can access this page"
-			redirect_to articles_path and return 
+			redirect_to root_path and return 
 
 		end
 

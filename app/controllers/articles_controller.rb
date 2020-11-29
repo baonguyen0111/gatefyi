@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+	before_action :is_logged_in?
 	#linh and bao
 	def index
 		#tyler
@@ -60,7 +61,7 @@ class ArticlesController < ApplicationController
 		@article = Article.new(create_params)
 		#byebug
 		@article.upvotes = 0
-		#byebug
+		@article.user_id = current_user.id
 		if @article.save
 			flash[:notice] = "Waiting for approval from admin"
 			redirect_to articles_path and return
@@ -71,7 +72,14 @@ class ArticlesController < ApplicationController
 	end
 	
 	private
-	
+
+	def is_logged_in?
+		unless (admin_signed_in? || user_signed_in?)
+			flash[:alert] =  "Only authenticated users can access this page"
+			redirect_to root_path and return 
+
+		end
+	end
 	def create_params
 		params.require(:article).permit(:company, :industry_type, :state, :city, :compensation, :interview_exp, :work_exp)
 	end 

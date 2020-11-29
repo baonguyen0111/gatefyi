@@ -11,6 +11,7 @@ class CreateArticles < ActiveRecord::Migration[6.0]
       t.integer :upvotes
       t.boolean :admin_approved, default: false
       t.datetime :approved
+      t.references :user
       t.timestamps
     end
   end

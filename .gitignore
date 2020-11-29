@@ -20,7 +20,7 @@
 
 # Ignore all swap files
 *swp
-
+*swo 
 #Ignore all files in coverage
 /coverage/*
 

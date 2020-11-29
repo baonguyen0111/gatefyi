@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-md">
+      <h4 class="approvepage"> Feedbacks waiting for you to resolve  </h4>
+    </div>
+</div>
+<!--Back to main page-->
+<div class="text-right mr-4">
+    <%= link_to articles_path, :class =>"text-decoration-none" do %>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+        </svg>
+        Back to main page
+    <% end %>      
+</div>
+<div class="feedback-list">
+	<table class="table table-hover">
+		<thead class="table-headers">
+			<th>Content</th>
+			<th>Resolve? </th>
+		</thead>
+		<tbody>
+			<% @feedbacks.each do |f| %>
+				<% if !f.resolved %>
+					<tr>
+						<td>
+							<div> <%= f.content %> </div> 
+						</td>
+
+						<td>
+							<div> <%= link_to "Resolve", admin_feedback_path(f, :resolved => true), :method => :put %> 
+						</td>
+					</tr>
+				<% end %>
+			<% end %>
+		</tbody>
+	</table>
+
+</div>
+ 
+

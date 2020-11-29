@@ -11,4 +11,9 @@ class Article < ApplicationRecord
 		Article.where(admin_approved: false).order("approved DESC")	
 	end
 
+	def self.most_active
+		Article.joins(:user).group(:user_id).count(:user_id)
+	end
+
+
 end

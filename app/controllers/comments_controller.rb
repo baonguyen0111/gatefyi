@@ -3,8 +3,13 @@ class CommentsController < ApplicationController
 	def index
 		id = params[:article_id]
 		article = Article.find(id)
+		hash = Hash.new(0)
 		comments = article.comments
-		@arr = [id, comments] 
+		comments.each do |c|
+			comment_owner = User.find(c.user_id)
+			hash[c] = comment_owner
+		end
+		@arr = [id, hash] 
 	end
 
 	def update

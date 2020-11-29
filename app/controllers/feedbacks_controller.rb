@@ -1,0 +1,34 @@
+class FeedbacksController < ApplicationController
+	before_action :is_logged_in?
+	def index
+		user = User.find(current_user.id)
+		@feedbacks = user.feedbacks
+		@new_feedback = Feedback.new
+		@arr = [@feedbacks, @new_feedback]	
+	end
+
+	def create
+		@feedback = Feedback.new(create_params)
+		@feedback.user_id = current_user.id
+		if @feedback.save
+			flash[:notice] = "Waiting for admin to resolve"
+			redirect_to feedbacks_path and return
+		else
+			flash[:alert] = "Failed to save feedback"
+			redirect_to feedbacks_path and return
+		end
+	end
+
+	private
+	def create_params
+		params.require(:feedback).permit(:content)
+	end 
+
+	def is_logged_in?
+		unless (admin_signed_in? || user_signed_in?)
+			flash[:alert] =  "Only authenticated users can access this page"
+			redirect_to root_path and return 
+
+		end
+	end
+end

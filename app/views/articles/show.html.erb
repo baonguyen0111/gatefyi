@@ -1,8 +1,17 @@
+<%= @article = @arr[0] %>
+<%= @owner = @arr[1] %>
 <div class="row">
     <div class="col-md">
       <h4 class="articlecompany">
         <%= "Internship experience at #{@article.company}" %>
       </h4>
+      <h3>
+	      <% if @owner.show_profile %> 
+		      Posted by <%= link_to "#{@owner.displayname}", profile_path(@owner) %>
+      		<% else %>
+	      		<%= "#{@owner.displayname}" %>
+      		<% end %>
+      </h3> 
     </div>
 </div>
 <div class="ml-4"> 

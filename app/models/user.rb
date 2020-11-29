@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 	has_many :articles, dependent: :destroy
 	has_many :comments, dependent: :destroy
+	has_many :feedbacks, dependent: :destroy
 	devise :rememberable, :registerable
 	def self.from_omniauth(auth)
 		User.where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -10,4 +11,5 @@ class User < ApplicationRecord
 			user.name ||= auth["info"]["name"]
 		end
 	end
+
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :feedbacks, only: [:index, :create] 
   devise_for :users
   devise_for :admins, controllers: {omniauth_callbacks: "admins/omniauth_callbacks"}
   devise_scope :admin do
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
   end
   namespace :admin do 
 	resources :articles
+	resources :feedbacks, only: [:index, :update]
   end
   resources :articles do 
 	  resources :comments 
@@ -19,4 +21,5 @@ Rails.application.routes.draw do
   root :to => "static#index"
   get '/about' => 'static#aboutus', :as => :about
   get '/howto' => 'static#howto', :as=> :how
+  get '/profile/:id' => 'profile#show', :as=> :profile
 end

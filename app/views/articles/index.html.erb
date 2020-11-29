@@ -1,15 +1,34 @@
-
+<%= @articles = @arr[1] %>
+<%= @most_active_user = @arr[0] %>
 <div class="row">
 	<% if admin_signed_in? %>
 		<div class="col-md-2 offset-md-1">
-			<%= link_to "Approve posts", admin_articles_path, :class => "btn btn-primary" %> 
+			<%= link_to "Approve posts", admin_articles_path, :class => "btn btn-primary" %>
+		</div>
+		<div class ="col-md-2 offset-md-3">
+			<%= link_to "Look at feedbacks", admin_feedbacks_path, :class=> "btn btn-primary" %>   	
 		</div>	
 	<% end %>
+	<% if user_signed_in? %>
+		<div class = "col-md-2 offset-md-4">
+			<%= link_to "Submit feedback", feedbacks_path, :class => "btn btn-primary" %>
+		</div>
+	<% end %>
 </div>
-<div class = "row">	
-	<div class="col-md-2 offset-md-10">
-		<%= link_to "+ Add Post", new_article_path, :class => "btn btn-primary" %>
-	</div>
+<div class = "row">
+	<div class = "col-md-2 offset-md-6">
+		<% if @most_active_user.show_profile %> 
+		      Most active user is: <%= link_to "#{@most_active_user.displayname}", profile_path(@most_active_user) %>
+      		<% else %>
+	      	     Most active user is: <%= "#{@most_active_user.displayname}" %>
+      		<% end %>
+
+	</div> 
+	<% if user_signed_in? %>	
+		<div class="col-md-2 offset-md-10">
+			<%= link_to "+ Add Post", new_article_path, :class => "btn btn-primary" %>
+		</div>
+	<% end %>
 </div>
 <div class="company-list">
 	<table class="table table-hover">

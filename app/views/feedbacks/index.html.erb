@@ -1,0 +1,51 @@
+<%= @feedbacks = @arr[0] %>
+<%= @feedback = @arr[1] %>
+<div class="row">
+    <div class="col-md">
+	<h4>
+		    All your past feedbacks
+      </h4>
+    </div>
+</div>
+<div class="feedback-list">
+	<table class="table table-borderless">
+		<thead>
+			<th> Content </th>
+			<th> Status </th>
+		</thead> 
+		<tbody>
+			<% @feedbacks.each do |f| %>
+				<tr>
+					<td>
+						<%= "#{f.content}" %> 	
+					</td> 
+				</tr>
+				<tr>
+					<td>
+						<% if f.resolved %>
+							<div> Resolved </div> 
+						<% else %>
+						 	<div> Not resolved </div> 
+						<% end %>
+					</td> 
+				</tr> 
+		        <% end %>
+		</tbody>
+	</table>
+</div>
+<div class="mr-4">
+<div class="row"> Post a feedback </div>
+<%= form_with model: @feedback, url: feedbacks_path, method: :post, local: true, :class => "form-horizontal center" do |f| %>
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<%= f.label :content, "Comment:", class: "col-md-4 control-label" %>
+			<div class="col-md-8">
+				<%= f.text_field :content, class: "form-control" %>
+			</div>
+		</div>	
+	</div>
+	<span style="margin-left: 30%">
+		<%= f.submit "Submit", class: "btn btn-default btn-primary" %>  
+	</span>
+<% end %>
+</div>

@@ -1,8 +1,14 @@
 class ArticlesController < ApplicationController
 	before_action :is_logged_in?
-	#linh and bao
 	def index
-		#tyler
+		most_active_poster = Article.most_active()
+		most_active_commenter = Comment.most_active()
+		hash = Hash.new(0)
+		most_active_poster.each do |key, value|
+			hash[key.to_i] = (value.to_i + most_active_commenter[key.to_i].to_i)
+		end
+		most_active_id = hash.max_by{|k,v| v}[0]
+		@active_user = User.find(most_active_id)
 		queries = {"company" => :company, "industy" => :industry_type, "location" => :state, "salary" => :compensation, "upvotes" => :upvotes}
 		#if a sorting param has been selected
     	if queries.key? params[:query]
@@ -20,23 +26,28 @@ class ArticlesController < ApplicationController
 	        @articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4).reorder(queries[params[:query]].to_s + session[params[:query]])
 	        session[:prev] = params[:query]
 	        params[:query] = nil
+		@arr = [@active_user, @articles]
 		else
 			#if no sorting param is selected (in the case of going to next or prev page)
 			
 			#if no param has ever been slected (the page was loaded for the first time)
 			if session[:prev] == nil
 				@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4)
-			
+				@arr = [@active_user, @articles]	
 			#if a param was previous selcted, we should kepp follwing it when going to a different page
 			else
 				@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4).reorder(queries[session[:prev]].to_s + session[session[:prev]])
+				@arr = [@active_user, @articles]
 			end
 		end
 	end
 
 	def show
 		id = params[:id]
-		@article = Article.find(id)
+		article = Article.find(id)
+		user_id = article.user_id
+		article_owner = User.find(user_id)
+		@arr = [article, article_owner]
 	end
 
 	def update

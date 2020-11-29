@@ -5,6 +5,10 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :email
       t.string :provider
       t.string :uid
+      t.text :displayname
+      t.string :displayphoto
+      t.string :description
+      t.boolean :show_profile, default: false 
       t.string :remember_token
       t.datetime :remember_created_at
       t.timestamps null: false

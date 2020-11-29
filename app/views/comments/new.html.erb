@@ -14,7 +14,7 @@
     <% end %>      
 </div>
 <div class="mr-4">
-<%= @comment = @arr[1] %>
+	<div class = "invisible"> <%= @comment = @arr[1] %></div>
 <%= form_with model: @comment, url: article_comments_path(@arr[0]), method: :post, local: true, :class => "form-horizontal center" do |f| %>
 	<div class="form-row">
 		<div class="form-group col-md-6">
@@ -25,7 +25,7 @@
 		</div>	
 	</div>
 	<%= f.hidden_field :article_id, value: @arr[0] %>
-i	<span style="margin-left: 30%">
+	<span style="margin-left: 30%">
 		<%= f.submit "Submit", class: "btn btn-default btn-primary" %>  
 	</span>
 <% end %>

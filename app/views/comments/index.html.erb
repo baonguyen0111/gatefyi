@@ -1,10 +1,14 @@
 <br>
+<div class="invisible" >
 <%= @article_id = @arr[0] %>
 <%= @hash = @arr[1] %>
+</div>
 <div class="row">
+	<% if user_signed_in? %>
 	<div class="offset-md-1">
 		<%= link_to "+ Add comment", new_article_comment_path(@article_id), :class => "btn btn-primary" %> 
-	</div> 
+	</div>
+	<% end %>
 </div> 
 <div class ="row">
 	<div class="comment-list offset-md-1">

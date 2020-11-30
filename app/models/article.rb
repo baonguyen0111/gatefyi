@@ -14,6 +14,14 @@ class Article < ApplicationRecord
 	def self.most_active
 		Article.joins(:user).group(:user_id).count(:user_id)
 	end
+	
+	def self.company_filter
+		Article.distinct.plunk(:company)
+	end 
+	
+	def self.industry_filter
+		Article.distinct.plunk(:industry_type)
+	end 
 
 
 end

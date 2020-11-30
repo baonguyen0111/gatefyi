@@ -82,6 +82,12 @@ class ArticlesController < ApplicationController
 		end
 	end
 	
+	def filter_selectors
+		@select_states = ArticlesHelper::US_STATES
+		@select_company = Article.company_filter
+		@select_industry = Article.industry_filter
+	end 
+	
 	private
 
 	def is_logged_in?
@@ -105,4 +111,6 @@ class ArticlesController < ApplicationController
 			flash[:alert] = "Failed to upvote"	
 		end
 	end
+	
+	
 end

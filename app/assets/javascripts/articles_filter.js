@@ -11,7 +11,7 @@ $(".company_filter .btn btn-default btn-primary").click(function(){
     // 'success' and 'error' functions will be passed 3 args
     }); 
     return(false);
-})
+});
 
 $(".salary_filter #filter_submit").click(function(){
     $.ajax({type: 'GET',
@@ -28,4 +28,9 @@ $(".salary_filter #filter_submit").click(function(){
     // 'success' and 'error' functions will be passed 3 args
     });
     return(false);
-})
+});
+
+$(".close").click(function(){
+    //$(this).hide();
+    return(false);
+});

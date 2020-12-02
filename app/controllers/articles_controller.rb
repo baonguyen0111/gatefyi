@@ -29,6 +29,7 @@ class ArticlesController < ApplicationController
 			@arr = [@active_user, @articles]
 		#if filtered
 		elsif params[:filter]
+			#byebug
 			filter_selectors
 			if session[:prev] == nil
 				@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4)
@@ -60,7 +61,7 @@ class ArticlesController < ApplicationController
 				@arr = [@active_user, @articles]
 			end
 			if filter == "industry_type"
-				industry = params[industry]
+				industry = params["industry"]
 				@articles = @articles.where('industry_type = ?', industry)
 				@arr = [@active_user, @articles]
 			end
@@ -131,6 +132,7 @@ class ArticlesController < ApplicationController
 				@select_states = Article.state_filter
 				@select_city = Article.city_filter
 			elsif filter == "company"
+				#byebug
 				@select_company = Article.company_filter
 			else
 				@select_industry = Article.industry_filter

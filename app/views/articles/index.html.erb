@@ -5,9 +5,18 @@
 <%= @most_active_user = @arr[0] %>
 </div>
 
+<div class = "most_active_user">
+		<% if @most_active_user.show_profile %> 
+		      Most active user is: <%= link_to "#{@most_active_user.displayname}", profile_path(@most_active_user) %>
+      		<% else %>
+	      	     Most active user is: <%= "#{@most_active_user.displayname}" %>
+      		<% end %>
+
+</div> 
+
 <nav class="row">
 	<ul class="col-md-2 offset-md-0">
-		<button class="btn btn-primary" id="filter">Filter</button>
+		<button class="btn btn-primary" id="filter">Filter></button>
 		<!--%= link_to("Filter", articles_path, class: "btn btn-primary") %-->
 		<ul>
 			<li> <button class="btn btn-primary" id="company">Company</button></li>
@@ -29,31 +38,33 @@
 			<%= link_to "Submit feedback", feedbacks_path, :class => "btn btn-primary" %>
 		</ul>
 	<% end %>
-
-</nav>
-
-
-
-<div class = "row">
-	<div class = "col-md-2 offset-md-6">
-		<% if @most_active_user.show_profile %> 
-		      Most active user is: <%= link_to "#{@most_active_user.displayname}", profile_path(@most_active_user) %>
-      		<% else %>
-	      	     Most active user is: <%= "#{@most_active_user.displayname}" %>
-      		<% end %>
-
-	</div> 
+	
 	<% if user_signed_in? %>	
 		<div class="col-md-2 offset-md-10">
 			<%= link_to "+ Add Post", new_article_path, :class => "btn btn-primary" %>
 		</div>
 	<% end %>
 
+</nav>
+
+
+
+
+	
+	
+
 <div class="company-list">
 	<%= render 'articles', articles: @articles %>
 </div>
 
-<!-- pop up window -->
+<nav aria-label="Pagination">
+	<ul class="pagination"> 
+		<%= will_paginate @articles %>
+	</ul>
+</nav> 
+
+
+<!-- pop up windows for filters -->
 <nav>
 <div class="salary_filter">
 	<div class="salary_filter_content">
@@ -84,6 +95,7 @@
 	</div>
 </div>
 </nav>
+
 <nav>
 <div class="company_filter">
 	<div class="company_filter_content">
@@ -110,6 +122,7 @@
 	</div>
 </div>
 </nav>
+
 <nav>
 <div class="industry_filter">
 	<div class="industry_filter_content">
@@ -136,6 +149,7 @@
 	</div>
 </div>
 </nav>
+
 <nav>
 <div class="location_filter">
 	<div class="location_filter_content">
@@ -170,9 +184,4 @@
 </div>
 </nav>
 
-<nav aria-label="Pagination">
-	<ul class="pagination justify-content-center"> 
-		<%= will_paginate @articles %>
-	</ul>
-</nav> 
 

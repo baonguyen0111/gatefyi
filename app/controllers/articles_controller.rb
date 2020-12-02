@@ -11,7 +11,7 @@ class ArticlesController < ApplicationController
 		@active_user = User.find(most_active_id)
 		queries = {"company" => :company, "industy" => :industry_type, "location" => :state, "salary" => :compensation, "upvotes" => :upvotes}
 		#if a sorting param has been selected
-    	if queries.key? params[:query]
+		if queries.key? params[:query]
 	    	#decide if we should sort by ASC or DESC
 	    	if session[:prev] == params[:query]
 	    		if session[params[:query]] == ' DESC'
@@ -26,7 +26,45 @@ class ArticlesController < ApplicationController
 	        @articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4).reorder(queries[params[:query]].to_s + session[params[:query]])
 	        session[:prev] = params[:query]
 	        params[:query] = nil
-		@arr = [@active_user, @articles]
+			@arr = [@active_user, @articles]
+		#if filtered
+		elsif params[:filter]
+			filter_selectors
+			if session[:prev] == nil
+				@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4)
+				@arr = [@active_user, @articles]
+			#if a param was previous selcted, we should kepp follwing it when going to a different page
+			else
+				@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4).reorder(queries[session[:prev]].to_s + session[session[:prev]])
+				@arr = [@active_user, @articles]
+			end
+			filter = params["filter"]
+			#filter type
+			if filter == "location"
+				#city and state
+				city = params[city]
+				state = params[state]
+				@articles = @articles.where('state = ?', state).where('city = ?', city)
+				@arr = [@active_user, @articles]
+			end
+			if filter == "compensation"
+				#low and high
+				low = params["low_salary"]
+				high = params["high_salary"]
+				@articles = @articles.where('compensation >= ?', low).where('compensation <= ?', high)
+				@arr = [@active_user, @articles]
+			end
+			if filter == "company"
+				company = params["company"]
+				@articles = @articles.where('company = ?', company)
+				@arr = [@active_user, @articles]
+			end
+			if filter == "industry_type"
+				industry = params[industry]
+				@articles = @articles.where('industry_type = ?', industry)
+				@arr = [@active_user, @articles]
+			end
+			
 		else
 			#if no sorting param is selected (in the case of going to next or prev page)
 			
@@ -40,6 +78,10 @@ class ArticlesController < ApplicationController
 				@arr = [@active_user, @articles]
 			end
 		end
+		respond_to do |format|
+    	format.html
+    	format.js
+    	end
 	end
 
 	def show
@@ -83,10 +125,18 @@ class ArticlesController < ApplicationController
 	end
 	
 	def filter_selectors
-		@select_states = ArticlesHelper::US_STATES
-		@select_company = Article.company_filter
-		@select_industry = Article.industry_filter
-	end 
+		if params[:filter]
+			filter = params[:filter]
+			if filter == "location"
+				@select_states = Article.state_filter
+				@select_city = Article.city_filter
+			elsif filter == "company"
+				@select_company = Article.company_filter
+			else
+				@select_industry = Article.industry_filter
+			end
+		end
+	end
 	
 	private
 

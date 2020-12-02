@@ -64,14 +64,22 @@ nav ul ul {
 	list-style: none;
 }
 
+nav ul ul a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
 nav ul:hover ul{
 	display:block;
 	position: absolute;
+	color:#fff;
 }
 
-nav #filter a:hover{
-	background-color: #f3f3f3;
-	text-decoration:none;
+nav button:hover{
+	color:#fff;
+	background-color:#0069d9;
+	border-color:#0062cc;
+	text-decoration: none;
 }
 
 

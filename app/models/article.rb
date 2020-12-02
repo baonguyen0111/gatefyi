@@ -16,12 +16,18 @@ class Article < ApplicationRecord
 	end
 	
 	def self.company_filter
-		Article.distinct.plunk(:company)
+		Article.distinct.pluck(:company)
 	end 
 	
 	def self.industry_filter
-		Article.distinct.plunk(:industry_type)
+		Article.distinct.pluck(:industry_type)
 	end 
-
-
+	
+	def self.state_filter
+		Article.distinct.pluck(:state)
+	end 
+	
+	def self.city_filter
+		Article.distinct.pluck(:city)
+	end 
 end

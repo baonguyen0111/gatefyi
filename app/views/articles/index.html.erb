@@ -6,12 +6,14 @@
 </div>
 
 <nav class="row">
-	<ul class="col-md-1 offset-md-1" id="filter"> <a href="#">Filter</a>
+	<ul class="col-md-2 offset-md-0">
+		<button class="btn btn-primary" id="filter">Filter</button>
+		<!--%= link_to("Filter", articles_path, class: "btn btn-primary") %-->
 		<ul>
-			<li> <a href="">company</a></li>
-			<li> <a href="">industry</a></li>
-			<li> <a href="">location</a></li>
-			<li> <a href="">salary</a></li>
+			<li> <button class="btn btn-primary" id="company">Company</button></li>
+			<li> <button class="btn btn-primary" id="industry_type">Industry type</button></li>
+			<li> <button class="btn btn-primary" id="location">Location</button></li>
+			<li> <button class="btn btn-primary" id="salary">Salary</button></li>
 		</ul>
 	</ul>
 	<% if admin_signed_in? %>
@@ -46,39 +48,9 @@
 			<%= link_to "+ Add Post", new_article_path, :class => "btn btn-primary" %>
 		</div>
 	<% end %>
-</div>
-<div class="company-list">
-	<table class="table table-hover">
-		<thead class="table-headers">
-			<th> <%= link_to("Company", articles_path(query: "company"))%> </th>
-			<th> <%= link_to("Industry", articles_path(query: "industy"))%> </th>
-			<th> <%= link_to("Location", articles_path(query: "location"))%> </th>
-			<th> <%= link_to("Salary", articles_path(query: "salary"))%> </th>
-			<th> <%= link_to("Upvotes", articles_path(query: "upvotes"))%> </th>
-		</thead>
-		<tbody>
-			<% @articles.each do |a| %>
-				<tr>
-					<td class="articlecompany">
-						<%= link_to "#{a.company}", article_path(a), :class => "articlecompany" %>
-					</td>
-					<td class="articleindustry">
-						<%= a.industry_type %>
-					</td>
-					<td class="articlelocation">
-						<%= a.city %>, <%= a.state %>
-					</td>
-					<td class="articlecompensation">
-						<%= number_to_currency(a.compensation) %>
-					</td>
-					<td class="articleupvotes">
-						<%= a.upvotes %>
-					</td>
-				</tr>
-			<% end %>
-		</tbody>
-	</table>
 
+<div class="company-list">
+	<%= render 'articles', articles: @articles %>
 </div>
 
 <!-- pop up window -->
@@ -87,11 +59,113 @@
 	<div class="salary_filter_content">
 		<div class="close">+</div>
 		Please fill in the range of salary you are looking for
-		<form action="">
-			<input type="text" placeholder="lower salary range">
+		<!--%= form_with url: articles_path, method: :get, remote: true do |f| %>
+			<div class="form-group">
+				<!--%= f.label :compensation, "lower salary range:", class: "col-md-4 control-label" %>
+				<div class="col-md-10">
+					<!--%= f.number_field :compensation, step: 1, class: "form-control" %>
+				</div>
+			</div>
+			<div class="form-group">
+				<!--%= f.label :compensation, "higher salary range:", class: "col-md-4 control-label" %>
+				<div class="col-md-10">
+					<!--%= f.number_field :compensation, step: 1, class: "form-control" %>
+				</div>
+			</div>
+			
+			<span style="margin-left: 30%">
+				<!--%= f.submit "Submit", class: "btn btn-default btn-primary" %>  
+			</span-->
+			
+			<input id="low_salary", type="number", placeholder="lower salary range">Lower salary</input>
+			<input id="high_salary", type="number", placeholder="upper salary range">Upper salary</input>
+			<button class="btn btn-default btn-primary", id="filter_submit"> Submit </button>
+		<!--% end %-->
+	</div>
+</div>
+</nav>
+<nav>
+<div class="company_filter">
+	<div class="company_filter_content">
+		<div class="close">+</div>
+		<% if @select_company %>
+		Please select company
+		<%= form_with url: articles_path, method: :get, remote: true do |f| %>
+			<div class="form-group">
+				<%= f.label :company, "Company:", class: "col-md-4 control-label" %>
+				<div class="col-md-10">
+					<%= f.select :company, options_for_select(@select_company), {:prompt => "Select company"}, {class: "form-control"}%>
+				</div>
+			</div>
+			
+			<span style="margin-left: 30%">
+				<%= f.submit "Submit", class: "btn btn-default btn-primary"%>  
+			</span>
+			
+			<!--input type="text" placeholder="lower salary range">
 			<input type="text" placeholder="upper salary range">
-			<a href="" class="filter_submit"> Submit </a>
-		</form>
+			<a href="" class="filter_submit"> Submit </a-->
+		<% end %>
+		<% end %>
+	</div>
+</div>
+</nav>
+<nav>
+<div class="industry_filter">
+	<div class="industry_filter_content">
+		<div class="close">+</div>
+		<% if @select_industry %>
+		Please select industry type
+		<%= form_with url: articles_path, method: :get, remote: true do |f| %>
+			<div class="form-group">
+				<%= f.label :industry_type, "Industry Type:", class: "col-md-4 control-label" %>
+				<div class="col-md-10">
+					<%= f.select :industry_type, options_for_select(@select_industry), {:prompt => "Select industry"}, {class: "form-control"}%>
+				</div>
+			</div>
+			
+			<span style="margin-left: 30%">
+				<%= f.submit "Submit", class: "btn btn-default btn-primary" %>  
+			</span>
+			
+			<!--input type="text" placeholder="lower salary range">
+			<input type="text" placeholder="upper salary range">
+			<a href="" class="filter_submit"> Submit </a-->
+		<% end %>
+		<% end %>
+	</div>
+</div>
+</nav>
+<nav>
+<div class="location_filter">
+	<div class="location_filter_content">
+		<div class="close">+</div>
+		<% if @select_states && @select_city%>
+		Please select state and city
+		<%= form_with url: articles_path, method: :get, remote: true do |f| %>
+			<div class="form-group">
+				<%= f.label :state, "State:", class: "col-md-4 control-label" %>
+				<div class="col-md-10">
+					<%= f.select :state, options_for_select(@select_states), {:prompt => "Select state"}, {class: "form-control"}%>
+				</div>
+			</div>
+			<div class="form-group">
+				<%= f.label :city, "City:", class: "col-md-4 control-label" %>
+				<div class="col-md-10">
+					<%= f.select :city, options_for_select(@select_city), {:prompt => "Select city"}, {class: "form-control"}%>
+					
+				</div>
+			</div>
+			
+			<span style="margin-left: 30%">
+				<%= f.submit "Submit", class: "btn btn-default btn-primary" %>  
+			</span>
+			
+			<!--input type="text" placeholder="lower salary range">
+			<input type="text" placeholder="upper salary range">
+			<a href="" class="filter_submit"> Submit </a-->
+		<% end %>
+		<% end %>
 	</div>
 </div>
 </nav>

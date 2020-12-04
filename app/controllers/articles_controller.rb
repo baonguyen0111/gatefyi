@@ -30,42 +30,57 @@ class ArticlesController < ApplicationController
 		#if filtered
 		elsif params[:filter]
 			#byebug
-			filter_selectors
-			if session[:prev] == nil
-				@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4)
-				@arr = [@active_user, @articles]
-			#if a param was previous selcted, we should kepp follwing it when going to a different page
+			if params[:popup]
+				filter_selectors
+				if session[:prev] == nil
+					@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4)
+					@arr = [@active_user, @articles]	
+				#if a param was previous selcted, we should kepp follwing it when going to a different page
+				else
+					@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4).reorder(queries[session[:prev]].to_s + session[session[:prev]])
+					@arr = [@active_user, @articles]
+				end
+				return
 			else
-				@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4).reorder(queries[session[:prev]].to_s + session[session[:prev]])
-				@arr = [@active_user, @articles]
-			end
-			filter = params["filter"]
-			#filter type
-			if filter == "location"
-				#city and state
-				city = params[city]
-				state = params[state]
-				@articles = @articles.where('state = ?', state).where('city = ?', city)
-				@arr = [@active_user, @articles]
-			end
-			if filter == "compensation"
-				#low and high
-				low = params["low_salary"]
-				high = params["high_salary"]
-				@articles = @articles.where('compensation >= ?', low).where('compensation <= ?', high)
-				@arr = [@active_user, @articles]
-			end
-			if filter == "company"
-				company = params["company"]
-				@articles = @articles.where('company = ?', company)
-				@arr = [@active_user, @articles]
-			end
-			if filter == "industry_type"
-				industry = params["industry"]
-				@articles = @articles.where('industry_type = ?', industry)
-				@arr = [@active_user, @articles]
-			end
-			
+				if session[:prev] == nil
+					@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4)
+					@arr = [@active_user, @articles]
+				#if a param was previous selcted, we should kepp follwing it when going to a different page
+				else
+					@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4).reorder(queries[session[:prev]].to_s + session[session[:prev]])
+					@arr = [@active_user, @articles]
+				end
+				filter = params["filter"]
+				#filter type
+				if filter == "location"
+					#city and state
+					city = params[city]
+					state = params[state]
+					@articles = @articles.where('state = ?', state).where('city = ?', city)
+					@arr = [@active_user, @articles]
+				end
+				if filter == "salary"
+					#low and high
+					low = params["low_salary"]
+					high = params["high_salary"]
+					@articles = @articles.where('compensation >= ?', low).where('compensation <= ?', high)
+					@arr = [@active_user, @articles]
+				end
+				if filter == "company"
+					company = params["company"]
+					@articles = @articles.where('company = ?', company)
+					@arr = [@active_user, @articles]
+				end
+				if filter == "industry_type"
+					industry = params["industry"]
+					@articles = @articles.where('industry_type = ?', industry)
+					@arr = [@active_user, @articles]
+				end
+				respond_to do |format|
+    				format.html
+    				format.json if request.xhr?
+    			end
+    		end
 		else
 			#if no sorting param is selected (in the case of going to next or prev page)
 			
@@ -79,10 +94,6 @@ class ArticlesController < ApplicationController
 				@arr = [@active_user, @articles]
 			end
 		end
-		respond_to do |format|
-    	format.html
-    	format.js
-    	end
 	end
 
 	def show
@@ -134,6 +145,7 @@ class ArticlesController < ApplicationController
 			elsif filter == "company"
 				#byebug
 				@select_company = Article.company_filter
+				puts @select_company
 			else
 				@select_industry = Article.industry_filter
 			end

@@ -1,0 +1,20 @@
+<div class="close_salary">+</div>
+		Please fill in the range of salary you are looking for
+		<%= form_with(id: :submit_salary, method: "get", url: articles_path) do |f| %>
+			<div class="form-group">
+				<%= f.label :compensation, "lower salary range:", class: "col-md-4 control-label" %>
+				<div class="col-md-10">
+					<%= f.number_field :compensation, step: 1, class: "form-control_low" %>
+				</div>
+			</div>
+			<div class="form-group">
+				<%= f.label :compensation, "higher salary range:", class: "col-md-4 control-label" %>
+				<div class="col-md-10">
+					<%= f.number_field :compensation, step: 1, class: "form-control_high" %>
+				</div>
+			</div>
+			
+			<span style="margin-left: 30%">
+				<%= f.submit "Submit", class: "btn btn-default btn-primary" %>  
+			</span>
+		<% end %>

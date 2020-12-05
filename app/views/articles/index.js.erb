@@ -1,1 +1,1 @@
-$('#submit_company').html("<%= escape_javascript(render 'articles') %>")
+$('.company_list').html("<%= escape_javascript(render 'articles', articles: @articles) %>");

@@ -7,7 +7,7 @@
 			<th> <%= link_to("Upvotes", articles_path(query: "upvotes"))%> </th>
 		</thead>
 		<tbody>
-			<% @articles.each do |a| %>
+			<% articles.each do |a| %>
 				<tr>
 					<td class="articlecompany">
 						<%= link_to "#{a.company}", article_path(a), :class => "articlecompany" %>

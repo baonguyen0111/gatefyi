@@ -5,10 +5,12 @@ var js = (function(){
     var filter_company = function() {
         var choice = $(".company_filter_content .form-control").val()
         $.ajax({type: 'GET',
-            url: "/articles?filter=company&company=#{choice}#",
+            url: '/articles?filter=company&company='+choice,
             timeout: 5000,
             success: function(result){
                 alert(result.name);
+                $('#submit_company')[0].reset();
+                $(".company_filter").css("visibility", "hidden");
             },
             error: function(xhrObj , textStatus , exception) { alert('Error!');
             }
@@ -19,10 +21,12 @@ var js = (function(){
     var filter_industry = function() {
         var choice = $(".industry_filter_content .form-control").val()
         $.ajax({type: 'GET',
-            url: "/articles?filter=industry_type&industry=#{choice}#",
+            url: "/articles?filter=industry_type&industry="+choice,
             timeout: 5000,
             success: function(result){
                 alert(result.name);
+                $('#submit_industry')[0].reset();
+                $(".industry_filter").css("visibility", "hidden");
             },
             error: function(xhrObj , textStatus , exception) { alert('Error!');
             }
@@ -34,10 +38,12 @@ var js = (function(){
         var state = $(".industry_filter_content .form-control_state").val();
         var city = $(".location_filter_content .form-control_city").val();
         $.ajax({type: 'GET',
-            url: "/articles?filter=location&state=#{state}#$city=#{city}#",
+            url: "/articles?filter=location&state="+state+"&city="+city,
             timeout: 5000,
             success: function(result){
                 alert(result.name);
+                $('#submit_location')[0].reset();
+                $(".location_filter").css("visibility", "hidden");
             },
             error: function(xhrObj , textStatus , exception) { alert('Error!');
             }
@@ -49,10 +55,12 @@ var js = (function(){
         var low = $(".salary_filter_content .form-control_low").val();
         var high = $(".salary_filter_content .form-control_high").val();
         $.ajax({type: 'GET',
-            url: "/articles?filter=salary&low_salary=#{low}#&high_salary=#{high}#",
+            url: "/articles?filter=salary&low_salary="+low+"&high_salary="+high,
             timeout: 5000,
             success: function(result){
                 alert(result.name);
+                $('#submit_salary')[0].reset();
+                $(".salary_filter").css("visibility", "hidden");
             },
             error: function(xhrObj , textStatus , exception) { alert('Error!');
             }

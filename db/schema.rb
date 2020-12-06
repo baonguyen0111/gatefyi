@@ -12,19 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2020_11_29_035934) do
 
-  create_table "admins", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "provider"
-    t.string "uid"
-    t.string "remember_token"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_admins_on_email", unique: true
-    t.index ["uid", "provider"], name: "index_admins_on_uid_and_provider", unique: true
-  end
-
   create_table "articles", force: :cascade do |t|
     t.string "company"
     t.string "industry_type"
@@ -74,6 +61,7 @@ ActiveRecord::Schema.define(version: 2020_11_29_035934) do
     t.boolean "show_profile", default: false
     t.string "remember_token"
     t.datetime "remember_created_at"
+    t.boolean "isAdmin", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

@@ -14,17 +14,12 @@
 		<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 	</head>
 	<body>
-		<% if admin_signed_in? or user_signed_in? %>
+		<% if user_signed_in? %>
 			<div class="container-fluid">
 				<div class="row" id="header">
 					<div class="col-md-4">
 						<%= image_tag("gatefyilogo.png", height: 100, alt:"gatefyi logo") %>
-					</div>
-					<% if admin_signed_in? %>
-						<div class="col-md-2 offset-md-6">
-							<%= link_to t("logout"), destroy_admin_session_path, method: :get, :class => "btn btn-warning btn-sm" %>
-						</div>
-					<% end%>
+					</div>	
 					<% if user_signed_in? %>
 						<div class="col-md-2 offset-md-6">
 							<%= link_to t("logout"), destroy_user_session_path, method: :get, :class => "btn btn-warning btn-sm" %>
@@ -34,10 +29,10 @@
 				</div>
 				<br/>
 				<div class="row">
-					<% if admin_signed_in? %>
+					<% if user_signed_in? && current_user.isAdmin %>
 						<div class="col-md-4 alert alert-light">
 							<span>
-								<%= "Welcome #{current_admin.email}" %>
+								<%= "Welcome #{current_user.email}" %>
 							</span>
 							<span>(admin user)</span>
 						</div>

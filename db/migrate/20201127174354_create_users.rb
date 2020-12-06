@@ -11,6 +11,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.boolean :show_profile, default: false 
       t.string :remember_token
       t.datetime :remember_created_at
+      t.boolean :isAdmin, default: false
       t.timestamps null: false
     end
     add_index :users , :email,                unique: true

@@ -257,7 +257,7 @@ class ArticlesController < ApplicationController
 	private
 
 	def is_logged_in?
-		unless (admin_signed_in? || user_signed_in?)
+		unless (user_signed_in?)
 			flash[:alert] =  "Only authenticated users can access this page"
 			redirect_to root_path and return 
 

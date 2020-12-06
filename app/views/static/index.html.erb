@@ -13,13 +13,14 @@
 		</div>
 	</div>
 	<br/>
-	<% if admin_signed_in? or user_signed_in? %>
+	<% if user_signed_in? %>
 		<div class="row">
 			<%= link_to "Enter our page", articles_path, method: :get, :class => "btn btn-warning btn-sm" %>
 		</div>
 	<% else %>
 		<div class="row">
-			<%= link_to "Sign in through Google", admin_google_oauth2_omniauth_authorize_path, :class => " google-card text-white card bg-success mb-3 " %>
+			<%= link_to "Sign in through Google",user_google_oauth2_omniauth_authorize_path , :class => " google-card text-white card bg-success mb-3 " %>
+
 		</div>
 	<% end %>
 </div>

@@ -3,7 +3,8 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 .company-list {
 	text-align: center;
-	padding: 20px; 
+	padding: 20px;
+	width:100%;
 }
 .table-headers {
 	background-color: #8c0303; 
@@ -62,59 +63,64 @@ nav ul ul {
 	display: none;
 	float: left;
 	list-style: none;
+	width: 250px;
 }
 
 nav ul:hover ul{
-	display:block;
+	display: block;
 	position: absolute;
-}
-
-nav #filter a:hover{
-	background-color: #f3f3f3;
-	text-decoration:none;
+	background-color: rgba(0, 0, 0, 0.7);
+	text-align: center;
+	border-radius: 4px;
+	padding: 5px;
 }
 
 
 nav{
 	
-	.salary_filter{
-		width:100%;
-		height:100%;
-		background-color:rgba(0, 0, 0, 0.7);
-		position:absolute;
-		top:0;
-		display:flex;
-		justify-content:center;
-		align-items:center;
-		display:none;
+	.salary_filter, .company_filter, .industry_filter, .location_filter{
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.7);
+		position: absolute;
+		top: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		visibility: hidden;
 	}
-	.salary_filter_content{
-		width:400px;
-		height:200px;
-		background-color:white;
-		border-radius:4px;
-		text-align:center;
-		padding:20px;
-		position:relative;
-		
+	.salary_filter_content, .company_filter_content, .industry_filter_content, .location_filter_content{
+		width: 400px;
+		height: 400px;
+		background-color: white;
+		border-radius: 4px;
+		text-align: center;
+		padding: 20px;
+		position: relative;
+		justify-content: center;
 	}
 	
 	input{
 		width: 50%;
-		display:block;
+		display: block;
 		margin: 15px auto;
 	}
 	
-	.close{
-		position:absolute;
-		top:0;
+	.close_company, .close_industry, .close_location, .close_salary{
+		position: absolute;
+		top: 0;
 		right: 14px;
 		font-size: 22px;
 		transform: rotate(45deg);
-		cursor:pointer;
+		cursor: pointer;
 	}
 }
 
+
+.pagination {
+	justify-content:center;
+	
+}
 //.salary_filter{
 //	width:100%;
 //	height:100%;

@@ -1,0 +1,20 @@
+<div class="close_company">+</div>
+		Please select company
+<div class="form-group">
+	<%= form_with(id: :submit_company, url: articles_path, method: 'get') do |f| %>
+				<%= f.label :company, "Company:", class: "col-md-4 control-label" %>
+				<div class="col-md-10">
+					<% if select_company %>
+						<%= f.select :company, options_for_select(select_company), {:prompt => "Select company"}, {class: "form-control"}%>
+					<% else %>
+						<%= f.select :company, options_for_select([]), {:prompt => "Select company"}, {class: "form-control_empty"}%>
+					<% end %>
+				</div>
+				
+			
+			
+			<span style="margin-left: 30%">
+				<%= f.submit "Submit", class: "btn btn-default btn-primary"%>  
+			</span>
+			<% end %>
+			</div>

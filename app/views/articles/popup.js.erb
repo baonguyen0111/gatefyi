@@ -1,0 +1,4 @@
+$('#company_filter_content').html("<%= escape_javascript(render('select_company', locals: {select_company: @select})) %>");
+$('#industry_filter_content').html("<%= escape_javascript(render('select_industry', locals: {select_industry: @select})) %>");
+$('#location_filter_content').html("<%= escape_javascript(render('select_location', locals: {select_location: @select})) %>");
+$('#salary_filter_content').html("<%= escape_javascript(render 'salary' %>");

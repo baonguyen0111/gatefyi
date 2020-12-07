@@ -1,0 +1,30 @@
+<table class="table table-hover">
+		<thead class="table-headers">
+			<th> <%= link_to("Company", articles_path(query: "company"))%> </th>
+			<th> <%= link_to("Industry", articles_path(query: "industy"))%> </th>
+			<th> <%= link_to("Location", articles_path(query: "location"))%> </th>
+			<th> <%= link_to("Salary", articles_path(query: "salary"))%> </th>
+			<th> <%= link_to("Upvotes", articles_path(query: "upvotes"))%> </th>
+		</thead>
+		<tbody>
+			<% articles.each do |a| %>
+				<tr>
+					<td class="articlecompany">
+						<%= link_to "#{a.company}", article_path(a), :class => "articlecompany" %>
+					</td>
+					<td class="articleindustry">
+						<%= a.industry_type %>
+					</td>
+					<td class="articlelocation">
+						<%= a.city %>, <%= a.state %>
+					</td>
+					<td class="articlecompensation">
+						<%= number_to_currency(a.compensation) %>
+					</td>
+					<td class="articleupvotes">
+						<%= a.upvotes %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+</table>

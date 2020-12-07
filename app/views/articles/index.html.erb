@@ -1,17 +1,20 @@
-<link rel="stylesheet" type="text/scss" href="articles.scss">
-
 <div class="invisible">
-	<%= @articles = @arr[1] %>
-	<%= @most_active_user = @arr[0] %>
+
+<%= @articles = @arr[1] %>
+<%= @most_active_user = @arr[0] %>
+<%= @select = @arr[2] %>
+
 </div>
 
 <nav class="row">
-	<ul class="col-md-1 offset-md-1" id="filter"> <a href="#">Filter</a>
+	<ul class="col-md-2 offset-md-0">
+		<button class="btn btn-primary">Filter></button>
+		<!--%= link_to("Filter", articles_path, class: "btn btn-primary") %-->
 		<ul>
-			<li> <a href="">company</a></li>
-			<li> <a href="">industry</a></li>
-			<li> <a href="">location</a></li>
-			<li> <a href="">salary</a></li>
+			<li> <%= button_to "Commpany", articles_path, id: "company", class: "btn btn-primary", remote: true %></li>
+			<li> <%= button_to "Industry type", articles_path, id: "industry_type", class: "btn btn-primary", remote: true %></li>
+			<li> <%= button_to "Location", articles_path, id: "location", class: "btn btn-primary", remote: true %></li>
+			<li> <%= button_to "Salary", articles_path, id: "salary", class: "btn btn-primary", remote: true %></li>
 		</ul>
 	</ul>
 	<% if user_signed_in? && current_user.isAdmin %>
@@ -28,73 +31,55 @@
 
 </nav>
 
-
-
 <div class = "row">
 	<div class = "col-md-2 offset-md-6">
 		<% if @most_active_user.show_profile %> 
 			Most active user is: <%= link_to "#{@most_active_user.displayname}", profile_path(@most_active_user) %>
-	<% else %>
-		Most active user is: <%= "#{@most_active_user.displayname}" %>
-<% end %>
-
+	  <% else %>
+		  Most active user is: <%= "#{@most_active_user.displayname}" %>
+    <% end %>
 	</div> 
 	<div class="col-md-2 offset-md-10">
 		<%= link_to "+ Add Post", new_article_path, :class => "btn btn-primary" %>
 	</div>
 </div>
-<div class="company-list">
-	<table class="table table-hover">
-		<thead class="table-headers">
-			<th> <%= link_to("Company", articles_path(query: "company"))%> </th>
-			<th> <%= link_to("Industry", articles_path(query: "industy"))%> </th>
-			<th> <%= link_to("Location", articles_path(query: "location"))%> </th>
-			<th> <%= link_to("Salary", articles_path(query: "salary"))%> </th>
-			<th> <%= link_to("Upvotes", articles_path(query: "upvotes"))%> </th>
-		</thead>
-		<tbody>
-			<% @articles.each do |a| %>
-				<tr>
-					<td class="articlecompany">
-						<%= link_to "#{a.company}", article_path(a), :class => "articlecompany" %>
-					</td>
-					<td class="articleindustry">
-						<%= a.industry_type %>
-					</td>
-					<td class="articlelocation">
-						<%= a.city %>, <%= a.state %>
-					</td>
-					<td class="articlecompensation">
-						<%= number_to_currency(a.compensation) %>
-					</td>
-					<td class="articleupvotes">
-						<%= a.upvotes %>
-					</td>
-				</tr>
-			<% end %>
-		</tbody>
-	</table>
 
+<div class="company-list">
+	<%= render 'articles', articles: @articles %>
 </div>
 
-<!-- pop up window -->
+
+
+<!-- pop up windows for filters -->
 <nav>
-	<div class="salary_filter">
-		<div class="salary_filter_content">
-			<div class="close">+</div>
-			Please fill in the range of salary you are looking for
-			<form action="">
-				<input type="text" placeholder="lower salary range">
-				<input type="text" placeholder="upper salary range">
-				<a href="" class="filter_submit"> Submit </a>
-			</form>
-		</div>
+<div class="company_filter">
+	<div class="company_filter_content">
+		<%= render 'select_company', select_company: @select %>
 	</div>
+</div>
+
+<div class="industry_filter">
+	<div class="industry_filter_content">
+		<%= render 'select_industry', select_industry: @select %>
+  </div>
+</div>
+  
+<div class="location_filter">
+	<div class="location_filter_content">
+		<%= render 'select_location', select_location: @select %>
+	</div>
+</div>
+
+
+<div class="salary_filter">
+	<div class="salary_filter_content">
+		<%= render 'salary' %>
+	</div>
+</div>
 </nav>
 
 <nav aria-label="Pagination">
-	<ul class="pagination justify-content-center"> 
+	<ul class="pagination"> 
 		<%= will_paginate @articles %>
 	</ul>
 </nav> 
-

@@ -220,10 +220,10 @@ class ArticlesController < ApplicationController
 
 	def show
 		id = params[:id]
-		article = Article.find(id)
-		user_id = article.user_id
-		article_owner = User.find(user_id)
-		@arr = [article, article_owner]
+		@article = Article.find(id)
+		user_id = @article.user_id
+		@article_owner = User.find(user_id)
+		@arr = [@article, @article_owner]
 	end
 
 	def update

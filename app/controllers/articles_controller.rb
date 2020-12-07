@@ -7,8 +7,12 @@ class ArticlesController < ApplicationController
 		most_active_poster.each do |key, value|
 			hash[key.to_i] = (value.to_i + most_active_commenter[key.to_i].to_i)
 		end
-		most_active_id = hash.max_by{|k,v| v}[0]
-		@active_user = User.find(most_active_id)
+		if hash.empty? 
+			@active_user = ""
+		else
+			most_active_id = hash.max_by{|k,v| v}[0]
+			@active_user = User.find(most_active_id)
+		end
 		queries = {"company" => :company, "industy" => :industry_type, "location" => :state, "salary" => :compensation, "upvotes" => :upvotes}
 		#if a sorting param has been selected
 		if queries.key? params[:query]

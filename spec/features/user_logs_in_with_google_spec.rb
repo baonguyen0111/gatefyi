@@ -21,17 +21,4 @@ RSpec.feature "user logs in" do
   end
 end
 
-def stub_omniauth
-  # set OmniAuth to run in test mode
-  OmniAuth.config.test_mode = true
-  # then, provide a set of fake oauth data that
-  # omniauth will use when a user tries to authenticate:
-  OmniAuth.config.mock_auth[:google] = OmniAuth::AuthHash.new({
-	  provider: 'google',
-  	  uid: '12345',
-  	  info: {
-     		email: "bnguyen@colgate.edu", 
-     		name: "Bao Nguyen"
-  	}, 	  
-  })
-end
+

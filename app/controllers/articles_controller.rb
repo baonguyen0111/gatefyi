@@ -131,7 +131,7 @@ class ArticlesController < ApplicationController
 				end
 			end
 			if request.xhr?
-				render(partial: 'articles', locals:{articles: @arr[1]}) and return
+				render(partial: 'articles', locals:{articles: @articles}) and return
 			end
 		else
 			#if no sorting nor filtering param is selected (in the case of going to next or prev page)
@@ -176,6 +176,7 @@ class ArticlesController < ApplicationController
 		@article.upvotes = 0
 		@article.user_id = current_user.id
 		if @article.save
+			ArticleMailer.with(article: @article, user: current_user).new_article_email.deliver_now
 			flash[:notice] = "Waiting for approval from admin"
 			redirect_to articles_path and return
 		else

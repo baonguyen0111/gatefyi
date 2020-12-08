@@ -3,72 +3,40 @@
 var js = (function(){
     //private functions
     var show_company_popup = function() {
-        $.ajax({type: 'GET',
-            url: '/articles?filter=company&popup=true',
-            timeout: 5000,
-            success: function(result){
-                $(".company_filter").css("visibility", "visible");
-                alert("Success");
-            },
-            error: function(xhrObj , textStatus , exception) { alert('Error!');
-            }
-            // 'success' and 'error' functions will be passed 3 args
-        });
+        $(".company_filter").css("visibility", "visible");
         return(false);
     };
     var show_industry_popup = function() {
-        $.ajax({type: 'GET',
-            url: '/articles?filter=industry_type&popup=true',
-            timeout: 5000,
-            success: function(result){
-                alert(result.name);
-                $(".industry_filter").css("visibility", "visible");
-            },
-            error: function(xhrObj , textStatus , exception) { alert('Error!');
-            }
-            // 'success' and 'error' functions will be passed 3 args
-        }); 
+        $(".industry_filter").css("visibility", "visible");
         return(false);
     };
     var show_salary_popup = function() {
-        $.ajax({type: 'GET',
-            url: '/articles',
-            timeout: 5000,
-            success: function(result){
-                alert(result.name);
-                $(".salary_filter").css("visibility", "visible");
-            },
-            error: function(xhrObj , textStatus , exception) { alert('Error!');
-            }
-            // 'success' and 'error' functions will be passed 3 args
-        }); 
+        $(".salary_filter").css("visibility", "visible");
         return(false);
     };
     var show_location_popup = function() {
-        $.ajax({type: 'GET',
-            url: '/articles?filter=location&popup=true',
-            timeout: 5000,
-            success: function(result){
-                alert(result.name);
-                $(".location_filter").css("visibility", "visible");
-            },
-            error: function(xhrObj , textStatus , exception) { alert('Error!');
-            }
-            // 'success' and 'error' functions will be passed 3 args
-        }); 
+        $(".location_filter").css("visibility", "visible");
         return(false);
     };
     var hide_company_popup = function() {
+        $('#submit_company')[0].reset();
         $(".company_filter").css("visibility", "hidden");
+        return(false);
     };
     var hide_industry_popup = function() {
+        $('#submit_industry')[0].reset();
         $(".industry_filter").css("visibility", "hidden");
+        return(false);
     };
      var hide_location_popup = function() {
+        $('#submit_location')[0].reset();
         $(".location_filter").css("visibility", "hidden");
+        return(false);
     };
      var hide_salary_popup = function() {
+        $('#submit_salary')[0].reset();
         $(".salary_filter").css("visibility", "hidden");
+        return(false);
     };
     
     return {

@@ -7,15 +7,16 @@ var js = (function(){
         $.ajax({type: 'GET',
             url: '/articles?filter=company&company='+choice,
             timeout: 5000,
-            success: function(result){
-                alert(result.name);
+            dataType: "html",
+            complete: function(xhrObj , textStatus , exception){
+                //alert("Complete");
+                $('#company_list_partial').html(xhrObj.responseText);
                 $('#submit_company')[0].reset();
                 $(".company_filter").css("visibility", "hidden");
-            },
-            error: function(xhrObj , textStatus , exception) { alert('Error!');
+                return(false);
             }
-            // 'success' and 'error' functions will be passed 3 args
         });
+        return(false);
     };
     
     var filter_industry = function() {
@@ -23,49 +24,58 @@ var js = (function(){
         $.ajax({type: 'GET',
             url: "/articles?filter=industry_type&industry="+choice,
             timeout: 5000,
-            success: function(result){
-                alert(result.name);
+            dataType: "html",
+            complete: function(xhrObj , textStatus , exception){
+                //alert("Complete");
+                console.log(xhrObj.responseText);
+                $('#company_list_partial').html(xhrObj.responseText);
                 $('#submit_industry')[0].reset();
                 $(".industry_filter").css("visibility", "hidden");
-            },
-            error: function(xhrObj , textStatus , exception) { alert('Error!');
+                return(false);
             }
             // 'success' and 'error' functions will be passed 3 args
         });
+        return(false);
     };
     
     var filter_location = function() {
-        var state = $(".industry_filter_content .form-control_state").val();
-        var city = $(".location_filter_content .form-control_city").val();
+        var state = $(".location_filter_content #state .form-control").val();
+        var city = $(".location_filter_content #city .form-control").val();
         $.ajax({type: 'GET',
             url: "/articles?filter=location&state="+state+"&city="+city,
             timeout: 5000,
-            success: function(result){
-                alert(result.name);
+            dataType: "html",
+            complete: function(xhrObj , textStatus , exception){
+                //alert("Complete");
+                console.log(xhrObj.responseText);
+                $('#company_list_partial').html(xhrObj.responseText);
                 $('#submit_location')[0].reset();
                 $(".location_filter").css("visibility", "hidden");
-            },
-            error: function(xhrObj , textStatus , exception) { alert('Error!');
+                return(false);
             }
             // 'success' and 'error' functions will be passed 3 args
         });
+        return(false);
     };
     
     var filter_salary = function() {
-        var low = $(".salary_filter_content .form-control_low").val();
-        var high = $(".salary_filter_content .form-control_high").val();
+        var low = $(".salary_filter_content #low .form-control").val();
+        var high = $(".salary_filter_content #high .form-control").val();
         $.ajax({type: 'GET',
             url: "/articles?filter=salary&low_salary="+low+"&high_salary="+high,
             timeout: 5000,
-            success: function(result){
-                alert(result.name);
+            dataType: "html",
+            complete: function(xhrObj , textStatus , exception){
+                //alert("Complete");
+                console.log(xhrObj.responseText);
+                $('#company_list_partial').html(xhrObj.responseText);
                 $('#submit_salary')[0].reset();
                 $(".salary_filter").css("visibility", "hidden");
-            },
-            error: function(xhrObj , textStatus , exception) { alert('Error!');
+                return(false);
             }
             // 'success' and 'error' functions will be passed 3 args
         });
+        return(false);
     };
     
     return {

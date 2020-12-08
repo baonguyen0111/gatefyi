@@ -15,6 +15,7 @@
 			<li> <%= button_to "Industry type", articles_path, id: "industry_type", class: "btn btn-primary", remote: true %></li>
 			<li> <%= button_to "Location", articles_path, id: "location", class: "btn btn-primary", remote: true %></li>
 			<li> <%= button_to "Salary", articles_path, id: "salary", class: "btn btn-primary", remote: true %></li>
+			<li id="clear_filter"> <%= link_to("Clear filter", articles_path, class: "btn btn-primary") %></li>
 		</ul>
 	</ul>
 	<% if user_signed_in? && current_user.isAdmin %>

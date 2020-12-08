@@ -21,18 +21,22 @@ var js = (function(){
     var hide_company_popup = function() {
         $('#submit_company')[0].reset();
         $(".company_filter").css("visibility", "hidden");
+        return(false);
     };
     var hide_industry_popup = function() {
         $('#submit_industry')[0].reset();
         $(".industry_filter").css("visibility", "hidden");
+        return(false);
     };
      var hide_location_popup = function() {
         $('#submit_location')[0].reset();
         $(".location_filter").css("visibility", "hidden");
+        return(false);
     };
      var hide_salary_popup = function() {
         $('#submit_salary')[0].reset();
         $(".salary_filter").css("visibility", "hidden");
+        return(false);
     };
     
     return {

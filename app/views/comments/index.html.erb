@@ -45,7 +45,7 @@
 						<td>
 							<% if value.show_profile %>
 
-								<%= link_to "#{value.displayname}", profile_path(value) %>
+								<%= link_to "#{value.displayname}", user_path(value) %>
 							<% else %>
 								<%= "#{value.displayname}" %>
 							<% end %>

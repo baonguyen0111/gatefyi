@@ -113,7 +113,6 @@ class ArticlesController < ApplicationController
 				if company != ""
 					session[:filter_company] = company
 					@articles = @articles.where('company = ?', company).paginate(:page => params[:page], :per_page => 4)
-					puts @articles
 				else
 					session[:filter_by] = nil
 					@articles = @articles.paginate(:page => params[:page], :per_page => 4)

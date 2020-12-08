@@ -21,7 +21,7 @@
 	<% end %>
 	<% if current_user.isAdmin %>
 		<ul><%= link_to "Approve Articles", admin_articles_path, :class =>"text-decoration-none" %></ul>
-		<ul><%= link_to "Check feedbacks", admin_feedbacks_path, :class =>"text-decoration-none" %></ul>	
+		<ul><%= link_to "Check Feedbacks", admin_feedbacks_path, :class =>"text-decoration-none" %></ul>	
 	<% end %>
 	<div class="col-md-2 offset-md-10">
 		<%= link_to "+ Add Post", new_article_path, :class => "btn btn-primary" %>

@@ -1,5 +1,17 @@
 require 'rails_helper'
 RSpec.feature "test as admin" do
+  before :each do
+    OmniAuth.config.test_mode = true
+    OmniAuth.config.mock_auth[:google_oauth2] = {
+      'uid' => '1337',
+      'provider' => 'google_oauth2',
+      'info' => {
+        'name' => 'Admin User', 
+        'email' => 'bnguyen@colgate.edu'
+      }
+    } 
+  end
+    
   scenario "using google oauth2" do
     visit root_path
     click_link "Sign in through Google"

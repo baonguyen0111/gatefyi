@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.feature "user logs in" do
   scenario "using google oauth2" do
-    stub_omniauth
-    
     visit root_path
     expect(page).to have_link("Sign in through Google")
     click_link "Sign in through Google"
@@ -19,7 +17,7 @@ RSpec.feature "user logs in" do
     visit root_path
     expect(page).not_to have_content("Enter Page")
     visit admin_articles_path
-    expect(page).to have_content("Only admin users can access this page")
+    expect(page).to have_content("Sign in through Google")
   end
 end
 
@@ -35,6 +33,5 @@ def stub_omniauth
      		email: "bnguyen@colgate.edu", 
      		name: "Bao Nguyen"
   	}, 	  
-    ## must intialize fake stub for testing 
   })
 end

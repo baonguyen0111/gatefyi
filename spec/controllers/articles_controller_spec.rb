@@ -83,8 +83,11 @@ RSpec.describe ArticlesController, type: :controller do
 	
 	context "create" do
 		it "routes correctly" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			allow(controller).to receive(:current_user).and_return(a)
 			get :create, :params => {:article => {company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00)}}
-    		expect(response).to have_http_status(:redirect)
+    			expect(response).to have_http_status(:redirect)
 		end
 	end
 	

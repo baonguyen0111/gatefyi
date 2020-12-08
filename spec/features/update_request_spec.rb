@@ -6,7 +6,7 @@ RSpec.feature "test as admin" do
 
     visit root_path
        
-    click_link "Log in as admin"
+    click_link "Sign in through Google"
     Article.create!(:company => "NoNet", :industry_type => "Movies", :state => "ID", :city => "Cityland", :compensation => 500000, :interview_exp => "Pretty simple interview", :work_exp => "Great team. Challenging work", :upvotes => 3, :approved => DateTime.new(2024, 11, 04, 00, 00, 00))
      
     Article.create!(:company => "Net", :industry_type => "Movies", :state => "ID", :city => "Cityland", :compensation => 500000, :interview_exp => "Pretty simple interview", :work_exp => "Great team. Challenging work", :upvotes => 3, :approved => DateTime.new(2024, 11, 04, 00, 00, 00))
@@ -37,9 +37,8 @@ def stub_omniauth
   # then, provide a set of fake oauth data that
   # omniauth will use when a user tries to authenticate:
   OmniAuth.config.mock_auth[:google] = OmniAuth::AuthHash.new({
-  :provider => 'google',
-  :uid => '12345',
-
+  	:provider => 'google',
+  	:uid => '12345',
   })
 end
 

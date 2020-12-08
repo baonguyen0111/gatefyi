@@ -5,8 +5,8 @@ RSpec.feature "user logs in" do
     stub_omniauth
     
     visit root_path
-    expect(page).to have_link("Log in as admin")
-    click_link "Log in as admin"
+    expect(page).to have_link("Sign in through Google")
+    click_link "Sign in through Google"
     
     expect(page).to have_link("Approve posts")
     click_link "Approve posts"
@@ -15,9 +15,9 @@ RSpec.feature "user logs in" do
     expect(page).to have_link("Logout")
     
     click_link("Logout")
-    expect(page).to have_link("Log in as admin")
+    expect(page).to have_link("Sign in through Google")
     visit root_path
-    expect(page).not_to have_content("Approve posts")
+    expect(page).not_to have_content("Enter Page")
     visit admin_articles_path
     expect(page).to have_content("Only admin users can access this page")
   end
@@ -29,9 +29,12 @@ def stub_omniauth
   # then, provide a set of fake oauth data that
   # omniauth will use when a user tries to authenticate:
   OmniAuth.config.mock_auth[:google] = OmniAuth::AuthHash.new({
-  :provider => 'google',
-  :uid => '12345',
-    
+	  provider: 'google',
+  	  uid: '12345',
+  	  info: {
+     		email: "bnguyen@colgate.edu", 
+     		name: "Bao Nguyen"
+  	}, 	  
     ## must intialize fake stub for testing 
   })
 end

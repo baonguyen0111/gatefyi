@@ -8,11 +8,11 @@ class ArticlesController < ApplicationController
 			hash[key.to_i] = (value.to_i + most_active_commenter[key.to_i].to_i)
 		end
 		if hash.empty? 
- 			@active_user = ""
- 		else
- 			most_active_id = hash.max_by{|k,v| v}[0]
- 			@active_user = User.find(most_active_id)
- 		end
+			@active_user = ""
+		else
+			most_active_id = hash.max_by{|k,v| v}[0]
+			@active_user = User.find(most_active_id)
+		end
 		queries = {"company" => :company, "industy" => :industry_type, "location" => :state, "salary" => :compensation, "upvotes" => :upvotes}
 		#if a sorting param has been selected
 		if queries.key? params[:query]
@@ -161,10 +161,10 @@ class ArticlesController < ApplicationController
 
 	def show
 		id = params[:id]
-		article = Article.find(id)
-		user_id = article.user_id
-		article_owner = User.find(user_id)
-		@arr = [article, article_owner]
+		@article = Article.find(id)
+		user_id = @article.user_id
+		@article_owner = User.find(user_id)
+		@arr = [@article, @article_owner]
 	end
 
 	def update

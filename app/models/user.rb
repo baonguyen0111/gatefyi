@@ -14,7 +14,6 @@ class User < ApplicationRecord
 			user.name ||= auth['info']['name']
 			user.displayname ||= auth['info']['name']
 			user.isAdmin = isAdmin
-			
 		end
 	end
 end

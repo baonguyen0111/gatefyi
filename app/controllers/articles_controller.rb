@@ -143,6 +143,7 @@ class ArticlesController < ApplicationController
 			else
 				@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4).reorder(queries[session[:prev]].to_s + session[session[:prev]])
 			end
+			session[:filter_by] = nil
 		end
 	end
 

@@ -16,6 +16,14 @@ RSpec.describe "index page", type: :feature do
 		Article.create!(:company => "Facebook", :industry_type => "SpyWare", :state => "NJ", :city => "Trenton", :compensation => 300000, :interview_exp => "Pretty simple interview", :work_exp => "Great team. Challenging work", :upvotes => 2, admin_approved: true, :approved => DateTime.new(2022, 11, 04, 00, 00, 00), user_id: 1)
 		Article.create!(:company => "Netflix", :industry_type => "Movies", :state => "ID", :city => "Cityland", :compensation => 500000, :interview_exp => "Pretty simple interview", :work_exp => "Great team. Challenging work", :upvotes => 3, admin_approved: true, :approved => DateTime.new(2024, 11, 04, 00, 00, 00), user_id: 1)
 		Article.create!(:company => "Google", :industry_type => "Search", :state => "MB", :city => "PlaceBerg", :compensation => 400000, :interview_exp => "Pretty simple interview", :work_exp => "Great team. Challenging work", :upvotes => 4, admin_approved: true, :approved => DateTime.new(2025, 11, 04, 00, 00, 00), user_id: 1)
+		OmniAuth.config.mock_auth[:google_oauth2] = {
+			'uid' => '1337',
+			'provider' => 'google_oauth2',
+			'info' => {
+				'name' => 'Test User', 
+				'email' => 'test@colgate.edu'
+			}
+		}
 		visit root_path
 		expect(page).to have_link("Sign in through Google")
 		click_link "Sign in through Google"

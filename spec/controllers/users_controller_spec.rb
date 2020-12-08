@@ -54,7 +54,7 @@ RSpec.describe UsersController, type: :controller do
 			
 			get :update, :params => {:id => 1, :user => {displayname: "TRAN LINH", show_profile: "false"}}
     		expect(response).to have_http_status(:redirect)
-    		expect(response).should redirect_to :action => :show, :id => 1   
+    		expect(response).to redirect_to :action => :show, :id => 1   
 		end
 		
 		it "update details correctly" do

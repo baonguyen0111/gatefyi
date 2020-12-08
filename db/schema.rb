@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 2020_12_08_133555) do
     t.boolean "isAdmin", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.text "avatar", default: ""
+    t.text "image", default: ""
     t.string "password"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true

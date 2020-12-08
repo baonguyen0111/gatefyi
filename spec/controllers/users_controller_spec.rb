@@ -54,7 +54,7 @@ RSpec.describe UsersController, type: :controller do
 			
 			get :update, :params => {:id => 1, :user => {displayname: "TRAN LINH", show_profile: "false"}}
     		expect(response).to have_http_status(:redirect)
-    		expect(response).should redirect_to :action => :show, :id => 1   
+    		expect(response).to redirect_to :action => :show, :id => 1   
 		end
 		
 		it "update details correctly" do
@@ -69,14 +69,6 @@ RSpec.describe UsersController, type: :controller do
     		expect(a.name).to eq("Linh Tran")
     		expect(a.show_profile).to eq(false)
     		expect(a.description).to eq("Colgate senior. Into research")
-    		
-    	    get :update, :params => {:id => 1, :user => {displayname: "Linh Tran", show_profile: "true", image: "http://google.com", description: "Colgate grad"}}
-			a = User.find(a.id)
-    		expect(response).to have_http_status(:redirect)
-    		expect(a.displayname).to eq("Linh Tran")
-    		expect(a.description).to eq("Colgate grad")
-    		expect(a.show_profile).to eq(true)
-    		expect(a.image).to eq("http://google.com")
 		end
 	end
 end

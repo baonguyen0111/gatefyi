@@ -8,6 +8,8 @@ RSpec.describe "index page", type: :feature do
 	let(:location_ASC_sort_pg1) { ["$500,000.00", "$400,000.00", "$300,000.00", "$200,000.00"] }
 	let(:industry_ASC_sort_pg1) { ["$200,000.00", "$500,000.00", "$400,000.00", "$300,000.00"] }
 	let(:upvotes_ASC_sort_pg1) { ["$100,000.00", "$200,000.00", "$300,000.00", "$500,000.00"] }
+	let(:filter_by) {["$100,000.00"]}
+	let(:preserve) {["$100,000.00", "$200,000.00", "$300,000.00", "$400,000.00"]}
 
 	before :each do
 		User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
@@ -81,6 +83,45 @@ RSpec.describe "index page", type: :feature do
 		click_link("Upvotes")
 		page.all(".articlecompensation").each { |x| names << x.text }
 		expect(names).to match_array(upvotes_ASC_sort_pg1)
+	end
+	
+	it "should show the filtered articles when filter by company" do
+		names = []
+		select('Amazon', from: 'company')
+		page.all(".articlecompensation").each { |x| names << x.text }
+		expect(names).to match_array(filter_by)
+	end
+	
+	it "should show the filtered articles when filter by industry" do
+		names = []
+		select('Tech', from: 'industry_type')
+		page.all(".articlecompensation").each { |x| names << x.text }
+		expect(names).to match_array(filter_by)
+	end
+	
+	it "should show the filtered articles when filter by location" do
+		names = []
+		select('WA', from: 'state')
+		select('Seattle', from: 'city')
+		page.all(".articlecompensation").each { |x| names << x.text }
+		expect(names).to match_array(filter_by)
+	end
+	
+	it "should show the filtered articles when filter by salary" do
+		names = []
+		fill_in('compensationlow', with: '0')
+		fill_in('compensationhigh', with: '100000')
+		page.all(".articlecompensation").each { |x| names << x.text }
+		expect(names).to match_array(filter_by)
+	end
+	
+	it "should show preserve the filtered articles when ordering after filter" do
+		names = []
+		fill_in('compensationlow', with: '100000')
+		fill_in('compensationhigh', with: '400000')
+		click_link('Salary')
+		page.all(".articlecompensation").each { |x| names << x.text }
+		expect(names).to match_array(preserve)
 	end
 
 end

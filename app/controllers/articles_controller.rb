@@ -113,6 +113,7 @@ class ArticlesController < ApplicationController
 				if company != ""
 					session[:filter_company] = company
 					@articles = @articles.where('company = ?', company).paginate(:page => params[:page], :per_page => 4)
+					puts @articles
 				else
 					session[:filter_by] = nil
 					@articles = @articles.paginate(:page => params[:page], :per_page => 4)
@@ -129,7 +130,7 @@ class ArticlesController < ApplicationController
 				end
 			end
 			if request.xhr?
-				render(partial: 'articles', locals:{articles: @arr[1]}) and return
+				render(partial: 'articles', locals:{articles: @articles}) and return
 			end
 		else
 			#if no sorting nor filtering param is selected (in the case of going to next or prev page)

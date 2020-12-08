@@ -14,8 +14,7 @@
     <% end %>      
 </div>
 <div class="mr-4">
-	<div class = "invisible"> <%= @comment = @arr[1] %></div>
-<%= form_with model: @comment, url: article_comments_path(@arr[0]), method: :post, local: true, :class => "form-horizontal center" do |f| %>
+<%= form_with model: @comment, url: article_comments_path(@article_id), method: :post, local: true, :class => "form-horizontal center" do |f| %>
 	<div class="form-row">
 		<div class="form-group col-md-6">
 			<%= f.label :content, "Comment:", class: "col-md-4 control-label" %>
@@ -24,7 +23,7 @@
 			</div>
 		</div>	
 	</div>
-	<%= f.hidden_field :article_id, value: @arr[0] %>
+	<%= f.hidden_field :article_id, value: @article_id %>
 	<span style="margin-left: 30%">
 		<%= f.submit "Submit", class: "btn btn-default btn-primary" %>  
 	</span>

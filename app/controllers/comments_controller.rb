@@ -20,7 +20,6 @@ class CommentsController < ApplicationController
 		end
 		
 		redirect_to article_comments_path(article_id) and return 
-
 	end
 
 	def new

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_29_035934) do
+ActiveRecord::Schema.define(version: 2020_12_08_071824) do
 
   create_table "articles", force: :cascade do |t|
     t.string "company"
@@ -56,14 +56,15 @@ ActiveRecord::Schema.define(version: 2020_11_29_035934) do
     t.string "provider"
     t.string "uid"
     t.text "displayname"
-    t.string "displayphoto"
     t.string "description"
-    t.boolean "show_profile", default: false
+    t.boolean "show_profile", default: true
     t.string "remember_token"
     t.datetime "remember_created_at"
     t.boolean "isAdmin", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "image", default: ""
+    t.string "password"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end

@@ -12,9 +12,8 @@ Rails.application.routes.draw do
   resources :articles do 
 	  resources :comments 
   end
-  #resources :articles, :only => [:index, :show, :new, :create, :update]
+  resources :users 
   root :to => "static#index"
   get '/about' => 'static#aboutus', :as => :about
   get '/howto' => 'static#howto', :as=> :how
-  get '/profile/:id' => 'profile#show', :as=> :profile
 end

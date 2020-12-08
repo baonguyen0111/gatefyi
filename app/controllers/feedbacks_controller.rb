@@ -27,7 +27,6 @@ class FeedbacksController < ApplicationController
 		unless (user_signed_in?)
 			flash[:alert] =  "Only authenticated users can access this page"
 			redirect_to root_path and return 
-
 		end
 	end
 end

@@ -1,0 +1,2 @@
+      invoke  active_record
+    conflict    db/migrate/20201208072159_add_image_to_model.rb

@@ -1,7 +1,6 @@
 <nav class="row">
 	<ul class="col-md-2 offset-md-0">
-		<button class="btn btn-primary">Filter></button>
-		<!--%= link_to("Filter", articles_path, class: "btn btn-primary") %-->
+		<button class="btn btn-primary">Filter</button>
 		<ul>
 			<li> <%= button_to "Company", articles_path, id: "company", class: "btn btn-primary", remote: true %></li>
 			<li> <%= button_to "Industry type", articles_path, id: "industry_type", class: "btn btn-primary", remote: true %></li>
@@ -10,31 +9,20 @@
 			<li id="clear_filter"> <%= link_to("Clear filter", articles_path, class: "btn btn-primary") %></li>
 		</ul>
 	</ul>
-	<% if user_signed_in? && current_user.isAdmin %>
-		<ul class="col-md-2 offset-md-1">
-			<%= link_to "Approve posts", admin_articles_path, :class => "btn btn-primary" %>
-		</ul>
-		<ul class="col-md-2 offset-md-3">
-			<%= link_to "Look at feedbacks", admin_feedbacks_path, :class=> "btn btn-primary" %>   	
-		</ul>	
-	<% end %>
-	<ul class = "col-md-2 offset-md-4">
-		<%= link_to "Submit feedback", feedbacks_path, :class => "btn btn-primary" %>
-	</ul>
-
 </nav>
 
 <div class = "row">
-	<div class = "col-md-2 offset-md-6">
-
-		<% if !@most_active_user.blank? %> 
-			<% if @most_active_user.show_profile %> 
-				Most active user is: <%= link_to "#{@most_active_user.displayname}", profile_path(@most_active_user) %>
+	<% if !@most_active_user.blank? %> 
+		<% if @most_active_user.show_profile %> 
+			<ul>Most active user is: <%= link_to "#{@most_active_user.displayname}", user_path(@most_active_user) %></ul>
 		<% else %>
-			Most active user is: <%= "#{@most_active_user.displayname}" %>
+			<ul>Most active user is: <%= "#{@most_active_user.displayname}" %></ul>
+		<% end %>
 	<% end %>
-<% end %>
-	</div> 
+	<% if current_user.isAdmin %>
+		<ul><%= link_to "Approve Articles", admin_articles_path, :class =>"text-decoration-none" %></ul>
+		<ul><%= link_to "Check feedbacks", admin_feedbacks_path, :class =>"text-decoration-none" %></ul>	
+	<% end %>
 	<div class="col-md-2 offset-md-10">
 		<%= link_to "+ Add Post", new_article_path, :class => "btn btn-primary" %>
 	</div>
@@ -44,8 +32,9 @@
 	<%= render 'articles', articles: @articles %>
 </div>
 
-
-
+<div class="text-light ml-4">
+	<%= link_to "Submit Feedbacks", feedbacks_path, :class =>"text-decoration-none" %>
+</div> 
 <!-- pop up windows for filters -->
 <nav>
 

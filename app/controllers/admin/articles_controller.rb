@@ -1,4 +1,5 @@
 class Admin::ArticlesController < ApplicationController
+	rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 	before_action :admin_logged_in?
 
 	def index
@@ -47,4 +48,9 @@ class Admin::ArticlesController < ApplicationController
 			flash[:alert] = "Failed to approve post"
 		end
 	end 
+	
+	def record_not_found
+		flash[:alert] = "Articles not found"	
+		redirect_to admin_articles_path and return 
+	end
 end

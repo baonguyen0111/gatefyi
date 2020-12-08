@@ -8,4 +8,7 @@ class StaticController < ApplicationController
 
   def aboutus
   end
+  
+  def filenotfound 
+  end 
 end

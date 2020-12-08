@@ -5,7 +5,7 @@
       </h4>
       <h3>
 	      <% if @owner.show_profile %> 
-		      Posted by <%= link_to "#{@owner.displayname}", profile_path(@owner) %>
+		      Posted by <%= link_to "#{@owner.displayname}", user_path(@owner) %>
       		<% else %>
 	      		<%= "#{@owner.displayname}" %>
       		<% end %>

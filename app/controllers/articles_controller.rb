@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
+	rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 	before_action :is_logged_in?
+	
 	def index
 		most_active_poster = Article.most_active()
 		most_active_commenter = Comment.most_active()
@@ -171,7 +173,6 @@ class ArticlesController < ApplicationController
 
 	def create
 		@article = Article.new(create_params)
-		#byebug
 		@article.upvotes = 0
 		@article.user_id = current_user.id
 		if @article.save
@@ -192,6 +193,7 @@ class ArticlesController < ApplicationController
 
 		end
 	end
+	
 	def create_params
 		params.require(:article).permit(:company, :industry_type, :state, :city, :compensation, :interview_exp, :work_exp)
 	end 
@@ -205,5 +207,10 @@ class ArticlesController < ApplicationController
 		else
 			flash[:alert] = "Failed to upvote"	
 		end
+	end
+	
+	def record_not_found
+		flash[:alert] = "Articles not found"	
+		redirect_to articles_path and return 
 	end
 end

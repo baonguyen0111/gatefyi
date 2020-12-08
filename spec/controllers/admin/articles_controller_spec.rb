@@ -49,8 +49,8 @@ RSpec.describe Admin::ArticlesController, type: :controller do
 
 			Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), user_id: u.id)
 			get :update, :params => { :id => 1, :approval => true } 
-            		expect(response).to have_http_status(:redirect)
-            		expect(Article.find(1).admin_approved).to be_truthy
+    		expect(response).to have_http_status(:redirect)
+    		expect(Article.find(1).admin_approved).to be_truthy
 		end
 		
 		it "reject" do

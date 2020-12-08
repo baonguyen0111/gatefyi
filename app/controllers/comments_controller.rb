@@ -1,15 +1,14 @@
 class CommentsController < ApplicationController
 	before_action :is_logged_in?
 	def index
-		id = params[:article_id]
-		article = Article.find(id)
-		hash = Hash.new(0)
+		@article_id = params[:article_id]
+		article = Article.find(@article_id)
+		@hash = Hash.new(0)
 		comments = article.comments
 		comments.each do |c|
 			comment_owner = User.find(c.user_id)
-			hash[c] = comment_owner
+			@hash[c] = comment_owner
 		end
-		@arr = [id, hash] 
 	end
 
 	def update
@@ -26,7 +25,7 @@ class CommentsController < ApplicationController
 
 	def new
 		@comment = Comment.new
-		@arr = [params[:article_id], @comment]
+		@article_id = params[:article_id]
 	end
 
 	def create

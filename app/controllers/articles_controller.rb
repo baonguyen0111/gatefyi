@@ -8,10 +8,10 @@ class ArticlesController < ApplicationController
 			hash[key.to_i] = (value.to_i + most_active_commenter[key.to_i].to_i)
 		end
 		if hash.empty? 
-			@active_user = ""
+			@most_active_user = ""
 		else
 			most_active_id = hash.max_by{|k,v| v}[0]
-			@active_user = User.find(most_active_id)
+			@most_active_user = User.find(most_active_id)
 		end
 		queries = {"company" => :company, "industy" => :industry_type, "location" => :state, "salary" => :compensation, "upvotes" => :upvotes}
 		#if a sorting param has been selected
@@ -60,7 +60,6 @@ class ArticlesController < ApplicationController
 	        #Sort and update where needed
 	        session[:prev] = params[:query]
 	        params[:query] = nil
-			@arr = [@active_user, @articles]
 		#if filtered
 		elsif params[:filter]
 			filter = params[:filter]
@@ -75,21 +74,17 @@ class ArticlesController < ApplicationController
 					session[:filter_city] = city
 					session[:filter_state] = state
 					@articles = @articles.where('state = ?', state).where('city = ?', city).paginate(:page => params[:page], :per_page => 4)
-					@arr = [@active_user, @articles]
 				elsif city != ""
 					session[:filter_city] = city
 					session[:filter_state] = nil
 					@articles = @articles.where('city = ?', city).paginate(:page => params[:page], :per_page => 4)
-					@arr = [@active_user, @articles]
 				elsif state != ""
 					session[:filter_state] = state
 					session[:filter_city] = nil
 					@articles = @articles.where('state = ?', state).paginate(:page => params[:page], :per_page => 4)
-					@arr = [@active_user, @articles]
 				else
 					session[:filter_by] = nil
 					@articles = @articles.paginate(:page => params[:page], :per_page => 4)
-					@arr = [@active_user, @articles]
 				end
 			end
 			if filter == "salary"
@@ -100,21 +95,17 @@ class ArticlesController < ApplicationController
 					session[:filter_low] = low
 					session[:filter_high] = high
 					@articles = @articles.where('compensation >= ?', low).where('compensation <= ?', high).paginate(:page => params[:page], :per_page => 4)
-					@arr = [@active_user, @articles]
 				elsif low != ""
 					session[:filter_low] = low
 					session[:filter_high] = nil
 					@articles = @articles.where('compensation >= ?', low).paginate(:page => params[:page], :per_page => 4)
-					@arr = [@active_user, @articles]
 				elsif high != ""
 					session[:filter_low] = nil
 					session[:filter_high] = high
 					@articles = @articles.where('compensation >= ?', 0).where('compensation <= ?', high).paginate(:page => params[:page], :per_page => 4)
-					@arr = [@active_user, @articles]
 				else
 					session[:filter_by] = nil
 					@articles = @articles.paginate(:page => params[:page], :per_page => 4)
-					@arr = [@active_user, @articles]
 				end
 			end
 			if filter == "company"
@@ -122,11 +113,9 @@ class ArticlesController < ApplicationController
 				if company != ""
 					session[:filter_company] = company
 					@articles = @articles.where('company = ?', company).paginate(:page => params[:page], :per_page => 4)
-					@arr = [@active_user, @articles]
 				else
 					session[:filter_by] = nil
 					@articles = @articles.paginate(:page => params[:page], :per_page => 4)
-					@arr = [@active_user, @articles]
 				end
 			end
 			if filter == "industry_type"
@@ -134,11 +123,9 @@ class ArticlesController < ApplicationController
 				if industry != ""
 					session[:filter_industry] = industry
 					@articles = @articles.where('industry_type = ?', industry).paginate(:page => params[:page], :per_page => 4)
-					@arr = [@active_user, @articles]
 				else
 					session[:filter_by] = nil
 					@articles = @articles.paginate(:page => params[:page], :per_page => 4)
-					@arr = [@active_user, @articles]
 				end
 			end
 			if request.xhr?
@@ -150,11 +137,9 @@ class ArticlesController < ApplicationController
 			#if no param has ever been slected (the page was loaded for the first time)
 			if session[:prev] == nil
 				@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4)
-				@arr = [@active_user, @articles]	
 			#if a param was previous selcted, we should kepp follwing it when going to a different page
 			else
 				@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4).reorder(queries[session[:prev]].to_s + session[session[:prev]])
-				@arr = [@active_user, @articles]
 			end
 		end
 	end
@@ -163,8 +148,7 @@ class ArticlesController < ApplicationController
 		id = params[:id]
 		@article = Article.find(id)
 		user_id = @article.user_id
-		@article_owner = User.find(user_id)
-		@arr = [@article, @article_owner]
+		@owner = User.find(user_id)
 	end
 
 	def update

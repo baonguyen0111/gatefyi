@@ -3,8 +3,7 @@ class FeedbacksController < ApplicationController
 	def index
 		user = User.find(current_user.id)
 		@feedbacks = user.feedbacks
-		@new_feedback = Feedback.new
-		@arr = [@feedbacks, @new_feedback]	
+		@feedback = Feedback.new
 	end
 
 	def create

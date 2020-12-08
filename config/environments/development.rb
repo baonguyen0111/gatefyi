@@ -6,6 +6,7 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
   config.hosts << "33aa658ff75040b687078a689fbe875c.vfs.cloud9.us-east-1.amazonaws.com"
+  config.hosts << "042be2d3ab744762900fbbb564dcd603.vfs.cloud9.us-east-1.amazonaws.com"
   # Do not eager load code on boot.
   config.eager_load = false
 

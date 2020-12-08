@@ -35,7 +35,7 @@ class UsersController < ApplicationController
 	
 	def record_not_found
 		flash[:alert] = "Users not found"	
-		redirect_to articles_path and return 
+		redirect_to root_path and return 
 	end
 	
 	def edit_params

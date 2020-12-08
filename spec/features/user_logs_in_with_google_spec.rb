@@ -6,7 +6,7 @@ RSpec.feature "user logs in" do
     expect(page).to have_link("Sign in through Google")
     click_link "Sign in through Google"
     
-    expect(page).to have_link("Approve posts")
+    expect(page).to have_link("Approve Articles")
     click_link "Approve posts"
     expect(page).to have_content("Posts waiting for your approval")
     expect(page).to have_current_path(admin_articles_path)

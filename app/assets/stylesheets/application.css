@@ -14,3 +14,6 @@
  *= require_self
  */
 
+html, body{
+	background-color: #EDF5E1;
+}

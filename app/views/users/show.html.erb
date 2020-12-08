@@ -11,7 +11,12 @@
     </div>
     <div>
     <% if @user.show_profile or @user.id === current_user.id %> 
-      <%= image_tag("#{@user.image.empty? ? "default_profile_image.png" : @user.image}", height: 150) %>
+    <% if @user.avatar.attached? %>
+  	  	<%= image_tag @user.avatar, height: 150 %>
+  	<%else %>
+  	  <%= image_tag("default_profile_image.png", height: 150) %>
+  	<%end%>
+      
       <h3 class="articlecompany">
         <%= "#{@user.displayname}" %>
         <% if @user.isAdmin %><%= "(Admin)" %><% end %>
@@ -52,7 +57,29 @@
       			  <th>My articles <%= "(#{@user.articles.count})" %></th>
       		  </thead>
       		  <tbody>
-      		    <!--link each, limit 5 -->
+      		    <tbody>
+            			<% @user.articles.each do |a| %>
+            				<tr>
+            					<td class="articlecompany">
+            						<%= link_to "#{a.company}", article_path(a), :class => "articlecompany" %>
+            					</td>
+            					<td class="articleindustry">
+            						<%= a.industry_type %>
+            					</td>
+            					<td class="articlelocation">
+            						<%= a.city %>, <%= a.state %>
+            					</td>
+            					<td class="articlecompensation">
+            						<%= number_to_currency(a.compensation) %>
+            					</td>
+            					<td class="articleupvotes">
+            						<%= a.upvotes %>
+            					</td>
+            					
+            				</tr>
+            			<% end %>
+		</tbody>
+      		    
       		  </tbody>
           </table>
         </div>
@@ -62,7 +89,15 @@
     			    <th>My comments <%= "(#{@user.comments.count})" %></th>
     		    </thead>
     		    <tbody>
-    		      <!--link each, limit 5 -->
+    		      <% @user.comments.each do |a| %>
+        					<tr>
+        					  <td class = "articlecompany" ><%= link_to "#{a.article.company}", article_path(a.article), :class => "articlecompany"  %></td>
+        						<td>[+<%= a.upvotes %> ,-<%= a.downvotes %>]</td>
+        						<td><%= a.content %></td>
+        						
+        					</tr>
+        
+        				<% end %>
     		    </tbody>
           </table>
         </div>

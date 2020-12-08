@@ -16,6 +16,19 @@
 </div>
 <div class="mr-4"> 
 <%= form_with model: @user, local: true, :class => "form-horizontal center" do |f| %>
+	<% if @user.avatar.attached?%>
+		<%= image_tag @user.avatar, height: 150 %>
+	<%else %>
+		<%= image_tag("default_profile_image.png", height: 150) %>
+  	<%end%>
+	<div class="form-group">
+		<div class="col-md-8">
+		Upload profile picture
+		</div>
+		<div class="col-md-8">
+			<%= f.file_field :avatar %>
+		</div>
+	</div>
 	<div class="form-group">
 		<%= f.label :displayname, "Display Name:", class: "col-md-4 control-label" %>
 		<div class="col-md-8">

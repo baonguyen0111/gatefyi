@@ -56,5 +56,4 @@ Rails.application.configure do
         'email' => 'bnguyen@colgate.edu'
       }
     } 
-
 end

@@ -1,0 +1,41 @@
+<div class="text-right mr-4">
+	<%= link_to articles_path, :class =>"text-decoration-none" do %>
+		<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+		</svg>
+		Back to main page
+	<% end %>      
+</div>
+<% if @over_limit %>
+	<%= link_to 'Show Previous',chat_messages_path(@chat, :viewall => true) %>
+<% end %>
+
+<div class="ui segment">
+	<% @messages.each do |m| %>
+		<% if m.message %>
+			<% user = User.find(m.user_id) %>
+			<div class="item">
+				<div class="content">
+					<div class="header"><strong><%= user.displayname %></strong> <%= m.message_time %></div>
+					<div class="list">
+						<div class="item">
+							<i class="right triangle icon"></i>
+							<%= m.message %>
+						</div>
+					</div>
+				</div>
+			</div>
+		<% end %>
+	<% end %>
+</div>
+
+<%= form_for [@chat, @message], html: {class: "ui reply form"} do |f| %>
+	<div class="field">
+		<%= f.text_area :message, class: "form-control" %>
+	</div>
+	<%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
+	<div>
+		<%= f.submit "Add Reply", class: "ui blue labeled submit icon button" %>
+	</div>
+
+<% end %>

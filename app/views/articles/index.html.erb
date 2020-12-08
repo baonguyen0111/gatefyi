@@ -14,14 +14,28 @@
 <div class = "row">
 	<% if !@most_active_user.blank? %> 
 		<% if @most_active_user.show_profile %> 
-			<ul>Most active user is: <%= link_to "#{@most_active_user.displayname}", user_path(@most_active_user) %></ul>
+			<ul>
+				Most active user is: 
+				<i class="em em-partying_face" aria-role="presentation" aria-label="FACE WITH PARTY HORN AND PARTY HAT"></i>
+				<%= link_to "#{@most_active_user.displayname}", user_path(@most_active_user) %>
+			</ul>
 		<% else %>
-			<ul>Most active user is: <%= "#{@most_active_user.displayname}" %></ul>
+			<ul>
+				Most active user is: 
+				<i class="em em-partying_face" aria-role="presentation" aria-label="FACE WITH PARTY HORN AND PARTY HAT"></i>
+				<%= "#{@most_active_user.displayname}" %>
+			</ul>
 		<% end %>
 	<% end %>
 	<% if current_user.isAdmin %>
-		<ul><%= link_to "Approve Articles", admin_articles_path, :class =>"text-decoration-none" %></ul>
-		<ul><%= link_to "Check Feedbacks", admin_feedbacks_path, :class =>"text-decoration-none" %></ul>	
+		<ul>
+			<i class="em em---1" aria-role="presentation" aria-label="THUMBS UP SIGN"></i>
+			<%= link_to "Approve Articles", admin_articles_path, :class =>"text-decoration-none" %>
+		</ul>
+		<ul>
+			<i class="em em-earth_asia" aria-role="presentation" aria-label="EARTH GLOBE ASIA-AUSTRALIA"></i>
+			<%= link_to "Check Feedbacks", admin_feedbacks_path, :class =>"text-decoration-none" %>
+		</ul>	
 	<% end %>
 	<div class="col-md-2 offset-md-10">
 		<%= link_to "+ Add Post", new_article_path, :class => "btn btn-primary" %>

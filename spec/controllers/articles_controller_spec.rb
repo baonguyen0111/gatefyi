@@ -20,6 +20,246 @@ RSpec.describe ArticlesController, type: :controller do
     		expect(assigns(:articles)).to match_array([x,y])
     		expect(response).to render_template("index")
 		end
+		
+		it "filters by company" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:filter => 'company', :company => 'Amazon'}
+            		expect(assigns(:articles)).to match_array([y])
+            		expect(response).to render_template("index")
+		end
+		
+		it "filters by company" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:filter => 'company', :company => ''}
+            		expect(assigns(:articles)).to match_array([x,y])
+            		expect(response).to render_template("index")
+		end
+		
+		it "filters by industry" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:filter => 'industry_type', :industry => 'Tech'}
+            		expect(assigns(:articles)).to match_array([x,y])
+            		expect(response).to render_template("index")
+		end
+		
+		it "filters by industry" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:filter => 'industry_type', :industry => ''}
+            		expect(assigns(:articles)).to match_array([x,y])
+            		expect(response).to render_template("index")
+		end
+		
+		it "filters by location" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:filter => 'location', :state => 'CA', :city => 'Seattle'}
+            		expect(assigns(:articles)).to match_array([])
+            		expect(response).to render_template("index")
+		end
+		
+		it "filters by location" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:filter => 'location', :state => '', :city => ''}
+            		expect(assigns(:articles)).to match_array([x,y])
+            		expect(response).to render_template("index")
+		end
+		
+		it "filters by location" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:filter => 'location', :state => 'CA', :city => ''}
+            		expect(assigns(:articles)).to match_array([x])
+            		expect(response).to render_template("index")
+		end
+		
+		it "filters by location" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:filter => 'location', :state => '', :city => 'Seattle'}
+            		expect(assigns(:articles)).to match_array([y])
+            		expect(response).to render_template("index")
+		end
+		
+		it "filters by salary" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:filter => 'salary', :low_salary => '10000', :high_salary => '70000'}
+            		expect(assigns(:articles)).to match_array([])
+            		expect(response).to render_template("index")
+		end
+		
+		it "filters by salary" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:filter => 'salary', :low_salary => '', :high_salary => ''}
+            		expect(assigns(:articles)).to match_array([x,y])
+            		expect(response).to render_template("index")
+		end
+		
+		it "filters by salary" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:filter => 'salary', :low_salary => '90000', :high_salary => ''}
+            		expect(assigns(:articles)).to match_array([x,y])
+            		expect(response).to render_template("index")
+		end
+		
+		it "filters by salary" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:filter => 'salary', :low_salary => '', :high_salary => '50000'}
+            		expect(assigns(:articles)).to match_array([])
+            		expect(response).to render_template("index")
+		end
+		
+		it "preserves filtered articles (company) after sorting" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:query => 'salary'}, :session => {:filter_by => 'company', :filter_company => 'Amazon'}
+            		expect(assigns(:articles)).to match_array([y])
+            		expect(response).to render_template("index")
+		end
+		
+		it "preserves filtered articles (industry) after sorting" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:query => 'salary'}, :session => {:filter_by => 'industry_type', :filter_industry => 'Tech'}
+            		expect(assigns(:articles)).to match_array([x,y])
+            		expect(response).to render_template("index")
+		end
+		
+		it "preserves filtered articles (location) after sorting" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:query => 'salary'}, :session => {:filter_by => 'location', :filter_city => nil, :filter_state => 'WA'}
+            		expect(assigns(:articles)).to match_array([y])
+            		expect(response).to render_template("index")
+		end
+		
+		it "preserves filtered articles (location) after sorting" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:query => 'salary'}, :session => {:filter_by => 'location', :filter_city => 'San Jose', :filter_state => nil}
+            		expect(assigns(:articles)).to match_array([x])
+            		expect(response).to render_template("index")
+		end
+		
+		it "preserves filtered articles (salary) after sorting" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:query => 'salary'}, :session => {:filter_by => 'salary', :filter_low => nil, :filter_high => '90000'}
+            		expect(assigns(:articles)).to match_array([x])
+            		expect(response).to render_template("index")
+		end
+		
+		it "preserves filtered articles (salary) after sorting" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:query => 'salary'}, :session => {:filter_by => 'salary', :filter_low => '10000', :filter_high => '50000'}
+            		expect(assigns(:articles)).to match_array([])
+            		expect(response).to render_template("index")
+		end
+		
+		it "preserves filtered articles (salary) after sorting" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:query => 'salary'}, :session => {:filter_by => 'salary', :filter_low => '90000', :filter_high => nil}
+            		expect(assigns(:articles)).to match_array([x,y])
+            		expect(response).to render_template("index")
+		end
+		
+		it "preserves filtered articles (salary) after sorting" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			x, y = 
+				Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: a.id), 
+				Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 0, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+
+            		get :index, :params => {:query => 'salary'}, :session => {:filter_by => 'salary', :filter_low => nil, :filter_high => '90000'}
+            		expect(assigns(:articles)).to match_array([x])
+            		expect(response).to render_template("index")
+		end
 	end
 	
 	context "show" do

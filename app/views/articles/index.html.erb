@@ -1,148 +1,190 @@
-<nav class="row">
-	<ul class="col-md-3 filter-box">
-		<button class="btn btn-primary">Filter</button>
-		<ul>
-			<li> <%= button_to "Company", articles_path, id: "company", class: "btn btn-primary", remote: true %></li>
-			<li> <%= button_to "Industry type", articles_path, id: "industry_type", class: "btn btn-primary", remote: true %></li>
-			<li> <%= button_to "Location", articles_path, id: "location", class: "btn btn-primary", remote: true %></li>
-			<li> <%= button_to "Salary", articles_path, id: "salary", class: "btn btn-primary", remote: true %></li>
-			<li id="clear_filter"> <%= link_to("Clear filter", articles_path, class: "btn btn-primary") %></li>
-		</ul>
-	</ul>
-</nav>
-
-<div class = "row">
-	<% if !@most_active_user.blank? %> 
-		<% if @most_active_user.show_profile %> 
+<div class="sect1">
+	<nav class="row">
+		<ul class="col-md-3 filter-box">
+			<button class="btn btn-primary">Filter</button>
 			<ul>
-				Most active user is: 
-				<i class="em em-partying_face" aria-role="presentation" aria-label="FACE WITH PARTY HORN AND PARTY HAT"></i>
-				<%= link_to "#{@most_active_user.displayname}", user_path(@most_active_user) %>
+				<li> <%= button_to "Company", articles_path, id: "company", class: "btn btn-primary", remote: true %></li>
+				<li> <%= button_to "Industry type", articles_path, id: "industry_type", class: "btn btn-primary", remote: true %></li>
+				<li> <%= button_to "Location", articles_path, id: "location", class: "btn btn-primary", remote: true %></li>
+				<li> <%= button_to "Salary", articles_path, id: "salary", class: "btn btn-primary", remote: true %></li>
+				<li id="clear_filter"> <%= link_to("Clear filter", articles_path, class: "btn btn-primary") %></li>
 			</ul>
-		<% else %>
-			<ul>
-				Most active user is: 
-				<i class="em em-partying_face" aria-role="presentation" aria-label="FACE WITH PARTY HORN AND PARTY HAT"></i>
-				<%= "#{@most_active_user.displayname}" %>
-			</ul>
-		<% end %>
-	<% end %>
-	<% if current_user.isAdmin %>
-		<ul>
-			<i class="em em---1" aria-role="presentation" aria-label="THUMBS UP SIGN"></i>
-			<%= link_to "Approve Articles", admin_articles_path, :class =>"text-decoration-none" %>
 		</ul>
-		<ul>
-			<i class="em em-earth_asia" aria-role="presentation" aria-label="EARTH GLOBE ASIA-AUSTRALIA"></i>
-			<%= link_to "Check Feedbacks", admin_feedbacks_path, :class =>"text-decoration-none" %>
-		</ul>	
-	<% end %>
-	<div class="col-md-2 offset-md-10">
-		<%= link_to "+ Add Post", new_article_path, :class => "btn btn-primary" %>
-	</div>
-</div>
+	</nav>
 
-<div class="company-list">
-	<%= render 'articles', articles: @articles %>
-</div>
-
-<div class="text-light ml-4">
-	<%= link_to "Submit Feedbacks", feedbacks_path, :class =>"text-decoration-none" %>
-</div> 
-<!-- pop up windows for filters -->
-<nav>
-
-<div class="company_filter">
-	<div class="company_filter_content">
-		<div class="close_company">+</div>
-		Please select company
-		<%= form_with(id: :submit_company, url: articles_path, method: 'get') do |f| %>
-			<div class="form-group">
-				<%= f.label :company, "Company:", class: "col-md-4 control-label" %>
-				<div class="col-md-10">
-					<%= f.select :company, Article.distinct.pluck(:company), {:prompt => "Select company"}, {class: "form-control"}%>
-				</div>
-			</div>
-			<span style="margin-left: 30%">
-				<%= f.submit "Submit", class: "btn btn-default btn-primary"%>  
-			</span>
+	<div class = "row">
+		<% if !@most_active_user.blank? %> 
+			<% if @most_active_user.show_profile %> 
+				<ul>
+					Most active user is: 
+					<i class="em em-partying_face" aria-role="presentation" aria-label="FACE WITH PARTY HORN AND PARTY HAT"></i>
+					<%= link_to "#{@most_active_user.displayname}", user_path(@most_active_user) %>
+				</ul>
+			<% else %>
+				<ul>
+					Most active user is: 
+					<i class="em em-partying_face" aria-role="presentation" aria-label="FACE WITH PARTY HORN AND PARTY HAT"></i>
+					<%= "#{@most_active_user.displayname}" %>
+				</ul>
 			<% end %>
+		<% end %>
+		<% if current_user.isAdmin %>
+			<ul>
+				<i class="em em---1" aria-role="presentation" aria-label="THUMBS UP SIGN"></i>
+				<%= link_to "Approve Articles", admin_articles_path, :class =>"text-decoration-none" %>
+			</ul>
+			<ul>
+				<i class="em em-earth_asia" aria-role="presentation" aria-label="EARTH GLOBE ASIA-AUSTRALIA"></i>
+				<%= link_to "Check Feedbacks", admin_feedbacks_path, :class =>"text-decoration-none" %>
+			</ul>	
+		<% end %>
+		<div class="col-md-2 offset-md-10">
+			<%= link_to "+ Add Post", new_article_path, :class => "btn btn-primary" %>
 		</div>
 	</div>
 
+	<div class="company-list">
+		<%= render 'articles', articles: @articles %>
+	</div>
 
-<div class="industry_filter">
-	<div class="industry_filter_content">
-		<div class="close_industry">+</div>
-		Please select industry type
-		<%= form_with(id: :submit_industry, url: articles_path, method: 'get') do |f| %>
-			<div class="form-group">
-				<%= f.label :industry_type, "Industry Type:", class: "col-md-4 control-label" %>
-				<div class="col-md-10">
-					<%= f.select :industry_type, Article.distinct.pluck(:industry_type), {:prompt => "Select industry"}, {class: "form-control"}%>
-				</div>
+	<div class="text-light ml-4">
+		<i class="em em-chart_with_upwards_trend" aria-role="presentation" aria-label="CHART WITH UPWARDS TREND"></i>
+		<%= link_to "Submit Feedbacks", feedbacks_path, :class =>"text-decoration-none" %>
+	</div> 
+	<!-- pop up windows for filters -->
+	<nav>
+
+		<div class="company_filter">
+			<div class="company_filter_content">
+				<div class="close_company">+</div>
+				Please select company
+				<%= form_with(id: :submit_company, url: articles_path, method: 'get') do |f| %>
+					<div class="form-group">
+						<%= f.label :company, "Company:", class: "col-md-4 control-label" %>
+						<div class="col-md-10">
+							<%= f.select :company, Article.distinct.pluck(:company), {:prompt => "Select company"}, {class: "form-control"}%>
+						</div>
+					</div>
+					<span style="margin-left: 30%">
+						<%= f.submit "Submit", class: "btn btn-default btn-primary"%>  
+					</span>
+				<% end %>
 			</div>
-			
-			<span style="margin-left: 30%">
-				<%= f.submit "Submit", class: "btn btn-default btn-primary" %>  
-			</span>
-		<% end %>
-    </div>
+		</div>
+
+
+		<div class="industry_filter">
+			<div class="industry_filter_content">
+				<div class="close_industry">+</div>
+				Please select industry type
+				<%= form_with(id: :submit_industry, url: articles_path, method: 'get') do |f| %>
+					<div class="form-group">
+						<%= f.label :industry_type, "Industry Type:", class: "col-md-4 control-label" %>
+						<div class="col-md-10">
+							<%= f.select :industry_type, Article.distinct.pluck(:industry_type), {:prompt => "Select industry"}, {class: "form-control"}%>
+						</div>
+					</div>
+
+					<span style="margin-left: 30%">
+						<%= f.submit "Submit", class: "btn btn-default btn-primary" %>  
+					</span>
+				<% end %>
+			</div>
+		</div>
+
+		<div class="location_filter">
+			<div class="location_filter_content">
+				<div class="close_location">+</div>
+				Please select state and city
+				<%= form_with(id: :submit_location, method: 'get', url: articles_path) do |f| %>
+					<div class="form-group", id="state">
+						<%= f.label :state, "State:", class: "col-md-4 control-label" %>
+						<div class="col-md-10">
+							<%= f.select :state, Article.distinct.pluck(:state), {:prompt => "Select state"}, {class: "form-control"}%>
+						</div>
+					</div>
+					<div class="form-group", id="city">
+						<%= f.label :city, "City:", class: "col-md-4 control-label" %>
+						<div class="col-md-10">
+							<%= f.select :city, Article.distinct.pluck(:city), {:prompt => "Select city"}, {class: "form-control"}%>
+						</div>
+					</div>
+
+					<span style="margin-left: 30%">
+						<%= f.submit "Submit", class: "btn btn-default btn-primary" %>  
+					</span>
+				<% end %>
+			</div>
+		</div>
+
+		<div class="salary_filter">
+			<div class="salary_filter_content">
+				<div class="close_salary">+</div>
+				Please fill in the range of salary you are looking for
+				<%= form_with(id: :submit_salary, method: "get", url: articles_path) do |f| %>
+					<div class="form-group", id="low">
+						<%= f.label :compensationlow, "lower salary range:", class: "col-md-4 control-label" %>
+						<div class="col-md-10">
+							<%= f.number_field :compensationlow, step: 1, class: "form-control" %>
+						</div>
+					</div>
+					<div class="form-group", id="high">
+						<%= f.label :compensationhigh, "higher salary range:", class: "col-md-4 control-label" %>
+						<div class="col-md-10">
+							<%= f.number_field :compensationhigh, step: 1, class: "form-control" %>
+						</div>
+					</div>
+
+					<span style="margin-left: 30%">
+						<%= f.submit "Submit", class: "btn btn-default btn-primary" %>  
+					</span>
+				<% end %>
+			</div>
+		</div>
+	</nav>
+
+	<nav aria-label="Pagination">
+		<ul class="pagination"> 
+			<%= will_paginate @articles %>
+		</ul>
+	</nav>
 </div>
-  
-<div class="location_filter">
-	<div class="location_filter_content">
-		<div class="close_location">+</div>
-		Please select state and city
-		<%= form_with(id: :submit_location, method: 'get', url: articles_path) do |f| %>
-			<div class="form-group", id="state">
-				<%= f.label :state, "State:", class: "col-md-4 control-label" %>
-				<div class="col-md-10">
-					<%= f.select :state, Article.distinct.pluck(:state), {:prompt => "Select state"}, {class: "form-control"}%>
+<div class="sect2">
+	<div class = "row" >
+		<div class="col-sm">
+			<div class="card" style="width: 20rem; height: 20rem; background: #659DBD; color: #FFFFFF">
+				<h3 class="card-header"> 
+					<i class="em em-nerd_face" aria-role="presentation" aria-label="NERD FACE"></i>	
+					Site statistics
+				</h3>
+				<div class="card-body">
+					<p class="card-text">Total posts: <%= @no_of_posts %> </p> 
+					<p class="card-text">Total comments: <%= @no_of_comments %> </p>
+					<p class="card-text">Total messages: <%= @no_of_messages %> </p> 
 				</div>
 			</div>
-			<div class="form-group", id="city">
-				<%= f.label :city, "City:", class: "col-md-4 control-label" %>
-				<div class="col-md-10">
-					<%= f.select :city, Article.distinct.pluck(:city), {:prompt => "Select city"}, {class: "form-control"}%>
-				</div>
+		</div>
+
+		<div class="col-sm">
+			<div class="card" style="width: 20rem; height: 20rem; background: #659DBD; color: #FFFFFF">
+				<h3 class="card-header">
+					<i class="em em-birthday" aria-role="presentation" aria-label="BIRTHDAY CAKE"></i>
+					Birthday Board: 
+				</h3>
 			</div>
-			
-			<span style="margin-left: 30%">
-				<%= f.submit "Submit", class: "btn btn-default btn-primary" %>  
-			</span>
-		<% end %>
+		</div>
+		<div class="col-sm">
+			<div class="card" style="width: 20rem; height: 20rem; background: #659DBD; color: #FFFFFF">
+				<h3 class="card-header">
+					<i class="em em-bell" aria-role="presentation" aria-label="BELL"></i>
+					Spread the word
+				</h3>
+				<div class="card-body">
+					<%= social_share_button_tag("spread the word", :url => "https://powerful-cliffs-16579.herokuapp.com") %>
+
+				</div>
+			</div>  
 		</div>
 	</div>
 
-<div class="salary_filter">
-	<div class="salary_filter_content">
-		<div class="close_salary">+</div>
-		Please fill in the range of salary you are looking for
-		<%= form_with(id: :submit_salary, method: "get", url: articles_path) do |f| %>
-			<div class="form-group", id="low">
-				<%= f.label :compensationlow, "lower salary range:", class: "col-md-4 control-label" %>
-				<div class="col-md-10">
-					<%= f.number_field :compensationlow, step: 1, class: "form-control" %>
-				</div>
-			</div>
-			<div class="form-group", id="high">
-				<%= f.label :compensationhigh, "higher salary range:", class: "col-md-4 control-label" %>
-				<div class="col-md-10">
-					<%= f.number_field :compensationhigh, step: 1, class: "form-control" %>
-				</div>
-			</div>
-			
-			<span style="margin-left: 30%">
-				<%= f.submit "Submit", class: "btn btn-default btn-primary" %>  
-			</span>
-		<% end %>
-		</div>
-	</div>
-</nav>
-
-<nav aria-label="Pagination">
-	<ul class="pagination"> 
-		<%= will_paginate @articles %>
-	</ul>
-</nav> 
+</div>

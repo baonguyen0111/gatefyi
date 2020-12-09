@@ -34,10 +34,10 @@ class CommentsController < ApplicationController
 		@comment.user_id = current_user.id
 		@comment.article_id = params[:article_id] 
 		if @comment.save
-			flash[:notice] = "Waiting for approval from admin"
+			flash[:notice] = "Comment added"
 			redirect_to article_comments_path(params[:article_id]) and return
 		else
-			flash[:alert] = "Failed to save new work experience"
+			flash[:alert] = "Failed to save comment"
 			redirect_to new_article_comment_path(params[:article_id]) and return
 		end
 

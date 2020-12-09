@@ -1,10 +1,13 @@
 class ChatsController < ApplicationController
 	before_action :is_logged_in?
 	def index
+	
 		@users = User.all
+	
 		@chats = Chat.all
 	end
 	def create
+		
 		if Chat.between(params[:sender_id],params[:recipient_id])
 			.present?
 			@chat = Chat.between(params[:sender_id],

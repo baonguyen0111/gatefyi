@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
 
 	before_action :is_logged_in?
 	before_action do
-		@chat = Chat.find(params[:chat_id])
+		@chat = Chat.find(params[:chat_id] )
 	end
 
 	def index

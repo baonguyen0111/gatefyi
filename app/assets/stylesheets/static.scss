@@ -11,7 +11,42 @@ body
 	height: 100%; 
 	background-color: #E8A87C
 }
+.aboutus-header{
+	height: 10%; 
+	display: flex; 	
+	justify-content: center;
+	align-items: center; 
+	font-size: 2em;
+	font-weight: 500; 	
+	color: white; 
+}
+.howto-instruction{
+	height: 50%; 
+	display: flex; 
+	justify-content:center; 
+	align-items: center; 
+}
+.aboutus-description{
+	font: Roboto; 
+	height: 30%;
+	display: flex; 	
+	justify-content: center;
+	align-items: center; 
+	font-size: 2em;
+	font-weight: 300; 	
+	color: white; 
+}
 
+.aboutus-team{
+	height: 60%;
+       margin-left: 230px;
+	font-size: 1.5em;
+color: white; 	
+}
+.team-item{
+	font: Roboto;
+	margin-top: 10px; 
+}
 .howto-page{
 	height: 100%; 
 	background-color: #DAAD86
@@ -30,9 +65,9 @@ body
 .header {
 	height: 10%;
 	margin-right: 10px; 
-       display: flex;
+	display: flex;
 	justify-content: flex-end;
-      	font-size: 1.2rem; 
+	font-size: 1.2rem; 
 	font-weight: bold; 	
 }
 
@@ -49,8 +84,8 @@ body
 
 .google-card {
 	min-width: 15rem;
-       min-height: 2rem;
+	min-height: 2rem;
 	display: flex; 
- 	justify-content: center;
+	justify-content: center;
 	align-items: center;
 }

@@ -22,7 +22,8 @@ gem 'jbuilder', '~> 2.7'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-
+# semantic-ui-sass is an Sass-powered version of Semantic UI and ready to drop into Rails, Compass, or Sprockets.
+gem 'semantic-ui-sass'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false 
 # will_paginate is a pagination library that integrates with Ruby on Rails, Sinatra, Hanami::View, Merb, DataMapper and Sequel.

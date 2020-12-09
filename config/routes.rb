@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   resources :articles do 
 	  resources :comments 
   end
+  resources :chats do
+	  resources :messages
+  end
   resources :users 
   root :to => "static#index"
   get '/about' => 'static#aboutus', :as => :about

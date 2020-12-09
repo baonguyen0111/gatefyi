@@ -1,6 +1,38 @@
 // Place all the styles related to the Articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+@import "social-share-button";
+$size: 29px;
+
+.social-share-button {
+  .ssb-icon {
+    background-size: $size $size;
+    height: $size;
+    width: $size;
+  }
+}
+.sect1{
+	height: 80%;
+	width: 100%;
+}
+.sect2 {
+	margin-left: 10em;
+	height: 50%;
+}
+.sect2-row{
+	margin-left: 20em;  
+}
+
+.card-header{
+	text-align: center;
+}
+
+.card-body{
+	font-size: 1.2rem; 
+}
+.em-nerd_face, .em-birthday{
+	margin-right: 5px; 
+}
 
 .company-list {
 	text-align: center;
@@ -47,8 +79,8 @@
 }
 .container {
 	border-radius: 5px;
-  	background-color: #f2f2f2;
-  	padding: 20px;
+	background-color: #f2f2f2;
+	padding: 20px;
 }
 .left-button {
 	margin: 20px;
@@ -104,13 +136,13 @@ nav{
 		position: relative;
 		justify-content: center;
 	}
-	
+
 	input{
 		width: 50%;
 		display: block;
 		margin: 15px auto;
 	}
-	
+
 	.close_company, .close_industry, .close_location, .close_salary{
 		position: absolute;
 		top: 0;
@@ -124,7 +156,7 @@ nav{
 
 .pagination {
 	justify-content:center;
-	
+
 }
 //.salary_filter{
 //	width:100%;

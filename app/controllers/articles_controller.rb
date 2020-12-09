@@ -1,8 +1,11 @@
 class ArticlesController < ApplicationController
 	rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 	before_action :is_logged_in?
-	
+
 	def index
+		@no_of_posts = Article.count
+		@no_of_comments = Comment.count
+		@no_of_messages = Message.count
 		most_active_poster = Article.most_active()
 		most_active_commenter = Comment.most_active()
 		hash = Hash.new(0)
@@ -18,51 +21,51 @@ class ArticlesController < ApplicationController
 		queries = {"company" => :company, "industy" => :industry_type, "location" => :state, "salary" => :compensation, "upvotes" => :upvotes}
 		#if a sorting param has been selected
 		if queries.key? params[:query]
-	    	#decide if we should sort by ASC or DESC
-	    	if session[:prev] == params[:query]
-	    		if session[params[:query]] == ' DESC'
-	    			session[params[:query]] = ' ASC'
-	    		else
-	    			session[params[:query]] = ' DESC'
-	    		end
-	    	else
-	    		session[params[:query]] = ' ASC'
-	    	end
-	    	@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4).reorder(queries[params[:query]].to_s + session[params[:query]])
-	    	#preserve previous filter before sorting
-	    	if session[:filter_by]
-	    		filter = session[:filter_by]
-	    		if filter == "company"
-	    			value = session[:filter_company]
-	    			@articles = @articles.where('company = ?', value)
-	    		elsif filter == "industry_type"
-	    			value = session[:filter_industry]
-	    			@articles = @articles.where('industry_type = ?', value)
-	    		elsif filter == "location"
-	    			value1 = session[:filter_state]
-	    			value2 = session[:filter_city]
-	    			if value1
-	    				@articles = @articles.where('state = ?', value1)
-	    			end
-	    			if value2
-	    				@articles = @articles.where('city = ?', value2)
-	    			end
-	    		else
-	    			value1 = session[:filter_low]
-	    			value2 = session[:filter_high]
-	    			if value1 && value2
-	    				@articles = @articles.where('compensation >= ?', value1).where('compensation <= ?', value2)
-	    			elsif value1
-	    				@articles = @articles.where('compensation >= ?', value1)
-	    			elsif value2
-	    				@articles = @articles.where('compensation >= ?', 0).where('compensation <= ?', value2)
-	    			end
-	    		end
-	    	end
-	        #Sort and update where needed
-	        session[:prev] = params[:query]
-	        params[:query] = nil
-		#if filtered
+			#decide if we should sort by ASC or DESC
+			if session[:prev] == params[:query]
+				if session[params[:query]] == ' DESC'
+					session[params[:query]] = ' ASC'
+				else
+					session[params[:query]] = ' DESC'
+				end
+			else
+				session[params[:query]] = ' ASC'
+			end
+			@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4).reorder(queries[params[:query]].to_s + session[params[:query]])
+			#preserve previous filter before sorting
+			if session[:filter_by]
+				filter = session[:filter_by]
+				if filter == "company"
+					value = session[:filter_company]
+					@articles = @articles.where('company = ?', value)
+				elsif filter == "industry_type"
+					value = session[:filter_industry]
+					@articles = @articles.where('industry_type = ?', value)
+				elsif filter == "location"
+					value1 = session[:filter_state]
+					value2 = session[:filter_city]
+					if value1
+						@articles = @articles.where('state = ?', value1)
+					end
+					if value2
+						@articles = @articles.where('city = ?', value2)
+					end
+				else
+					value1 = session[:filter_low]
+					value2 = session[:filter_high]
+					if value1 && value2
+						@articles = @articles.where('compensation >= ?', value1).where('compensation <= ?', value2)
+					elsif value1
+						@articles = @articles.where('compensation >= ?', value1)
+					elsif value2
+						@articles = @articles.where('compensation >= ?', 0).where('compensation <= ?', value2)
+					end
+				end
+			end
+			#Sort and update where needed
+			session[:prev] = params[:query]
+			params[:query] = nil
+			#if filtered
 		elsif params[:filter]
 			filter = params[:filter]
 			session[:filter_by] = filter
@@ -135,11 +138,11 @@ class ArticlesController < ApplicationController
 			end
 		else
 			#if no sorting nor filtering param is selected (in the case of going to next or prev page)
-			
+
 			#if no param has ever been slected (the page was loaded for the first time)
 			if session[:prev] == nil
 				@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4)
-			#if a param was previous selcted, we should kepp follwing it when going to a different page
+				#if a param was previous selcted, we should kepp follwing it when going to a different page
 			else
 				@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4).reorder(queries[session[:prev]].to_s + session[session[:prev]])
 			end
@@ -157,11 +160,11 @@ class ArticlesController < ApplicationController
 	def update
 		id = params[:id]
 		@article = Article.find(id)
-		
+
 		if params[:vote_change] 
 			change_upvotes
 		end
-		
+
 		redirect_to article_path(@article) and return 
 	end	
 
@@ -185,7 +188,7 @@ class ArticlesController < ApplicationController
 			redirect_to new_article_path and return
 		end
 	end
-	
+
 	private
 
 	def is_logged_in?
@@ -195,22 +198,22 @@ class ArticlesController < ApplicationController
 
 		end
 	end
-	
+
 	def create_params
 		params.require(:article).permit(:company, :industry_type, :state, :city, :compensation, :interview_exp, :work_exp)
 	end 
-	
+
 	def change_upvotes
 		vote_change = params.require(:vote_change).to_i 
 		@article.upvotes += vote_change
-		
+
 		if @article.save
 			flash[:notice] = "#{vote_change == 1 ? 'Upvoted' : 'Downvoted'} successfully"
 		else
 			flash[:alert] = "Failed to upvote"	
 		end
 	end
-	
+
 	def record_not_found
 		flash[:alert] = "Articles not found"	
 		redirect_to articles_path and return 

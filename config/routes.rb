@@ -19,4 +19,6 @@ Rails.application.routes.draw do
   root :to => "static#index"
   get '/about' => 'static#aboutus', :as => :about
   get '/howto' => 'static#howto', :as=> :how
+ #get 'user/eat_chocolate/:id' => 'user#eat_chocolate', :as => :edit_comment
+  #get 'user/eat_chocolate/:id' => 'user#eat_chocolate', :as => :eat_chocolate_user
 end

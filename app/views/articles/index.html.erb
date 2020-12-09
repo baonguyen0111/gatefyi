@@ -12,16 +12,16 @@
 		</ul>
 	</nav>
 
-	<div class = "row">
+	<div class = "row intro-row">
 		<% if !@most_active_user.blank? %> 
-			<% if @most_active_user.show_profile %> 
-				<ul>
+			<% if @most_active_user.show_profile %>
+				<ul class="most-active">
 					Most active user is: 
 					<i class="em em-partying_face" aria-role="presentation" aria-label="FACE WITH PARTY HORN AND PARTY HAT"></i>
 					<%= link_to "#{@most_active_user.displayname}", user_path(@most_active_user) %>
 				</ul>
 			<% else %>
-				<ul>
+				<ul class="most-active">
 					Most active user is: 
 					<i class="em em-partying_face" aria-role="presentation" aria-label="FACE WITH PARTY HORN AND PARTY HAT"></i>
 					<%= "#{@most_active_user.displayname}" %>
@@ -29,11 +29,11 @@
 			<% end %>
 		<% end %>
 		<% if current_user.isAdmin %>
-			<ul>
+			<ul class="most-active">
 				<i class="em em---1" aria-role="presentation" aria-label="THUMBS UP SIGN"></i>
 				<%= link_to "Approve Articles", admin_articles_path, :class =>"text-decoration-none" %>
 			</ul>
-			<ul>
+			<ul class="most-active">
 				<i class="em em-earth_asia" aria-role="presentation" aria-label="EARTH GLOBE ASIA-AUSTRALIA"></i>
 				<%= link_to "Check Feedbacks", admin_feedbacks_path, :class =>"text-decoration-none" %>
 			</ul>	

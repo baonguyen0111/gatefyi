@@ -17,3 +17,7 @@
 html, body{
 	background-color: #EDF5E1;
 }
+
+.profile-row{
+	margin-left: 40px; 
+}

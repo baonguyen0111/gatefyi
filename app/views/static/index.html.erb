@@ -14,6 +14,21 @@
 		</div>
 	</div>
 	<br/>
+	<% if flash[:notice] %>
+		<div class="row">
+			<div class="col-md-13 alert alert-primary notice">
+				<%= "#{flash[:notice]}" %>
+			</div>
+		</div>
+	<% end %>
+	<% if flash[:alert] %>
+		<div class="row">
+			<div class="col-md-13 alert alert-warning alert">
+				<%= "#{flash[:alert]}" %>
+			</div>
+		</div>
+	<% end %>
+
 	<% if user_signed_in? %>
 		<div class="row">
 			<%= link_to "Enter our page", articles_path, method: :get, :class => "btn btn-warning btn-sm" %>

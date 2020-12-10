@@ -66,6 +66,35 @@ class ArticlesController < ApplicationController
 			session[:prev] = params[:query]
 			params[:query] = nil
 			#if filtered
+		elsif params[:commit] == "Apply filter"
+			@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4)
+			if params[:company]
+				company = params[:company]
+				@articles = @articles.where('company = ?', company) unless company == ""
+			elsif params[:industry_type]
+				industry = params[:industry_type]
+				@articles = @articles.where('industry_type = ?', industry) unless industry == ""
+			elsif params[:city]
+				city = params[:city]
+				state = params[:state]
+				if city != "" && state != ""
+					@articles = @articles.where('state = ?', state).where('city = ?', city)
+				elsif city != ""
+					@articles = @articles.where('city = ?', city)
+				elsif state != ""
+					@articles = @articles.where('state = ?', state)
+				end
+			elsif params[:compensationlow]
+				low = params[:compensationlow]
+				high = params[:compensationhigh]
+				if low != "" && high != ""
+					@articles = @articles.where('compensation >= ?', low).where('compensation <= ?', high)
+				elsif low != ""
+					@articles = @articles.where('compensation >= ?', low)
+				elsif high != ""
+					@articles = @articles.where('compensation >= ?', 0).where('compensation <= ?', high)
+				end
+			end
 		elsif params[:filter]
 			filter = params[:filter]
 			session[:filter_by] = filter

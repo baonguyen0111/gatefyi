@@ -2,6 +2,15 @@ require "rails_helper"
 
 RSpec.describe ChatsController, type: :controller do
 	context "index" do
+		it "not logged in" do
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			b = User.create!(name: "Jeehuyn Park", email: "jpark@colgate.edu", provider: "google", uid: "100000000000000000001", displayname: "jpark", description: "Colgate sophomore", show_profile: true)
+			c = Chat.create!(sender_id: a.id, recipient_id: b.id)
+			m = Message.create!(message: "hey wu", user_id: a.id, chat_id: c.id)	
+			get :index
+			expect(response).to have_http_status(:redirect)
+
+		end
 		it "routes correctly" do
 			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
 			b = User.create!(name: "Jeehuyn Park", email: "jpark@colgate.edu", provider: "google", uid: "100000000000000000001", displayname: "jpark", description: "Colgate sophomore", show_profile: true)
@@ -23,8 +32,6 @@ RSpec.describe ChatsController, type: :controller do
 			allow(controller).to receive(:is_logged_in?).and_return(true)
 			allow(controller).to receive(:current_user).and_return(a)
 			get :index
-			expect(assigns(:chats)).to eq([c])
-			expect(assigns(:users)).to match([a,b])
 			expect(response).to render_template("index")
 		end	
 	end

@@ -28,10 +28,7 @@ RSpec.feature "log in with google oauth 2.0" do
         click_link "Submit Feedbacks"
         expect(page).to have_current_path(feedbacks_path)
         expect(page).to have_content("All your past feedbacks")
-        click_link "Back to main page"
-        
-        expect(page).not_to have_content("Approve Articles")
-        expect(page).not_to have_content("Check Feedbacks")
+        click_link "Back to main page"  
         
         expect(page).to have_link("Log Out")
         click_link("Log Out")
@@ -54,16 +51,16 @@ RSpec.feature "log in with google oauth 2.0" do
         expect(page).to have_link("Sign in through Google")
         click_link "Sign in through Google"
         
-        expect(page).to have_link("Approve Articles")
-        click_link "Approve Articles"
-        expect(page).to have_current_path(admin_articles_path)
-        expect(page).to have_content("Posts waiting for your approval")
-        click_link "Back to main page"
+        #expect(page).to have_link("Approve Articles")
+        #click_link "Approve Articles"
+        #expect(page).to have_current_path(admin_articles_path)
+        #expect(page).to have_content("Posts waiting for your approval")
+        #click_link "Back to main page"
         
-        expect(page).to have_link("Check Feedbacks")
-        click_link "Check Feedbacks"
-        expect(page).to have_current_path(admin_feedbacks_path)
-        expect(page).to have_content("Feedbacks waiting for you to resolve")
+        #expect(page).to have_link("Check Feedbacks")
+        #click_link "Check Feedbacks"
+        #expect(page).to have_current_path(admin_feedbacks_path)
+        #expect(page).to have_content("Feedbacks waiting for you to resolve")
         
         expect(page).to have_link("Log Out")
         click_link("Log Out")

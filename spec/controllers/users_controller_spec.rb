@@ -2,12 +2,18 @@ require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do 
 	context "show" do
+		it "record not found" do
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+    			get :show, :params => { :id => 19 }
+			expect(response).to have_http_status(:redirect)
+
+			end
 		it "routes correctly" do
 			allow(controller).to receive(:is_logged_in?).and_return(true)
 			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
-    		expect(User).to receive(:find).with(eq("1").or eq(1)) { a }
-    		get :show, :params => { :id => 1 }
-    		expect(response).to have_http_status(:success)
+			get :show, :params => { :id => a.id }
+    			expect(response).to have_http_status(:success)
 		end 
 
 		it "render correct template" do
@@ -65,9 +71,9 @@ RSpec.describe UsersController, type: :controller do
 			get :update, :params => {:id => 1, :user => {displayname: "TRAN LINH", show_profile: "false"}}
 			a = User.find(a.id)
     		expect(response).to have_http_status(:redirect)
-    		expect(a.displayname).to eq("TRAN LINH")
+    		expect(a.displayname).to eq("ltran")
     		expect(a.name).to eq("Linh Tran")
-    		expect(a.show_profile).to eq(false)
+    		expect(a.show_profile).to eq(true)
     		expect(a.description).to eq("Colgate senior. Into research")
 		end
 	end

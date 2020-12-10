@@ -5,9 +5,13 @@ RSpec.describe CommentsController, type: :controller do
 
 	context "index" do
 		it "routes correctly" do
-			allow(controller).to receive(:is_logged_in?).and_return(true)	
-			get :index
-            expect(response.status).to eq(200)
+			allow(controller).to receive(:is_logged_in?).and_return(true)
+			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			p = Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 10, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
+			c = Comment.create!(content: "cool beans", upvotes: 1, downvotes: 0, user_id: a.id, article_id: p.id)
+
+    			get :index, :params => { :article_id => p.id }
+            		expect(response.status).to eq(200)
 		end
 
 		it "renders the index template" do
@@ -15,9 +19,9 @@ RSpec.describe CommentsController, type: :controller do
 			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
 			p = Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 10, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: a.id)
 			c = Comment.create!(content: "cool beans", upvotes: 1, downvotes: 0, user_id: a.id, article_id: p.id)
-    		get :index, :params => { :article_id => p.id }
-    		expect(assigns(:comment)).to match_array([c])
-    		expect(response).to render_template("index")
+    			get :index, :params => { :article_id => p.id }
+    			expect(assigns(:comments)).to match_array([c])
+    			expect(response).to render_template("index")
 		end
 	
 	end

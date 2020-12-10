@@ -4,33 +4,74 @@
 			<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
 		</svg>
 		Back to Chat page
-	<% end %>      
+	<% end %>
+</div>
+<h5>Chat History</h5>
+<div >
+			
+	<% @messages.each do |m| %>
+		<% if m.message %>
+			<% user = User.find(m.user_id) %>
+			
+			<% if user.id == current_user.id %>
+				
+				<div class="container">
+					<% if current_user.show_profile and current_user.avatar.attached? %> 
+					  	 <%= image_tag current_user.avatar, height:30 %>
+					 	<span ><%=m.message %></span>
+					 	<br/>
+					 
+					 	<span class="time-right"><%= m.message_time %></span>
+				  	<%else %>
+				  		
+				  	  	<%= image_tag("default_profile_image.png", height:30) %>
+				  	  	<span><%=m.message %></span>
+				  	  	<br/>
+				  	  
+					 	<span class="time-right"><%= m.message_time %></span>
+				  	<%end%>
+				  
+				</div>
+			<%else%>
+				<div class="container darker">
+					
+					<% if user.show_profile and user.avatar.attached? %> 
+					  	
+					  	 <%= image_tag user.avatar, height:30 %>
+					  	
+					 	<span ><%=m.message %></span>
+					 	<br/>
+					 	
+					 	<span class="time-right"><%= m.message_time %></span>
+				  	<%else %>
+				  		
+				  	  	<%= image_tag("default_profile_image.png", height:30) %>
+				  	 
+				  	  	<span ><%=m.message %></span>
+				  	  	<br/>
+				 
+					 	<span class="time-right"><%= m.message_time %></span>
+				  	  
+				  	<%end%>
+				  
+				  	
+				</div>	
+			<%end%>
+		
+			</br>
+		
+		<% end %>
+	<% end %>
 </div>
 <% if @over_limit %>
 	<%= link_to 'Show Previous',chat_messages_path(@chat, :viewall => true) %>
 <% end %>
 
-<div class="ui segment">
-	<% @messages.each do |m| %>
-		<% if m.message %>
-			<% user = User.find(m.user_id) %>
-			<div class="item">
-				<div class="content">
-					<div class="header"><strong><%= user.displayname %></strong> <%= m.message_time %></div>
-					<div class="list">
-						<div class="item">
-							<i class="right triangle icon"></i>
-							<%= m.message %>
-						</div>
-					</div>
-				</div>
-			</div>
-		<% end %>
-	<% end %>
-</div>
-
 <%= form_for [@chat, @message], html: {class: "ui reply form"} do |f| %>
-	<div class="field">
+	<div>
+		<h5>Reply</h5>
+	</div>	
+	<div class="reply">
 		<%= f.text_area :message, class: "form-control" %>
 	</div>
 	<%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>

@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
 	before_action :is_logged_in?
 	def index
 		@article_id = params[:article_id]
+		byebug
 		article = Article.find(@article_id)
 		@hash = Hash.new(0)
 		comments = article.comments

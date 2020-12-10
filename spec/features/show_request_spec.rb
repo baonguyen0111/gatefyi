@@ -2,14 +2,28 @@ require "rails_helper"
 
 RSpec.describe "show page", type: :feature do
 	before :each do
-		User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+		a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
 		Article.create!(company: "Amazon", industry_type: "Tech", state: "WA", city: "Seattle", compensation: 100000, interview_exp: "Pretty simple interview", work_exp: "Great team. Challenging work", upvotes: 10, approved: DateTime.new(2020, 11, 04, 03, 00, 00), admin_approved: true, user_id: 1)
 		Article.create!(company: "Uber", industry_type: "Tech", state: "CA", city: "San Jose", compensation: 90000, interview_exp: "Hard interview. System design questions", work_exp: "get work in different teams, pretty cool perks", upvotes: 0, approved: DateTime.new(2020, 11, 04, 04, 00, 00), admin_approved: true, user_id: 1)
+		Comment.create!(content: "cool beans", upvotes: 1, downvotes: 0, user_id: 1, article_id: 1)
 		visit root_path
 		expect(page).to have_link("Sign in through Google")
 		click_link "Sign in through Google"
 
 		visit "/articles"
+	end
+	
+	it "should have a link to see comments" do
+		click_link("Amazon")
+		expect(page).to have_link("View all post comments")
+	end
+	
+	it "should show comments on the comment page" do
+		click_link("Amazon")
+		click_link("View all post comments")
+		expect(page).to have_content("cool beans")
+		expect(page).to have_link("Back to article page")
+		expect(page).to have_link("+ Add comment")
 	end
 
 	it "should have links from each company name to 'show' pages" do

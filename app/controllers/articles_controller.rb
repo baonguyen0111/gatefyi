@@ -70,7 +70,7 @@ class ArticlesController < ApplicationController
 			filter = params[:filter]
 			session[:filter_by] = filter
 			#filter type
-			@articles = Article.getApprovedArticles
+			@articles = Article.getApprovedArticles.paginate(:page => params[:page], :per_page => 4)
 			if filter == "location"
 				#city and state
 				city = params["city"]
@@ -78,18 +78,17 @@ class ArticlesController < ApplicationController
 				if city != "" && state != ""
 					session[:filter_city] = city
 					session[:filter_state] = state
-					@articles = @articles.where('state = ?', state).where('city = ?', city).paginate(:page => params[:page], :per_page => 4)
+					@articles = @articles.where('state = ?', state).where('city = ?', city)
 				elsif city != ""
 					session[:filter_city] = city
 					session[:filter_state] = nil
-					@articles = @articles.where('city = ?', city).paginate(:page => params[:page], :per_page => 4)
+					@articles = @articles.where('city = ?', city)
 				elsif state != ""
 					session[:filter_state] = state
 					session[:filter_city] = nil
-					@articles = @articles.where('state = ?', state).paginate(:page => params[:page], :per_page => 4)
+					@articles = @articles.where('state = ?', state)
 				else
 					session[:filter_by] = nil
-					@articles = @articles.paginate(:page => params[:page], :per_page => 4)
 				end
 			end
 			if filter == "salary"
@@ -99,43 +98,82 @@ class ArticlesController < ApplicationController
 				if low != "" && high != ""
 					session[:filter_low] = low
 					session[:filter_high] = high
-					@articles = @articles.where('compensation >= ?', low).where('compensation <= ?', high).paginate(:page => params[:page], :per_page => 4)
+					@articles = @articles.where('compensation >= ?', low).where('compensation <= ?', high)
 				elsif low != ""
 					session[:filter_low] = low
 					session[:filter_high] = nil
-					@articles = @articles.where('compensation >= ?', low).paginate(:page => params[:page], :per_page => 4)
+					@articles = @articles.where('compensation >= ?', low)
 				elsif high != ""
 					session[:filter_low] = nil
 					session[:filter_high] = high
-					@articles = @articles.where('compensation >= ?', 0).where('compensation <= ?', high).paginate(:page => params[:page], :per_page => 4)
+					@articles = @articles.where('compensation >= ?', 0).where('compensation <= ?', high)
 				else
 					session[:filter_by] = nil
-					@articles = @articles.paginate(:page => params[:page], :per_page => 4)
 				end
 			end
 			if filter == "company"
 				company = params["company"]
 				if company != ""
 					session[:filter_company] = company
-					@articles = @articles.where('company = ?', company).paginate(:page => params[:page], :per_page => 4)
+					@articles = @articles.where('company = ?', company)
 				else
 					session[:filter_by] = nil
-					@articles = @articles.paginate(:page => params[:page], :per_page => 4)
 				end
 			end
 			if filter == "industry_type"
 				industry = params["industry"]
 				if industry != ""
 					session[:filter_industry] = industry
-					@articles = @articles.where('industry_type = ?', industry).paginate(:page => params[:page], :per_page => 4)
+					@articles = @articles.where('industry_type = ?', industry)
 				else
 					session[:filter_by] = nil
-					@articles = @articles.paginate(:page => params[:page], :per_page => 4)
 				end
 			end
 			if request.xhr?
 				render(partial: 'articles', locals:{articles: @articles}) and return
 			end
+		elsif params[:page]
+			@articles = Article.getApprovedArticles
+			if session[:filter_by]
+				filter = session[:filter_by]
+				if filter == "company"
+					value = session[:filter_company]
+					@articles = @articles.where('company = ?', value)
+				elsif filter == "industry_type"
+					value = session[:filter_industry]
+					@articles = @articles.where('industry_type = ?', value)
+				elsif filter == "location"
+					value1 = session[:filter_state]
+					value2 = session[:filter_city]
+					if value1
+						@articles = @articles.where('state = ?', value1)
+					end
+					if value2
+						@articles = @articles.where('city = ?', value2)
+					end
+				else
+					value1 = session[:filter_low]
+					value2 = session[:filter_high]
+					if value1 && value2
+						@articles = @articles.where('compensation >= ?', value1).where('compensation <= ?', value2)
+					elsif value1
+						@articles = @articles.where('compensation >= ?', value1)
+					elsif value2
+						@articles = @articles.where('compensation >= ?', 0).where('compensation <= ?', value2)
+					end
+				end
+			end
+			page = params[:page].to_i
+			length = @articles.length
+			which = 0
+			if page * 4 <= length
+				which = page
+			else
+				which = page - (page * 4 - length) / 4
+				which = 1 if which == 0
+			end
+			@articles = @articles.paginate(:page => which.to_s, :per_page => 4)
+			@articles = @articles.reorder(queries[session[:prev]].to_s + session[session[:prev]]) unless session[:prev] == nil
 		else
 			#if no sorting nor filtering param is selected (in the case of going to next or prev page)
 

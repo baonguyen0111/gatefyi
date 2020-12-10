@@ -27,7 +27,7 @@ var js = (function(){
             dataType: "html",
             complete: function(xhrObj , textStatus , exception){
                 //alert("Complete");
-                console.log(xhrObj.responseText);
+                //console.log(xhrObj.responseText);
                 $('#company_list_partial').html(xhrObj.responseText);
                 $('#submit_industry')[0].reset();
                 $(".industry_filter").css("visibility", "hidden");
@@ -47,7 +47,7 @@ var js = (function(){
             dataType: "html",
             complete: function(xhrObj , textStatus , exception){
                 //alert("Complete");
-                console.log(xhrObj.responseText);
+                //console.log(xhrObj.responseText);
                 $('#company_list_partial').html(xhrObj.responseText);
                 $('#submit_location')[0].reset();
                 $(".location_filter").css("visibility", "hidden");
@@ -67,7 +67,7 @@ var js = (function(){
             dataType: "html",
             complete: function(xhrObj , textStatus , exception){
                 //alert("Complete");
-                console.log(xhrObj.responseText);
+                //console.log(xhrObj.responseText);
                 $('#company_list_partial').html(xhrObj.responseText);
                 $('#submit_salary')[0].reset();
                 $(".salary_filter").css("visibility", "hidden");

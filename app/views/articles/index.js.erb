@@ -1,0 +1,3 @@
+$('#pagination').remove();
+$('.paginate').append("<ul class='pagination justify-content-center', id='pagination'></ul>");
+$('#pagination').html('<%= j will_paginate(@articles) %>');

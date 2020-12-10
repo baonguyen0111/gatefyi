@@ -4,8 +4,8 @@ class CommentsController < ApplicationController
 		@article_id = params[:article_id]
 		article = Article.find(@article_id)
 		@hash = Hash.new(0)
-		comments = article.comments
-		comments.each do |c|
+		@comments = article.comments
+		@comments.each do |c|
 			comment_owner = User.find(c.user_id)
 			@hash[c] = comment_owner
 		end
@@ -13,13 +13,19 @@ class CommentsController < ApplicationController
 
 	def update
 		id = params[:id]
-		article_id = params[:article_id]
 		@comment = Comment.find(id)
 		if params[:vote_change] 
+			article_id = params[:article_id]
 			change_upvotes
+			redirect_to article_comments_path(article_id) and return 
+		else
+			edit_comment
 		end
-		
-		redirect_to article_comments_path(article_id) and return 
+	end
+	
+	def edit
+		@comment = Comment.find(params[:id])
+		@article_id = params[:article_id]
 	end
 
 	def new
@@ -67,6 +73,17 @@ class CommentsController < ApplicationController
 			flash[:notice] = "#{vote_change == 1 ? 'Upvoted' : 'Downvoted'} successfully"
 		else
 			flash[:alert] = "Failed to upvote"	
+		end
+	end
+	
+	def edit_comment
+		@comment.attributes = params.require(:comment).permit(:content)
+		if @comment.save
+			flash[:notice] = "Comment edited"
+			redirect_to article_comments_path(params[:article_id]) and return
+		else
+			flash[:alert] = "Failed to save comment"
+			redirect_to new_article_comment_path(params[:article_id]) and return
 		end
 	end
 end

@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 2020_12_08_194128) do
     t.boolean "show_profile", default: true
     t.string "remember_token"
     t.datetime "remember_created_at"
+    t.boolean "isInNL", default: false
     t.boolean "isAdmin", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

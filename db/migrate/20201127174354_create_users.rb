@@ -10,6 +10,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.boolean :show_profile, default: true 
       t.string :remember_token
       t.datetime :remember_created_at
+      t.boolean :isInNL, default: false
       t.boolean :isAdmin, default: false
       t.timestamps null: false
       t.text :image, default: ""

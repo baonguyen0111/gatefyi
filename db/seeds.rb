@@ -14,7 +14,7 @@ alist = []
 clist = []
 flist = []
 #seed user
-u1 = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true)
+u1 = User.create!(name: "Linh Tran", email: "mygatefyitestemail@gmail.com", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isInNL: true)
 u2 = User.create!(name: "Jeehuyn Park", email: "jpark@colgate.edu", provider: "google", uid: "100000000000000000001", displayname: "jpark", description: "Colgate sophomore", show_profile: true)
 ulist << u1 << u2
 

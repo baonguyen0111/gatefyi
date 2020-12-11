@@ -26,6 +26,8 @@
 #Ignore all files in coverage
 /coverage/*
 
+#ignore previiew mail file
+/tmp/*
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
 !/tmp/pids/

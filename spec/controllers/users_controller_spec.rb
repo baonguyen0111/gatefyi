@@ -4,7 +4,7 @@ RSpec.describe UsersController, type: :controller do
 	context "show" do
 		it "record not found" do
 			allow(controller).to receive(:is_logged_in?).and_return(true)
-			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
+			#a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
 			get :show, :params => { :id => 19 }
 			expect(response).to have_http_status(:redirect)
 
@@ -68,13 +68,13 @@ RSpec.describe UsersController, type: :controller do
 			a = User.create!(name: "Linh Tran", email: "ltran@colgate.edu", provider: "google_oauth2", uid: "100000000000000000000", displayname: "ltran", description: "Colgate senior. Into research", show_profile: true, isAdmin: false)
 			allow(controller).to receive(:current_user).and_return(a)
 
-			get :update, :params => {:id => 1, :user => {displayname: "TRAN LINH", show_profile: "false"}}
-			a = User.find(a.id)
+			get :update, :params => {:id => 1, :user => {displayname: "TRAN LINH", show_profile: "false", description: "Colgate senior. Into research"}}
 			expect(response).to have_http_status(:redirect)
-			#expect(a.displayname).to eq("Linh Tran")
-			expect(a.name).to eq("Linh Tran")
-			#expect(a.show_profile).to eq(true)
-			#expect(a.description).to eq("Colgate senior. Into research")
+			a1 = User.find(a.id)
+			expect(a1.displayname).to eq("TRAN LINH")
+			expect(a1.name).to eq("Linh Tran")
+			expect(a1.show_profile).to eq(false)
+			expect(a1.description).to eq("Colgate senior. Into research")
 		end
 	end
 end

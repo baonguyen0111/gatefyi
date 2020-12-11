@@ -11,6 +11,13 @@
 				<li id="clear_filter"> <%= link_to("Clear filter", articles_path, class: "btn btn-primary") %></li>
 			</ul>
 		</ul>
+		<div class="col-md-2 profile-nl">
+                <% if !current_user.isInNL? %>
+                    <%= link_to "Subscribe to Newletter?", edit_user_path(current_user.id), :class =>"btn btn-outline-primary mb-3" %>  
+                <% else %>
+                	<%= link_to "Unsubscribe to Newletter?", edit_user_path(current_user.id), :class =>"btn btn-outline-primary mb-3" %>
+                <% end %>
+        </div>
 	</nav>
 	<div class="row">
 		
@@ -41,18 +48,12 @@
 				<%= link_to "Check Feedbacks", admin_feedbacks_path, :class =>"text-decoration-none" %>
 			</ul>	
 		<% end %>
-		<div class="col-md-2 profile-nl">
-                <% if !current_user.isInNL? %>
-                    <%= link_to "Subscribe to Newletter?", edit_user_path(current_user.id), :class =>"btn btn-outline-primary mb-3" %>  
-                <% else %>
-                	<%= link_to "Unsubscribe to Newletter?", edit_user_path(current_user.id), :class =>"btn btn-outline-primary mb-3" %>
-                <% end %>
-        </div>
+		
 		<div class="col-md-2 offset-md-10">
 			<%= link_to "+ Add Post", new_article_path, :class => "btn btn-primary" %>
 		</div>
 	</div>
-
+	
 	<div class="company-list">
 		<%= render 'articles', articles: @articles %>
 	</div>

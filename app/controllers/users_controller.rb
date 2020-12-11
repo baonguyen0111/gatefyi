@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 	end
 	
 	def edit_params
-		params.require(:user).permit(:displayname, :description, :show_profile, :image, :avatar)
+		params.require(:user).permit(:displayname, :description, :show_profile, :image, :avatar, :isInNL)
 	end 
 end
 

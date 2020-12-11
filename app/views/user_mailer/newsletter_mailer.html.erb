@@ -1,0 +1,22 @@
+<p> Dear Followers: </p>
+<p> Those are the lastest posts to our site. </p>
+
+<br/>
+<table>
+  	<thead class="table-headers">
+			<th> Company </th>
+			<th> Work experience </th>
+	</thead>
+	<tbody>
+			<% @articles.each do |a| %>
+				<tr>
+					<td class="articlecompany">
+						<%= a.company %>
+					</td>
+					<td class="articleworkexp">
+						<%= a.work_exp %>
+					</td>
+				</tr>
+			<% end %>
+	</tbody>
+</table>

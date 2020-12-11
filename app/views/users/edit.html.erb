@@ -46,7 +46,13 @@
 		<div class="col-md-10">
 		    <%= f.select :show_profile, options_for_select([["Yes", true], ["No", false]]), {:prompt => ""}, {class: "form-control"} %>
 		</div>
-	</div>	
+	</div>
+	<div class="form-group">
+		<%= f.label :isInNL, "Subscribe to Newsletter?", class: "col-md-4 control-label" %>
+		<div class="col-md-10">
+		    <%= f.select :isInNL, options_for_select([["Yes", true], ["No", false]]), {:prompt => ""}, {class: "form-control"} %>
+		</div>
+	</div>
 	<!--Change to radio button for show_profile-->
 	<!--Update profile photo -->
 	<span style="margin-left: 30%">

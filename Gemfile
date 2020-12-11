@@ -37,6 +37,8 @@ gem 'devise'
 gem 'omniauth-google-oauth2'
 # Shim to load environment variables from .env into ENV in development.
 gem 'dotenv-rails', groups: [:development, :test, :production]
+gem 'whenever', require: false
+gem "letter_opener", :group => :development
 # This gem provides jQuery and the jQuery-ujs driver for your Rails 4+ application.
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 group :development, :test do

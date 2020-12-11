@@ -194,10 +194,8 @@ class ArticlesController < ApplicationController
 			end
 			page = params[:page].to_i
 			length = @articles.length
-			which = 0
-			if page * 4 <= length
-				which = page
-			else
+			which = page
+			if page * 4 > length
 				which = page - (page * 4 - length) / 4
 				which = 1 if which == 0
 			end

@@ -13,13 +13,7 @@
 		</ul>
 	</nav>
 	<div class="row">
-		<div class="col-md-2 profile-nl">
-                <% if !current_user.isInNL? %>
-                    <%= link_to "Subscribe to Newletter?", edit_user_path(current_user.id), :class =>"btn btn-outline-primary mb-3" %>  
-                <% else %>
-                	<%= link_to "Unsubscribe to Newletter?", edit_user_path(current_user.id), :class =>"btn btn-outline-primary mb-3" %>
-                <% end %>
-        </div>
+		
     </div>
 	<div class = "row intro-row">
 		<% if !@most_active_user.blank? %> 
@@ -47,6 +41,13 @@
 				<%= link_to "Check Feedbacks", admin_feedbacks_path, :class =>"text-decoration-none" %>
 			</ul>	
 		<% end %>
+		<div class="col-md-2 profile-nl">
+                <% if !current_user.isInNL? %>
+                    <%= link_to "Subscribe to Newletter?", edit_user_path(current_user.id), :class =>"btn btn-outline-primary mb-3" %>  
+                <% else %>
+                	<%= link_to "Unsubscribe to Newletter?", edit_user_path(current_user.id), :class =>"btn btn-outline-primary mb-3" %>
+                <% end %>
+        </div>
 		<div class="col-md-2 offset-md-10">
 			<%= link_to "+ Add Post", new_article_path, :class => "btn btn-primary" %>
 		</div>

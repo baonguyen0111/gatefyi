@@ -2,7 +2,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 	# replace with your authenticate method
 	def google_oauth2
 		auth = request.env["omniauth.auth"]
-		admin_accpt = [ENV["ADMIN_EMAIL_1"], ENV["ADMIN_EMAIL_2"], ENV["ADMIN_EMAIL_3"]]
+		admin_accpt = [ENV["ADMIN_EMAIL_1"], ENV["ADMIN_EMAIL_2"], ENV["ADMIN_EMAIL_3"], ENV["ADMIN_EMAIL_4"]]
 		isAdmin = false
 		if auth["info"]["email"].split("@")[1] != "colgate.edu"
 		

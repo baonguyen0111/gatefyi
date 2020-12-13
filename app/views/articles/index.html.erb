@@ -73,7 +73,7 @@
 					<div class="form-group">
 						<%= f.label :company, "Company:", class: "col-md-4 control-label" %>
 						<div class="col-md-10">
-							<%= f.select :company, Article.distinct.pluck(:company), {:prompt => "Select company"}, {class: "form-control"}%>
+							<%= f.select :company, Article.getApprovedArticles.distinct.pluck(:company), {:prompt => "Select company"}, {class: "form-control"}%>
 						</div>
 					</div>
 					<span style="margin-left: 30%">
@@ -92,7 +92,7 @@
 					<div class="form-group">
 						<%= f.label :industry_type, "Industry Type:", class: "col-md-4 control-label" %>
 						<div class="col-md-10">
-							<%= f.select :industry_type, Article.distinct.pluck(:industry_type), {:prompt => "Select industry"}, {class: "form-control"}%>
+							<%= f.select :industry_type, Article.getApprovedArticles.distinct.pluck(:industry_type), {:prompt => "Select industry"}, {class: "form-control"}%>
 						</div>
 					</div>
 
@@ -111,13 +111,13 @@
 					<div class="form-group", id="state">
 						<%= f.label :state, "State:", class: "col-md-4 control-label" %>
 						<div class="col-md-10">
-							<%= f.select :state, Article.distinct.pluck(:state), {:prompt => "Select state"}, {class: "form-control"}%>
+							<%= f.select :state, Article.getApprovedArticles.distinct.pluck(:state), {:prompt => "Select state"}, {class: "form-control"}%>
 						</div>
 					</div>
 					<div class="form-group", id="city">
 						<%= f.label :city, "City:", class: "col-md-4 control-label" %>
 						<div class="col-md-10">
-							<%= f.select :city, Article.distinct.pluck(:city), {:prompt => "Select city"}, {class: "form-control"}%>
+							<%= f.select :city, Article.getApprovedArticles.distinct.pluck(:city), {:prompt => "Select city"}, {class: "form-control"}%>
 						</div>
 					</div>
 
